@@ -1,0 +1,194 @@
+<body>
+  
+    
+    <!--Navigacija-->
+    <div class="navigation fixed-top">
+        <div class="container-fluid" >
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+               
+                <!--Logo-->
+                <a class="navbar-brand" href="#">
+                    <b >Web oglasi za posao</b>
+                </a>
+                
+                         
+
+
+              
+
+                <!--Ostali deo menia-->
+                <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+                    <!--Pretrazivac-->
+                    <form class="form-inline" action ='' method=''>
+                    <input class="form-control mr-sm-2" style="background-color: rgba(28, 26, 61, 0.123); color: aliceblue;" type="search" placeholder="Pratraži poslove" aria-label="Search">
+                    </form>    
+                    <!-- /Pretrazivac--> 
+
+                  <div class="navbar-nav ml-auto">
+                      
+                    <a class="nav-item nav-link active" href="#">Početna <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link " href="#">O nama</a>
+                    <!--  Deo koji gost vidi  -->
+                    <a class="nav-item nav-link" href="#">Prijavi se</a>
+                    <a class="nav-item nav-link" href="#" style="color : rgb(0, 153, 255)">Registruj se</a>
+                    <!--/End-->
+                  </div>
+                </div> 
+                <!--/Ostali deo menija-->
+
+                <!--Deo koji gost ne vidi-->
+                    <!--Dropdown avatara-->
+                    <div class="dropdown show">
+                        <img class="avatar" src = '../static/img/avatar.jpg' href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </img>
+                        <div class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item text-black" href="#">Moj profil</a>
+                            <a class="dropdown-item text-danger" href="#">Odjavi se</a>
+                          </div>
+                    </div>
+                    <!-- /Dropdown avatar-->
+                <!-- /Deo koji gost ne vidi-->    
+
+                <!-- Button response -->
+
+                <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                 <!-- /Button response -->
+                   
+                
+                
+              </nav>
+            <!--/Navbar--> 
+            
+        </div>
+        <!--/Container-->
+        <!-- Razdvajanje menija od sadrzaja-->
+    </div>
+    <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
+    
+    <!-- Pretrazivanje i dodavanje-->
+    <div class="container mb-5">
+        <div class="row">
+            <!-- Forma za pretrazivanje -->
+            <div class = 'col-8'>
+                <form action ='' method = '' 
+                class="form-inline d-flex justify-content-center md-form form-sm";">
+                    
+                    <input class="form-control form-control-sm mr-3 w-75" type="search" placeholder="Pretraži kategorije"
+                    aria-label="Search" style="background-color: #23395d00; color: aliceblue; ">
+
+                    <button type="submit" style=" padding: 0;
+                    border: none;
+                    background: none;">
+                        <i class="fas fa-search" aria-hidden="true" style=" color:rgb(255, 255, 255)"></i>
+                    </button>
+                </form>
+                <!-- /Forma za pretrazivanje -->
+            </div>
+
+            <!-- Link za dodavanje kategorije-->
+            <div class = 'col-4'>
+                   <a href = '#' style=" color :rgb(255, 255, 255);">
+                    <i class="fas fa-plus mr-1 text-success"></i>
+                       Dodaj novu kategoriju
+                   </a>
+            </div>
+            <!-- /Link za dodavanje kategorije -->
+        </div>
+    </div>
+    <!-- /Pretrazivanje i dodavanje-->
+
+    <hr class = 'container col-9 ' style=" background-color: dimgray;">
+
+    <div class="container text-center"><h2>Sve kategorije</h2></div>
+    <!-- Izlistavanje kategorije -->
+    <div class="container mt-4">
+
+        <!-- Red -->
+        <div class="row">
+
+            <!-- Kolona -->
+            <div class="col-lg-4 mt-1 mb-3 ">
+                <!-- Kartica za kategoriju-->
+                <div class="card" style="width: 20rem; background-color: rgb(61, 61, 61);">
+                    <!-- Slika kategorije -->
+                    <img class="card-img-top " src="../static/img/avatar.jpg" alt="Card image cap">
+                    <!-- Sadrzaj kartice-->
+                    <div class="card-body">
+                        <!-- Naziv kategorije-->
+                            <div align='center'><p style="color: rgb(255, 255, 255);">Web programiranje</p></div>
+                        <!-- Akcije nad kategorijom-->
+                        <div align = 'center'>                        
+                            <!-- Vidi-->
+                            <a href ="" class='mr-4'><i class="fas fa-eye" style=" color:rgb(238, 255, 0)"></i></a>
+                            <!-- Izmeni #Admin-->
+                            <a href ="" class ='mr-4'><i class="fas fa-edit"></i></a>
+                            <!-- Obrisi #Admin-->
+                            <a href =""><i class="fas fa-trash " style='color:tomato';"></i></a>
+                        </div>
+                    </div>
+                    <!-- /Sadrzaj kartice-->
+                </div>
+                <!-- /Kartica za kateforiju-->
+            </div>
+            <!--/Kolona-->
+
+             <!-- Kolona -->
+             <div class="col-xl-4 mt-2 mb-3">
+                <!-- Kartica za kategoriju-->
+                <div class="card" style="width: 20rem; background-color: rgb(61, 61, 61);">
+                    <!-- Slika kategorije -->
+                    <img class="card-img-top " src="../static/img/wb.jpg" alt="Card image cap">
+                    <!-- Sadrzaj kartice-->
+                    <div class="card-body">
+                        <!-- Naziv kategorije-->
+                            <div align='center'><p style="color: rgb(255, 255, 255);">Web programiranje</p></div>
+                        <!-- Akcije nad kategorijom-->
+                        <div align = 'center'>                        
+                            <!-- Vidi-->
+                            <a href ="" class='mr-4'><i class="fas fa-eye" style=" color:rgb(238, 255, 0)"></i></a>
+                            <!-- Izmeni #Admin-->
+                            <a href ="" class ='mr-4'><i class="fas fa-edit"></i></a>
+                            <!-- Obrisi #Admin-->
+                            <a href =""><i class="fas fa-trash " style='color:tomato';"></i></a>
+                        </div>
+                    </div>
+                    <!-- /Sadrzaj kartice-->
+                </div>
+                <!-- /Kartica za kateforiju-->
+            </div>
+            <!--/Kolona-->
+        </div>
+        <!-- /Red-->
+
+
+
+    </div>
+    <!-- /Izlistavanje kartice-->
+                          
+    
+        <!-- Footer -->
+        <div class="container-fluid fixed-bottom footer">
+            <!-- Linija -->
+            <hr class='bg-white'>
+            <div class="row text-center">
+                <div class="col-lg-4 col-sm-4 text-secondary">
+                    nikolavlad63@gmail.com
+                </div>
+                <div class="col-lg-4 col-sm-4 text-secondary">
+                    Web oglasi za posao - 2020 <sup>&copy</sup> 
+                </div>
+                
+                <div class="col-lg-4 col-sm-4">
+                    <a href=""><i class="fab fa-instagram ml-3" style="color:blueviolet"></i></a>
+                    <a href=""><i class="fab fa-facebook ml-3"></i></a>
+                    <span class = 'text-secondary'><i class="fas fa-phone-alt ml-3"></i> 0123-456</span> 
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+
+</body>

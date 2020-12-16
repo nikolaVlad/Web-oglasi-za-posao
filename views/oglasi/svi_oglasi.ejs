@@ -1,0 +1,286 @@
+
+<body>
+
+    <!--Navigacija-->
+    <div class="navigation fixed-top">
+        <div class="container-fluid" >
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+               
+                <!--Logo-->
+                <a class="navbar-brand" href="#">
+                    <b >Web oglasi za posao</b>
+                </a>
+                
+                         
+
+
+              
+
+                <!--Ostali deo menia-->
+                <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+                    <!--Pretrazivac-->
+                    <form class="form-inline" action ='' method=''>
+                    <input class="form-control mr-sm-2" style="background-color: rgba(28, 26, 61, 0.123); color: aliceblue;" type="search" placeholder="Pratraži poslove" aria-label="Search">
+                    </form>    
+                    <!-- /Pretrazivac--> 
+
+                  <div class="navbar-nav ml-auto">
+                      
+                    <a class="nav-item nav-link active" href="#">Početna <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link " href="#">O nama</a>
+                    <!--  Deo koji gost vidi  -->
+                    <a class="nav-item nav-link" href="#">Prijavi se</a>
+                    <a class="nav-item nav-link" href="#" style="color : rgb(0, 153, 255)">Registruj se</a>
+                    <!--/End-->
+                  </div>
+                </div> 
+                <!--/Ostali deo menija-->
+
+                <!--Deo koji gost ne vidi-->
+                    <!--Dropdown avatara-->
+                    <div class="dropdown show">
+                        <img class="avatar" src = '../static/img/avatar.jpg' href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </img>
+                        <div class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item text-black" href="#">Moj profil</a>
+                            <a class="dropdown-item text-danger" href="#">Odjavi se</a>
+                          </div>
+                    </div>
+                    <!-- /Dropdown avatar-->
+                <!-- /Deo koji gost ne vidi-->    
+
+                <!-- Button response -->
+
+                <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                 <!-- /Button response -->
+                   
+                
+                
+              </nav>
+            <!--/Navbar--> 
+            
+        </div>
+        <!--/Container-->
+        <!-- Razdvajanje menija od sadrzaja-->
+    </div>
+    <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
+    
+    <!-- Akcije i meni-->
+    <div class="container">
+
+    <!-- Akcije-->
+    
+    <!-- Novi oglas-->
+        <div class="row">
+            <div class="col text-right h5 mr-4">
+                <a href = '' >
+                    <i class="fa fa-plus text-success" aria-hidden="true"></i> 
+                    <span class ='text-white'>Postavi novi oglas</span>
+                </a>
+            </div>
+        </div>
+    <!-- /Novi oglas-->
+        <br>
+    <!-- Filteri -->
+        <form action='' method=''>
+            <div class = 'row '>
+
+                <!-- Naziv-->
+                <div class="col-xl-3 ">
+                    <input type="text" class="form-control filter-style" placeholder="Naziv oglasa" >
+                </div>
+                <!-- /Naziv-->
+
+                <!-- Kategorija -->
+                <div class="col-xl-3">
+
+                    <select class ='form-control filter-style'>
+                        <option>
+                             Sve kategorije
+                        </option>
+                        <option value="">
+                             Kategorija 1
+                      </option>
+                    </select>
+
+                </div>
+                <!-- /Kategorija-->
+
+                <!-- Datum-->
+                <div class="col-xl-3">
+
+                   <select class ='form-control filter-style'>
+                       <option value="" >
+                            Prvo : Najnoviji
+                       </option>
+                       <option value="">
+                            Prvo : Najstariji
+                     </option>
+                   </select>
+
+                </div>
+                <!-- /Datum-->
+
+                <!-- Dugmici -->
+                <div class="col-xl-3">
+                   <input type="button" value="Filtriraj" class="btn btn-success ">
+                   <input type="button" value="Poništi" class="btn btn-danger ">
+                </div>
+                <!-- /Dugmici -->
+
+            </div>
+        </form>
+    <!-- /Filteri -->
+    </div>
+    <!-- /Akcije i meni-->
+   
+    <hr class = 'container col-9 ' style=" background-color: dimgray;">
+
+
+
+    <!-- Naslov -->
+    <div class="container text-center">
+        <h2>Svi aktivni oglasi</h2>
+    </div>
+
+     <!-- Spisak aktivnih poslova u kategoriji-->
+     <div class="container">
+
+        <!-- Posao 1-->
+        <div class="card text-left bg-dark m-1" style="box-shadow: none;">
+            <div class="card-header" style="color:rgb(255, 196, 0);">
+              Naziv posla
+            </div>
+
+            <div class="card-body ">
+                <a href=''>Naziv kategorije</a>
+                <p class ='card-text text-success'>
+                    #java #net #npm
+                </p>
+                <p class="card-text" style="padding-left: 30px;">
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla.
+                    <br>
+                    <a href=""> Detaljnije...</a>
+                </p>
+               
+             
+            </div>
+            <div class="card-footer ">
+                <!-- Izmena i brisanej (admin) i odredjeni korisnik-->
+                
+                <!-- Prijava na poslu-->
+                <div class = 'text-right'>
+                    <i class="fas fa-pen text-info mr-3"></i>
+                    <i class="fas fa-trash text-danger mr-3"></i>
+                    <a href = '' class='ml-3'> Prijavi se</a>
+                </div>
+            </div>
+          </div>
+          <!-- /Posao1-->
+
+
+        <!-- Posao 1-->
+        <div class="card text-left bg-dark m-1" style="box-shadow: none;">
+            <div class="card-header" style="color:rgb(255, 196, 0);">
+              Naziv posla
+            </div>
+
+            <div class="card-body ">
+                <a href=''>Naziv kategorije</a>
+                <p class ='card-text text-success'>
+                    #java #net #npm
+                </p>
+                <p class="card-text" style="padding-left: 30px;">
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla.
+                    <br>
+                    <a href=""> Detaljnije...</a>
+                </p>
+               
+             
+            </div>
+            <div class="card-footer ">
+                <!-- Izmena i brisanej (admin) i odredjeni korisnik-->
+                
+                <!-- Prijava na poslu-->
+                <div class = 'text-right'>
+                    <i class="fas fa-pen text-info mr-3"></i>
+                    <i class="fas fa-trash text-danger mr-3"></i>
+                    <a href = '' class='ml-3'> Prijavi se</a>
+                </div>
+            </div>
+          </div>
+          <!-- /Posao1-->
+
+                  <!-- Posao 1-->
+        <div class="card text-left bg-dark m-1" style="box-shadow: none;">
+            <div class="card-header" style="color:rgb(255, 196, 0);">
+              Naziv posla
+            </div>
+
+            <div class="card-body ">
+                <a href=''>Naziv kategorije</a>
+                <p class ='card-text text-success'>
+                    #java #net #npm
+                </p>
+                <p class="card-text" style="padding-left: 30px;">
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
+                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla.
+                    <br>
+                    <a href=""> Detaljnije...</a>
+                </p>
+               
+             
+            </div>
+            <div class="card-footer ">
+                <!-- Izmena i brisanej (admin) i odredjeni korisnik-->
+                
+                <!-- Prijava na poslu-->
+                <div class = 'text-right'>
+                    <i class="fas fa-pen text-info mr-3"></i>
+                    <i class="fas fa-trash text-danger mr-3"></i>
+                    <a href = '' class='ml-3'> Prijavi se</a>
+                </div>
+            </div>
+          </div>
+          <!-- /Posao1-->
+
+
+    </div>
+    <!-- /Poslovi-->
+    
+    
+    <!-- Footer -->
+    <div class="container-fluid fixed-bottom footer">
+        <!-- Linija -->
+        <hr class='bg-white'>
+        <div class="row text-center">
+            <div class="col-lg-4 col-sm-4 text-secondary">
+                nikolavlad63@gmail.com
+            </div>
+            <div class="col-lg-4 col-sm-4 text-secondary">
+                Web oglasi za posao - 2020 <sup>&copy</sup> 
+            </div>
+            
+            <div class="col-lg-4 col-sm-4">
+                <a href=""><i class="fab fa-instagram ml-3" style="color:blueviolet"></i></a>
+                <a href=""><i class="fab fa-facebook ml-3"></i></a>
+                <span class = 'text-secondary'><i class="fas fa-phone-alt ml-3"></i> 0123-456</span> 
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->    
+
+
+</body>

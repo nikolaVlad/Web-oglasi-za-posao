@@ -1,0 +1,223 @@
+<body>
+  
+    
+    <!--Navigacija-->
+    <div class="navigation fixed-top">
+        <div class="container-fluid" >
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+               
+                <!--Logo-->
+                <a class="navbar-brand" href="#">
+                    <b >Web oglasi za posao</b>
+                </a>
+                
+                         
+
+
+              
+
+                <!--Ostali deo menia-->
+                <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+                    <!--Pretrazivac-->
+                    <form class="form-inline" action ='' method=''>
+                    <input class="form-control mr-sm-2" style="background-color: rgba(28, 26, 61, 0.123); color: aliceblue;" type="search" placeholder="Pratraži poslove" aria-label="Search">
+                    </form>    
+                    <!-- /Pretrazivac--> 
+
+                  <div class="navbar-nav ml-auto">
+                      
+                    <a class="nav-item nav-link active" href="#">Početna <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link " href="#">O nama</a>
+                    <!--  Deo koji gost vidi  -->
+                    <a class="nav-item nav-link" href="#">Prijavi se</a>
+                    <a class="nav-item nav-link" href="#" style="color : rgb(0, 153, 255)">Registruj se</a>
+                    <!--/End-->
+                  </div>
+                </div> 
+                <!--/Ostali deo menija-->
+
+                <!--Deo koji gost ne vidi-->
+                    <!--Dropdown avatara-->
+                    <div class="dropdown show">
+                        <img class="avatar" src = '../static/img/avatar.jpg' href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </img>
+                        <div class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item text-black" href="#">Moj profil</a>
+                            <a class="dropdown-item text-danger" href="#">Odjavi se</a>
+                          </div>
+                    </div>
+                    <!-- /Dropdown avatar-->
+                <!-- /Deo koji gost ne vidi-->    
+
+                <!-- Button response -->
+
+                <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                 <!-- /Button response -->
+                   
+                
+                
+              </nav>
+            <!--/Navbar--> 
+            
+        </div>
+        <!--/Container-->
+        <!-- Razdvajanje menija od sadrzaja-->
+    </div>
+    <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
+
+
+
+
+
+    <!-- Izlistavanje svih korisnika -->
+        <div class="container">
+
+            <!-- Tabela-->
+            <table class="table table-striped text-white table-dark table-responsive-sm " >
+                <!-- Akcije -->
+                <form>
+                    <!-- Pretrazivanje -->
+                    <thead style="background-color: #142a4d;;">
+                        <tr>
+                        <!-- Ime i prezime -->   
+                            <th scope="col">
+                                <i class="fas fa-search"></i>
+                            </th>
+                            <th scope="col">
+                                <input class="form-control form-control-sm mr-3 text-white" type="search" placeholder="Pronađi korisnika" 
+                                style="background-color : #142a4d;"
+                                aria-label="Search">
+                            </th>
+                            <!-- Ime i prezime -->
+
+                            <!-- Prijavljeni poslovi -->
+                            <th scope="col">
+                                <div class="row ml-1">
+                                    <input type="text" placeholder="Od" style="background-color : #142a4d;" class="form-control form-control-sm  col-4 mr-3">
+                                    <input type="text" placeholder="Do" style="background-color : #142a4d;" class="form-control form-control-sm  col-4">
+                                </div>
+                            </th>
+                             <!-- /Prijavljeni poslovi -->
+
+
+                            <!-- Postavljeni poslovi -->
+                            <th scope="col">
+                                <div class="row ml-1">
+                                    <input type="text" placeholder="Od" style="background-color : #142a4d;" class="form-control form-control-sm  col-4 mr-3">
+                                    <input type="text" placeholder="Do" style="background-color : #142a4d;" class="form-control form-control-sm  col-4">
+                                </div>
+                            </th>
+                             <!-- /Postavljeni poslovi -->
+
+
+                            <!-- Akcije -->
+                            <th scope="col">
+                               <div class="row ">
+                                   <input class = 'btn-sm btn-primary'type="button" value="Pretraži" class="col-sm-6">
+                                   <a  href = ''class="btn-sm btn-secondary col-sm-6">Odustani</a>
+                                </div>
+                            </th>
+                            <!-- /Akcije -->
+
+
+
+                          </tr>
+                    </thead>
+                    <!-- /Pretrazivanje -->
+
+
+                </form>
+
+                <!-- /Akcije -->
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- Naslov -->
+                <thead class="bg-info ">
+                <!-- Podaci za prikaz -->
+                  <tr>
+                   
+                    <th scope="col"><i class="fas fa-user"></i></i></th>
+                    <th scope="col">Ime i prezime</th>
+                    <th scope="col">Broj oglasa na koje se prijavio</th>
+                    <th scope="col">Broj oglasa koje je postavio</th>
+                    <th scope="col" class="">Akcije</th>
+                  </tr>
+                <!-- /Podaci za prikaz -->
+
+                <!-- Prazan prostor -->
+                  <tr style="background-color: #142a4d;">
+                    <td colspan="6"></td>
+                  </tr>
+                <!-- /Prazan prostor -->
+                </thead>
+                <!-- /Naslov -->
+                
+                <!-- Telo -->
+                <tbody>
+                <!-- Podaci o korisniku-->
+                  <tr>
+                    <th scope="row">1 </th>
+                    <td>Mark Zakenberg</td>
+                    <td>5</td>
+                    <td>20</td>
+                    <td>
+                        <a href='' class="text-primary ml-3"><i class="fas fa-user-edit"></i></a> 
+                        <a href='' class='text-danger ml-3'> <i class="fas fa-user-times"></i></a>
+                    </td>
+                  </tr>
+                <!-- /Podaci o korisniku-->
+
+                <!-- Prazan prostor -->
+                  <tr style="background-color: #142a4d;">
+                    <td colspan='5'></td>
+                  </tr>
+                <!-- /Prazan prostor-->
+                </tbody>
+                <!-- Telo -->
+
+              </table>
+              <!-- /Tabela -->
+
+        </div>
+    <!-- /Izlistavanje svih korisnika -->
+
+    
+
+    <!-- Footer -->
+    <div class="container-fluid fixed-bottom footer">
+        <!-- Linija -->
+        <hr class='bg-white'>
+        <div class="row text-center">
+            <div class="col-lg-4 col-sm-4 text-secondary">
+                nikolavlad63@gmail.com
+            </div>
+            <div class="col-lg-4 col-sm-4 text-secondary">
+                Web oglasi za posao - 2020 <sup>&copy</sup> 
+            </div>
+            
+            <div class="col-lg-4 col-sm-4">
+                <a href=""><i class="fab fa-instagram ml-3" style="color:blueviolet"></i></a>
+                <a href=""><i class="fab fa-facebook ml-3"></i></a>
+                <span class = 'text-secondary'><i class="fas fa-phone-alt ml-3"></i> 0123-456</span> 
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+
+
+
+</body>

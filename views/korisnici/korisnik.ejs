@@ -1,0 +1,243 @@
+<body>
+ 
+    <!--Navigacija-->
+    <div class="navigation fixed-top">
+        <div class="container-fluid" >
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+               
+                <!--Logo-->
+                <a class="navbar-brand" href="#">
+                    <b >Web oglasi za posao</b>
+                </a>
+                
+                         
+
+
+              
+
+                <!--Ostali deo menia-->
+                <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+                    <!--Pretrazivac-->
+                    <form class="form-inline" action ='' method=''>
+                    <input class="form-control mr-sm-2" style="background-color: rgba(28, 26, 61, 0.123); color: aliceblue;" type="search" placeholder="Pratraži poslove" aria-label="Search">
+                    </form>    
+                    <!-- /Pretrazivac--> 
+
+                  <div class="navbar-nav ml-auto">
+                      
+                    <a class="nav-item nav-link active" href="#">Početna <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link " href="#">O nama</a>
+                    <!--  Deo koji gost vidi  -->
+                    <a class="nav-item nav-link" href="#">Prijavi se</a>
+                    <a class="nav-item nav-link" href="#" style="color : rgb(0, 153, 255)">Registruj se</a>
+                    <!--/End-->
+                  </div>
+                </div> 
+                <!--/Ostali deo menija-->
+
+                <!--Deo koji gost ne vidi-->
+                    <!--Dropdown avatara-->
+                    <div class="dropdown show">
+                        <img class="avatar" src = '../static/img/avatar.jpg' href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </img>
+                        <div class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item text-black" href="#">Moj profil</a>
+                            <a class="dropdown-item text-danger" href="#">Odjavi se</a>
+                          </div>
+                    </div>
+                    <!-- /Dropdown avatar-->
+                <!-- /Deo koji gost ne vidi-->    
+
+                <!-- Button response -->
+
+                <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                 <!-- /Button response -->
+                   
+                
+                
+              </nav>
+            <!--/Navbar--> 
+            
+        </div>
+        <!--/Container-->
+        <!-- Razdvajanje menija od sadrzaja-->
+    </div>
+    <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
+    
+   
+
+    <!-- Prikaz podataka o korisniku (profilu)-->
+    <div class="container-fluid   mt-5 bg-dark " style="padding-left: 20px; padding-top: 10px; border-radius: 30px;">
+        
+        <!-- Red -->
+        <div class="row">
+           
+            <!-- Kolona sa podacima korisnika-->
+            <div class="col-lg-6 col-sm-12 mb-5 text-wrap">
+
+                <!-- Naslov --> <span>Podaci o korisniku</span> 
+                
+                <!-- /Naslov-->
+                <hr style="background-color:rgba(255, 255, 255, 0.13); margin-top: 30px;">
+
+                <!-- Slika korisnika-->
+                <img src='../static/img/header.png ' alt="..." class="img-thumbnail profilna">
+                <!-- /Slika korisnika-->
+                <br><br>
+
+                <!-- Podaci o korisniku-->
+                <table class="table table-dark">
+                    <!-- Telo podataka-->
+                    <tbody >
+                        <!-- Ime -->
+                        <tr>
+                          <td>Ime :</td>
+                          <td class = 'text-warning'> Nikola</td>
+                        </tr>
+                        <!-- /Ime -->
+
+                        <!-- Prezime -->
+                        <tr>
+                          <td>Prezime : </td>
+                          <td class = 'text-warning'>Vladimirov</td>
+                        </tr>
+                        <!-- /Prezime -->
+
+                        <!-- Email-->
+                        <tr>
+                          <td>Email : </td>
+                          <td class = 'text-warning'>nikolavlad@gmail.com</td>
+                        </tr>
+                        <!-- /Email-->
+                      </tbody>
+                      <!-- /Telo podataka-->
+                </table>
+                <!-- /Pocai o korisniku-->
+                <hr>
+                <!-- Akcije nad korisnikom-->
+                <div>
+                   
+                   <a href ='' class='m-3 text-info'><i class="fas fa-pen-square"></i> </a>
+                   <a href ='' class='m-3 text-danger'><i class="fas fa-user-minus"></i></a>
+                </div>
+                <!-- /Akcije nad korisnikom-->
+                
+            </div>
+
+
+
+            <!-- /Kolona sa podacima o korisniku-->
+
+            <!-- Kolona sa postavljenim oglasima -->
+            <div class="col-lg-6 col-sm-12 mb-5  ">
+               
+                <form class = 'in-line mb-2'>
+                    <input type="button" name = 'jedan' value = 'Aktivni oglasi' class ='btn btn-outline-dark text-white'>
+                    <input type="button" name = 'jedan' value = 'Prijavljeni oglasi' class ='btn btn-outline-dark text-secondary'>
+                </form>
+           
+
+                <!-- Naslov -->
+                
+                <!-- /Naslov-->
+                <hr style="background-color: rgba(255, 255, 255, 0.13);">
+
+
+                
+                <!-- Telo sa oglasima -->
+                <div class="row">
+                    <!-- Naziv oglasa -->
+                    <div class="col-10">
+                        <span> Back-end PHP develouper koji je u pokusaju al mu ne uspr=vaaaa jea je a</span>
+                    </div>
+                    <!-- /Naziv oglasa -->
+
+                    <!-- Akcije nad oglasima-->
+                    <div class="col-2">
+                        
+                        <a href ='' class='m-1 text-info'><i class="fas fa-edit"></i> </a>
+                        <a href ='' class='m-1 text-danger'><i class="fas fa-trash"></i></a>
+                    </div>
+                     <!-- /Akcije nad oglasima-->
+                </div>
+                <!-- Telo sa oglasima -->
+                <hr style="background-color: rgb(146, 146, 146);">
+            </div>
+            <!-- /Kolona sa postavljenim oglasima-->
+
+
+
+
+           <!-- switvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh-->
+
+
+             <!-- Kolona sa prijavljenim oglasima -->
+             <div class="col-lg-6 col-sm-12 mb-5 ">
+
+                <!-- Naslov  MENI -->
+               <form class = 'in-line mb-2'>
+                    <input type="button" name = 'jedan' value = 'Aktivni oglasi' class ='btn btn-outline-dark text-secondary'>
+                    <input type="button" name = 'jedan' value = 'Prijavljeni oglasi' class ='btn btn-outline-dark text-white'>
+                </form>
+           
+                <!-- /Naslov  MENI-->
+
+                <hr style="background-color: rgba(255, 255, 255, 0.13);">
+                
+                <!-- Telo sa oglasima -->
+                <div class="row">
+                    <!-- Naziv oglasa -->
+                    <div class="col-7">
+                        <span> Prijavljeni_Posao_1 </span>
+                    </div>
+                    <!-- /Naziv oglasa -->
+
+                    <!-- Akcije nad oglasima-->
+                    <div class="col-5">
+                        <span class= 'text-info mr-3'>Na čekanju</span>   
+                        <span> Odustani</span>
+                    </div>
+                     <!-- /Akcije nad oglasima-->
+                </div>
+                <hr style="background-color: darkgray;">
+                <!-- /Telo sa oglasima -->
+            </div>
+            <!-- /Kolona sa prijavljenim oglasima-->
+            
+        </div>
+        <!-- /Red -->
+
+
+        
+        <!-- Footer -->
+        <div class="container-fluid fixed-bottom footer">
+            <!-- Linija -->
+            <hr class='bg-white'>
+            <div class="row text-center">
+                <div class="col-lg-4 col-sm-4 text-secondary">
+                    nikolavlad63@gmail.com
+                </div>
+                <div class="col-lg-4 col-sm-4 text-secondary">
+                    Web oglasi za posao - 2020 <sup>&copy</sup> 
+                </div>
+                
+                <div class="col-lg-4 col-sm-4">
+                    <a href=""><i class="fab fa-instagram ml-3" style="color:blueviolet"></i></a>
+                    <a href=""><i class="fab fa-facebook ml-3"></i></a>
+                    <span class = 'text-secondary'><i class="fas fa-phone-alt ml-3"></i> 0123-456</span> 
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+    </div>
+
+
+
+</body>
+
+
+    

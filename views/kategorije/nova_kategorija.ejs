@@ -1,0 +1,128 @@
+<body>
+  
+    <!--Navigacija-->
+    <div class="navigation fixed-top">
+        <div class="container-fluid" >
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+               
+                <!--Logo-->
+                <a class="navbar-brand" href="#">
+                    <b >Web oglasi za posao</b>
+                </a>
+                
+                         
+
+
+              
+
+                <!--Ostali deo menia-->
+                <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+                    <!--Pretrazivac-->
+                    <form class="form-inline" action ='' method=''>
+                    <input class="form-control mr-sm-2" style="background-color: rgba(28, 26, 61, 0.123); color: aliceblue;" type="search" placeholder="Pratraži poslove" aria-label="Search">
+                    </form>    
+                    <!-- /Pretrazivac--> 
+
+                  <div class="navbar-nav ml-auto">
+                      
+                    <a class="nav-item nav-link active" href="#">Početna <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link " href="#">O nama</a>
+                    <!--  Deo koji gost vidi  -->
+                    <a class="nav-item nav-link" href="#">Prijavi se</a>
+                    <a class="nav-item nav-link" href="#" style="color : rgb(0, 153, 255)">Registruj se</a>
+                    <!--/End-->
+                  </div>
+                </div> 
+                <!--/Ostali deo menija-->
+
+                <!--Deo koji gost ne vidi-->
+                    <!--Dropdown avatara-->
+                    <div class="dropdown show">
+                        <img class="avatar" src = '../static/img/avatar.jpg' href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </img>
+                        <div class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item text-black" href="#">Moj profil</a>
+                            <a class="dropdown-item text-danger" href="#">Odjavi se</a>
+                          </div>
+                    </div>
+                    <!-- /Dropdown avatar-->
+                <!-- /Deo koji gost ne vidi-->    
+
+                <!-- Button response -->
+
+                <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                 <!-- /Button response -->
+                   
+                
+                
+              </nav>
+            <!--/Navbar--> 
+            
+        </div>
+        <!--/Container-->
+        <!-- Razdvajanje menija od sadrzaja-->
+    </div>
+    <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
+
+
+    <!-- Forma za kreiranje nove kategorije-->
+    <!-- Naslov -->
+    <h1 style="text-align: center;">Nova kategorija</h1>
+     <!-- /Naslov -->
+    
+        <!-- Unos podataka -->
+        <div class ='container center'>
+            <!-- Forma -->
+            <form action="" method= ''>
+                <!-- Telo forme-->
+                <div class="form-group ">
+                    <!-- Mesto za sliku -->
+                    <div style="width: 250px; height: 150px; background-color: rgba(36, 36, 36, 0.219); "></div>
+                    <!-- Button za dodavanje fajla-->
+                    <input type="file" value='dodaj' class=' mt-3 mb-3'><br>
+
+                    <!-- Ostali deo forme-->
+                    <label>Naziv kategorije :</label>
+                    <input type="text" class='form-control center-style'>
+
+                    <lavel>Kratak opis :</lavel><br>
+                    <textarea class="form-control center-style"></textarea>
+                    <!-- /Ostali deo forme-->
+                    <br>
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-success">Kreiraj kategoriju</button>
+                </div>
+                <!-- /Telo forme-->
+            </form>
+            <!-- /Forma-->
+        </div>
+        <!-- /Unos podataka -->
+  
+        
+        <!-- Footer -->
+        <div class="container-fluid fixed-bottom footer">
+            <!-- Linija -->
+            <hr class='bg-white'>
+            <div class="row text-center">
+                <div class="col-lg-4 col-sm-4 text-secondary">
+                    nikolavlad63@gmail.com
+                </div>
+                <div class="col-lg-4 col-sm-4 text-secondary">
+                    Web oglasi za posao - 2020 <sup>&copy</sup> 
+                </div>
+                
+                <div class="col-lg-4 col-sm-4">
+                    <a href=""><i class="fab fa-instagram ml-3" style="color:blueviolet"></i></a>
+                    <a href=""><i class="fab fa-facebook ml-3"></i></a>
+                    <span class = 'text-secondary'><i class="fas fa-phone-alt ml-3"></i> 0123-456</span> 
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+
+
+</body>
