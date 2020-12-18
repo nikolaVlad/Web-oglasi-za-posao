@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+// Ucitavanje indexControllera
+const indexController = require('../controllers/indexController');
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Web oglasi za posao' });
