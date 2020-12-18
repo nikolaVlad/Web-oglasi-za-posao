@@ -10,7 +10,8 @@ var logger = require('morgan');
 // Layouts za kreiranje templejta
 const expressLayouts = require('express-ejs-layouts');
 
-
+// MySQL konfiguracija za bazu podataka
+const con = require('./config/db');
 
 
 // Ruteri---------------------------------------------------
@@ -60,7 +61,13 @@ app.use(express.static(path.join(__dirname, 'node_modules/bootstrap')));
 app.use(express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free')));
 app.use(express.static(path.join(__dirname, 'node_modules/jquery')));
 
- 
+// MySQL middleware funkcija za aktiviranje konekcije sa bazom
+app.use((req,res,next)=>
+{
+  req.con = con;
+  next();
+
+}); 
 
 }
 // end Podesavanja
