@@ -17,7 +17,7 @@ const con = require('./config/db');
 // Ruteri---------------------------------------------------
 
     // Index 
-    var indexRouter = require('./routes/index');
+    var indexRouter = require('./routes/indexRouter');
 
 
 // end Ruteri----------------------------------------------
