@@ -24,7 +24,7 @@ const expressLayouts = require('express-ejs-layouts');
 
 
 
-// Inicijalizacija express fameworka 
+// Inicijalizacija express fameworka app 
 var app = express();
 
 // Podesavanja
