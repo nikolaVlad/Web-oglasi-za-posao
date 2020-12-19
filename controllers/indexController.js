@@ -1,4 +1,4 @@
-const indexModel = require('../models/indexModel');
+
 
 module.exports = (req, res)=>
 {
