@@ -78,23 +78,19 @@
     <div class='kategorije bg-secondary' >
         <div class= 'container bg-secondary'>
             <div class = 'row'>
-                <div class="col-3">
-                    <a href = ''>
-                        Kategorija1
-                    </a>
-                </div>
 
-                <div class="col-3">
-                    <a href = ''>
-                        Kategorija2
-                    </a>
-                </div>
+                <!-- Izlistavanej kategorija-->
+                <% for (kategorija of kategorije){ %>
+                    <div class="col-3">
+                        <a href = '#'>
+                           <!-- Naziv kategorije -->
+                           <%- kategorija.naziv%>
+                        </a>
+                    </div>
+                <% } %>
+                <!-- /Izlistavanje kategorija-->
 
-                <div class="col-3">
-                    <a href = ''>
-                        Kategorija3
-                    </a>
-                </div>
+               
 
                 <div class="col-3">
                     <a href = ''>
