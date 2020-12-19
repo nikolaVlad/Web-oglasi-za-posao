@@ -153,41 +153,21 @@
                 <!-- Red sa poslovima-->
                 <div class="row m-4">
 
-                    <!-- Posao 1-->
-                    <div class="col-lg-4 sm-1 mb-3 mt-3" >
-                        <div class="posao-card">
-                            <i class="far fa-file-code" style="font-size: 30px; color: rgb(255, 230, 0);"></i>
-                            <a href=''><h5>Naziv posla_1</h5></a>
-                            <p>Kratak opis posla</p>
+                    <!-- Izlistavanje poslova -->
+                        <% for(posao of poslovi){ %>
+                        <div class="col-lg-4 sm-1 mb-3 mt-3" >
+                            <div class="posao-card">
+                                <i class="far fa-file-code" style="font-size: 30px; color: rgb(255, 230, 0);"></i>
+                                <!-- Naziv posla -->
+                                <a href=''><h5><%- posao.naziv %></h5></a>
+                                <!-- Kratak opis posla -->
+                                <p> <%- posao.kratak_opis %></p>
+                            </div>
                         </div>
-                    </div>
-                    <!-- /Posao 1-->    
+                        <%}%>
+                    <!-- /Izlistavanje poslova-->    
                     
                  
-                    <!-- Posao 1-->
-                    <div class="col-lg-4 sm-1 mb-3 mt-3" >
-                        <div class="posao-card">
-                            <i class="far fa-file-code" style="font-size: 30px; color: rgb(255, 230, 0);"></i>
-                            <a href=''><h5>Naziv posla_1</h5></a>
-                            <p>Kratak opis posla</p>
-                        </div>
-                    </div>
-                    <!-- /Posao 1-->    
-                    
-                 
-                    <!-- Posao 1-->
-                    <div class="col-lg-4 sm-1 mb-3 mt-3" >
-                        <div class="posao-card">
-                            <i class="far fa-file-code" style="font-size: 30px; color: rgb(255, 230, 0);"></i>
-                            <a href=''><h5>Naziv posla_1</h5></a>
-                            <p>Kratak opis posla</p>
-                        </div>
-                    </div>
-                    <!-- /Posao 1-->    
-                    
-                 
-                    
-                    
                     
                 </div>
             <!-- /Red sa poslovima-->
