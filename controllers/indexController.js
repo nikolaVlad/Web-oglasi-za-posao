@@ -2,6 +2,7 @@
 const kategorijeModel = require('../models/kategorijeModel');
 const posloviModel = require('../models/posloviModel');
 
+/**Get index */
 module.exports = async (req, res)=>
 {
 

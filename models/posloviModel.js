@@ -2,6 +2,7 @@
 const { type } = require('jquery');
 const conn = require('../config/db');
 
+// get poslovi
 module.exports.vratiPoslove = (limit) =>
 {
     return new Promise((res, rej)=>

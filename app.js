@@ -17,7 +17,10 @@ const expressLayouts = require('express-ejs-layouts');
 
     // Index 
     var indexRouter = require('./routes/indexRouter');
+    // Kategorije
     var kategorijeRouter = require('./routes/kategorijeRouter');
+    //O nama
+   var oNamaRouter = require('./routes/oNamaRouter');
 
 // end Ruteri----------------------------------------------
 
@@ -69,8 +72,10 @@ app.use(express.static(path.join(__dirname, 'node_modules/jquery')));
 
     // index
     app.use('/', indexRouter);
+    // sve_kategorije 
     app.use('/sve_kategorije', kategorijeRouter);
-
+    // o_nama
+    app.use('/o_nama', oNamaRouter);
 
 // end Rute
 
