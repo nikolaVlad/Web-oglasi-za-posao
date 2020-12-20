@@ -73,7 +73,7 @@
         <!-- Razdvajanje menija od sadrzaja-->
     </div>
     <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
-    
+
 
     <!-- Kategorije -->
     <div class='kategorije bg-secondary' >
@@ -83,7 +83,7 @@
                 <!-- @Izlistavanej kategorija-->
                 <% for (kategorija of kategorije){ %>
                     <div class="col-3">
-                        <a href = '#'>
+                        <a href = '/sve_kategorije/kategorija/<%- kategorija.id %>'>
                            <!-- Naziv kategorije -->
                            <%- kategorija.naziv%>
                         </a>

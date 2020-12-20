@@ -9,6 +9,7 @@ module.exports = async (req, res)=>
     // Iscitavanje 3 kategorija 
     var kategorije = await kategorijeModel.vratiKategorije(3);
 
+    
     // Iscitavanje 6 poslova
     var poslovi = await posloviModel.vratiPoslove(6);
    
