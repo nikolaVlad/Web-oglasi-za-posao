@@ -8,7 +8,7 @@ const kategorijeController = require('../controllers/kategorijeController');
 router.get('/', kategorijeController.getSveKategorije);
 
 /** Get /sve_kategorije/<kategorijaId> */
-router.get('/kategorija/:nazivKategorije', kategorijeController.getKategorija);
+router.get('/kategorija/:id', kategorijeController.getKategorija);
 
 
 

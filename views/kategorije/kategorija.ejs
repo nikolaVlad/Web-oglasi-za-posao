@@ -92,14 +92,68 @@
     <br>
     <!-- /Akcije -->
 
+    <!-- Filtriranje i pretrazivanje -->
+        <div class="container mr-5 mb-3">
+            <form action='' method=''>
+                <div class = 'row '>
+    
+                    <!-- Naziv-->
+                    <div class="col-xl-3 ">
+                        <input type="text" class="form-control filter-style" placeholder="Ključna reč" >
+                    </div>
+                    <!-- /Naziv-->
+    
+                    <!-- Datum-->
+                    <div class="col-xl-3">
+    
+                       <select class ='form-control filter-style'>
+                        <option value="">
+                            Prvo : Aktuelni
+                        </option>
+
+                           <option value="" >
+                                Prvo : Najnoviji
+                           </option>
+                           <option value="">
+                                Prvo : Najstariji
+                         </option>
+                       </select>
+    
+                    </div>
+                    <!-- /Datum-->
+    
+                    <!-- Dugmici -->
+                    <div class="col-xl-3">
+                       <input type="button" value="Filtriraj" class="btn btn-success ">
+                       <input type="button" value="Poništi" class="btn btn-danger ">
+                    </div>
+                    <!-- /Dugmici -->
+    
+                </div>
+            </form>
+        </div>
+    <!-- /Filtriranje i pretrazivanje -->
+
+
 
     <!-- Detalji o kategoriji -->
         <div class="container">
             <div class = 'text-center  kategorija-naslov'>
-                <h1> Web dewelopment </h1>
+                <h1> <%- kategorija[0].naziv %> </h1>
             </div>
         </div>
     <!-- /Detalji o kategoriji-->
+
+
+
+    <!-- Prikaz broja oglasa-->
+    <div class="container">
+        <span class ='ml-5 mb-3'> Broj oglasa :</span> 
+        
+    </div>
+    <!-- /Prikaz broja oglasa -->
+    <br>
+
 
 
 
@@ -145,7 +199,46 @@
     </div>
     <!-- /Spisak oglasa-->
 
-    
+
+
+
+
+    <!-- Paginacija -->
+    <nav>
+        <!-- Telo paginacije-->
+        <ul class="pagination justify-content-center mt-5    ">
+
+            <!-- Prethodna -->
+            <form action="" method="GET" >
+                <button class="btn text-white bg-dark" name = 'strana' value="0" >Prethodna</button> 
+
+                  <!-- Filteri -->
+                  <input name = '' value = ''  hidden />  
+                  <!-- /Filteri -->
+                
+            </form>
+            <!-- Prethodna -->
+
+            <!-- Trenutna -->
+            <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#">2 </a></li>
+            <!-- Trenutna -->
+
+            <!-- Sledeća -->
+            <form action="" method="GET" >
+                <button class="btn text-white bg-dark" name = 'strana' value="0" >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 
+                <!-- Filteri -->
+                    <input name = '' value = ''  hidden />  
+                 <!-- /Filteri -->               
+            </form>
+            <!-- /Sledeća -->
+        </ul>
+        <!-- /Telo paginacije-->
+    </nav>
+    <!-- /Paginacija -->
+
+
+
+
 
     <!-- Footer -->
     <div class="container-fluid fixed-bottom footer">
