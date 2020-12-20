@@ -48,6 +48,7 @@
                     </img>
                         <div class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item text-black" href="#">Moj profil</a>
+                            <a class="dropdown-item text-black" href="/svi_korisnici">Vidi sve profile</a>
                             <a class="dropdown-item text-danger" href="#">Odjavi se</a>
                           </div>
                     </div>
@@ -79,7 +80,7 @@
         <div class= 'container bg-secondary'>
             <div class = 'row'>
 
-                <!-- Izlistavanej kategorija-->
+                <!-- @Izlistavanej kategorija-->
                 <% for (kategorija of kategorije){ %>
                     <div class="col-3">
                         <a href = '#'>
@@ -88,7 +89,7 @@
                         </a>
                     </div>
                 <% } %>
-                <!-- /Izlistavanje kategorija-->
+                <!-- /@Izlistavanje kategorija-->
 
                
 
@@ -126,8 +127,8 @@
                     <!-- Buttons -->
                     <div class="col-12">
                         <section>
-                            <a href = '' class="btn btn-success">Postavi oglas</a>
-                            <a href = '' class="btn btn-primary">Pronađi posao</a>
+                            <a href = '/svi_poslovi/novi_posao' class="btn btn-success">Postavi oglas</a>
+                            <a href = '/svi_poslovi' class="btn btn-primary">Pronađi posao</a>
                         </section>
                     </div>
                     <!-- /Buttons-->
@@ -153,7 +154,7 @@
                 <!-- Red sa poslovima-->
                 <div class="row m-4">
 
-                    <!-- Izlistavanje poslova -->
+                    <!-- @Izlistavanje poslova -->
                         <% for(posao of poslovi){ %>
                         <div class="col-lg-4 sm-1 mb-3 mt-3" >
                             <div class="posao-card">
@@ -165,7 +166,7 @@
                             </div>
                         </div>
                         <%}%>
-                    <!-- /Izlistavanje poslova-->    
+                    <!-- /@Izlistavanje poslova-->    
                     
                  
                     
@@ -178,7 +179,7 @@
 
     <!-- Svi Poslovi-->
             <div class="col-xs-1 text-center mb-5" >
-                <h5>Ne dopada ti se nijedan aktuelan posao, pogledaj <a href = '' ><u>sve poslove na sajtu.</u></a></h5>
+                <h5>Ne dopada ti se nijedan aktuelan posao, pogledaj <a href = '/svi_poslovi' ><u>sve poslove na sajtu.</u></a></h5>
             </div>
     <!-- /Svi Poslovi-->
 

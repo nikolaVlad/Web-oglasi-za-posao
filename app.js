@@ -15,12 +15,26 @@ const expressLayouts = require('express-ejs-layouts');
 
 // Ruteri---------------------------------------------------
 
-    // Index 
+    /** Index */  
     var indexRouter = require('./routes/indexRouter');
-    // Kategorije
+
+    /** Kategorije */
     var kategorijeRouter = require('./routes/kategorijeRouter');
-    //O nama
-   var oNamaRouter = require('./routes/oNamaRouter');
+
+    /** Poslovi */
+    var posloviRouter = require('./routes/posloviRouter');
+
+    /** Korisnici */
+    var korisniciRouter = require('./routes/korisniciRouter');
+
+    /** LogIn */
+    var logInRouter = require('./routes/logInRouter');
+
+    /** Registracija */
+    var registracijaRouter = require('./routes/registracijaRouter');
+
+    /** O nama */
+    var oNamaRouter = require('./routes/oNamaRouter');
 
 // end Ruteri----------------------------------------------
 
@@ -72,8 +86,22 @@ app.use(express.static(path.join(__dirname, 'node_modules/jquery')));
 
     // index
     app.use('/', indexRouter);
+
+
     // sve_kategorije 
     app.use('/sve_kategorije', kategorijeRouter);
+
+    // svi_poslovi
+    app.use('/svi_poslovi', posloviRouter);
+
+    // svi_korisnici
+    app.use('/svi_korisnici', korisniciRouter);
+
+    app.use('/logIn', logInRouter);
+
+    // registracija
+    app.use('/registracija', registracijaRouter);
+
     // o_nama
     app.use('/o_nama', oNamaRouter);
 
