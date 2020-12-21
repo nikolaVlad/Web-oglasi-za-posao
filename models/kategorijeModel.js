@@ -28,7 +28,7 @@ module.exports.vratiKategorije = (limit) =>
     
 }
 
-/** Vraća određeni 1 kategoriju selektovanu pomoću kategorija.id */
+/** Vraća određenu 1 kategoriju selektovanu pomoću kategorija.id */
 module.exports.vratiKategoriju = (id) =>
 {
     return new Promise((res, rej) =>
@@ -42,3 +42,4 @@ module.exports.vratiKategoriju = (id) =>
         })
     })
 }
+

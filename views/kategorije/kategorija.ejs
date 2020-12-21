@@ -80,7 +80,7 @@
         <div class=" row text-right" >
             <div class="col-xl-12">
                 <a href="" style=" color : white" class=""><i class="fas fa-plus text-success" ></i> Dodaj oglas</a>
-                <a href =" " class="m-3" style="color: white;"><i class="fas fa-border-all text-warning"></i></i> Vidi sve kategorije</a>
+                <a href ="/sve_kategorije" class="m-3" style="color: white;"><i class="fas fa-border-all text-warning"></i></i> Vidi sve kategorije</a>
             </div>
             <hr>
             <div class="col-xl-12">
@@ -94,27 +94,31 @@
 
     <!-- Filtriranje i pretrazivanje -->
         <div class="container mr-5 mb-3">
-            <form action='' method=''>
+            <form action='/sve_kategorije/kategorija/<%-kategorija[0].id%>' method='GET'>
                 <div class = 'row '>
     
                     <!-- Naziv-->
-                    <div class="col-xl-3 ">
-                        <input type="text" class="form-control filter-style" placeholder="Ključna reč" >
+                    <div class="col-xl-3">
+                        <input  type="text" 
+                                class="form-control filter-style" 
+                                placeholder="Ključna reč" 
+                                name ='kljucnaRec' 
+                                value = <%- kljucnaRec %>>
                     </div>
                     <!-- /Naziv-->
     
                     <!-- Datum-->
                     <div class="col-xl-3">
     
-                       <select class ='form-control filter-style'>
-                        <option value="">
+                       <select class ='form-control filter-style' name = 'sortiranje'>
+                        <option value="br_prijava" <% if(sortiranje == 'br_prijava'){ %> selected <%}%>   >
                             Prvo : Aktuelni
                         </option>
 
-                           <option value="" >
+                           <option value="asc" <% if(sortiranje == 'asc'){ %> selected <%}%>  >
                                 Prvo : Najnoviji
                            </option>
-                           <option value="">
+                           <option value="desc" <% if(sortiranje == 'desc'){ %> selected <%}%>>
                                 Prvo : Najstariji
                          </option>
                        </select>
@@ -124,15 +128,20 @@
     
                     <!-- Dugmici -->
                     <div class="col-xl-3">
-                       <input type="button" value="Filtriraj" class="btn btn-success ">
-                       <input type="button" value="Poništi" class="btn btn-danger ">
+                       <button type="submit" class="btn btn-success ">Filtriraj</button> 
+                       <a href = '/sve_kategorije/kategorija/<%-kategorija[0].id%>' class="btn btn-danger ">Poništi</a>
                     </div>
                     <!-- /Dugmici -->
-    
+                    
+                    <!-- Stranica -->
+                        <input name = 'strana' hidden value = ''>
+                    <!-- Stranica -->
+                    
                 </div>
             </form>
         </div>
     <!-- /Filtriranje i pretrazivanje -->
+
 
 
 
@@ -148,7 +157,7 @@
 
     <!-- Prikaz broja oglasa-->
     <div class="container">
-        <span class ='ml-5 mb-3'> Broj oglasa :</span> 
+        <span class ='ml-5 mb-3'> Broj dostupnih oglasa :  od ukupnih : </span> 
         
     </div>
     <!-- /Prikaz broja oglasa -->
@@ -160,21 +169,32 @@
     <!-- Spisak aktivnih oglasa u kategoriji-->
     <div class="container ">
         
+        <% for(posao of poslovi) {%>
         <!-- Oglas1-->
         <div class="card text-left bg-dark mt-1 mb-1 ml-4 mr-4">
             <div class="card-header" style="color:rgb(255, 196, 0);">
-              Naziv posla
+              <!-- Naziv posla-->
+                    <%-posao.naziv%>
+              <!-- /Naziv posla-->
             </div>
+            
             <div class="card-body ">
+                <!-- Potrebne vestine -->
                 <p class ='card-text text-success'>
-                    #java #net #npm
+                    <%-posao.potrebne_vestine%>
                 </p>
+                <!-- /Potrebne vestine -->
+
+                <!-- Kratak opis -->
+                <p>
+                    <%-posao.kratak_opis%>
+                </p>
+                 <!-- /Kratak opis -->
+
                 <p class="card-text" style="padding-left: 30px;">
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla.
+                   
                     <br>
+                    <p class ='text-secondary'>Broj prijava : </p>
                     <a href=""> Detaljnije...</a>
                 </p>
                
@@ -192,10 +212,7 @@
             </div>
           </div>
           <!-- /Oglas1-->
-
-
-          
-        
+          <%}%>
     </div>
     <!-- /Spisak oglasa-->
 
@@ -213,14 +230,15 @@
                 <button class="btn text-white bg-dark" name = 'strana' value="0" >Prethodna</button> 
 
                   <!-- Filteri -->
-                  <input name = '' value = ''  hidden />  
+                  <input name = 'kljucnaRec' value = ''  hidden />  
+                  <input name = 'sortiranje' value = ''  hidden /> 
                   <!-- /Filteri -->
                 
             </form>
             <!-- Prethodna -->
 
             <!-- Trenutna -->
-            <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#">2 </a></li>
+            <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#">1 </a></li>
             <!-- Trenutna -->
 
             <!-- Sledeća -->

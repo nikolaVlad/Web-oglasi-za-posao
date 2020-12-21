@@ -12,5 +12,4 @@ router.get('/kategorija/:id', kategorijeController.getKategorija);
 
 
 
-
 module.exports = router;

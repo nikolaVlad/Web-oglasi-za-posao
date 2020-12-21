@@ -1,0 +1,32 @@
+<!-- Paginacija -->
+    <nav>
+        <!-- Telo paginacije-->
+        <ul class="pagination justify-content-center mt-5    ">
+
+            <!-- Prethodna -->
+            <form action="" method="GET" >
+                <button class="btn text-white bg-dark" name = 'strana' value="0" >Prethodna</button> 
+
+                  <!-- Filteri -->
+                  <input name = '' value = ''  hidden />  
+                  <!-- /Filteri -->
+                
+            </form>
+            <!-- Prethodna -->
+
+            <!-- Trenutna -->
+            <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#">2 </a></li>
+            <!-- Trenutna -->
+
+            <!-- Sledeća -->
+            <form action="" method="GET" >
+                <button class="btn text-white bg-dark" name = 'strana' value="0" >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 
+                <!-- Filteri -->
+                    <input name = '' value = ''  hidden />  
+                 <!-- /Filteri -->               
+            </form>
+            <!-- /Sledeća -->
+        </ul>
+        <!-- /Telo paginacije-->
+    </nav>
+    <!-- /Paginacija -->
