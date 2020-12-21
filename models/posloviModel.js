@@ -1,7 +1,12 @@
 // Referenca na konekciju sa bazom
 const conn = require('../config/db');
 
-// Vraća određeni broj poslova
+// Učitavanje globalnih funkcija
+const globalneFje = require('../globalneFje');
+
+
+
+// Vraća limitiran broj poslova 
 module.exports.vratiPoslove = (limit) =>
 {
     return new Promise((res, rej)=>
@@ -26,55 +31,67 @@ module.exports.vratiPoslove = (limit) =>
     });
 }
 
-/** Vraća sve poslove iz date kategorije */
-module.exports.vratiPosloveIzKategoriju = (idKategorije, kljucnaRec, sortiranje,strana) => //idKategorije, kljucnaRec, sortiranje
+/** Vraća sve poslove iz date kategorije sortirane po datumu ASC/DESC sa Limitom 10 i kljucnom rejcu za pretrazivanje  */
+module.exports.vratiPosloveIzKategorijeSort = (idKategorije, kljucnaRec,strana, sortiranje) => //idKategorije, kljucnaRec, sortiranje
 {
     return new Promise((res, rej)=>
     {
-        
-
-        
-        // Prvi deo querya
-        var query1 = `  SELECT * 
-                        FROM poslovi 
-                        WHERE kategorija_id = ${idKategorije} AND
-
+        var query = `   SELECT * 
+                        FROM poslovi    
+                        WHERE kategorija_id = ? AND
+                        
+                        ((
                         naziv LIKE "%${kljucnaRec}%" OR
-                        pozeljne_vestine LIKE '%${kljucnaRec}%' OR
-                        potrebne_vestine LIKE '%${kljucnaRec}%'
-                       
-                        `;
+                        pozeljne_vestine LIKE "%${kljucnaRec}%" OR
+                        potrebne_vestine LIKE "%${kljucnaRec}%"))
+                        ORDER BY datum ${sortiranje}
+                        LIMIT ?,10
+                        `
 
-                         
-
-
-        //Drugi deo querya, koji zavisi od parametara posle znaka ?
-        if (sortiranje == 'br_prijava')
+        strana = parseInt((strana * 10) - 10);
+        
+        conn.query(query,[idKategorije, strana],(err, result)=>
         {
-            query1 += `  ORDER BY br_prijava DESC `;
-        }
-
-        if (sortiranje == 'asc')
-        {
-            query1 += `ORDER BY id ASC `;
-        }
-
-        if(sortiranje == 'desc')
-        {
-            query1+= `ORDER BY id DESC `
-        }
-
-         query1 += `\n LIMIT ? , 3`
- 
-        strana = (strana * 10)-10;
-
-        // Izvršenje querya
-        conn.query(query1,[strana],(err,result)=>
-        {
-            console.log(query1);
-            if (err) rej(err);
-            else res(result);
+            console.log(query);
+            if (err)    rej(err);
+            else        res(result);
         });
+    });
+        
+}
 
+/**Vraća sve poslove iz date kategorije, sa kljucnom rečju za pretraživanje, sortirane po br_prijava, DESC */
+module.exports.vratiPosloveIzKategorije = (idKategorije, kljucneReci, strana) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `
+                    SELECT * FROM poslovi 
+                    WHERE (( 
+                        
+                        ${globalneFje.stringZaPretrazivanje(['naziv','pozeljne_vestine','potrebne_vestine'],
+                                                            kljucneReci
+                        )} 
+                        ))
+
+
+                    AND
+                    poslovi.kategorija_id = ?
+                    ORDER BY br_prijava DESC
+                    LIMIT ?,10
+                    `;
+
+        // Pagincaija
+        strana = parseInt( strana * 10 - 10);
+
+        // Izvršenje upita
+        conn.query(query,[idKategorije,strana], (err, result)=>
+        {
+            console.log(query);
+            if (err)    rej(err);
+            else        res(result);
+        });
     });
 }
+
+  

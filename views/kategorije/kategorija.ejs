@@ -74,7 +74,6 @@
     </div>
     <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
     
-    
     <!-- Akcije -->
     <div class = 'container bg'>
         <div class=" row text-right" >
@@ -92,6 +91,9 @@
     <br>
     <!-- /Akcije -->
 
+
+
+
     <!-- Filtriranje i pretrazivanje -->
         <div class="container mr-5 mb-3">
             <form action='/sve_kategorije/kategorija/<%-kategorija[0].id%>' method='GET'>
@@ -101,9 +103,11 @@
                     <div class="col-xl-3">
                         <input  type="text" 
                                 class="form-control filter-style" 
-                                placeholder="Ključna reč" 
-                                name ='kljucnaRec' 
-                                value = <%- kljucnaRec %>>
+                                placeholder="Ključne reči" 
+                                name ='kljucneReci'
+                                id="kljucneR" 
+                                value = '<%-kljucneReci%>'
+                                >
                     </div>
                     <!-- /Naziv-->
     
@@ -153,29 +157,33 @@
         </div>
     <!-- /Detalji o kategoriji-->
 
-
+        
 
     <!-- Prikaz broja oglasa-->
     <div class="container">
-        <span class ='ml-5 mb-3'> Broj dostupnih oglasa :  od ukupnih : </span> 
-        
+        <span class ='ml-4 mb-3'> 
+           
+            Prikazani oglasi :  <b> <%-prikazaniPoslovi%> </b> / <%-ukupnoPoslova%>
+        </span> 
     </div>
     <!-- /Prikaz broja oglasa -->
     <br>
 
 
-
+    
 
     <!-- Spisak aktivnih oglasa u kategoriji-->
     <div class="container ">
         
         <% for(posao of poslovi) {%>
         <!-- Oglas1-->
-        <div class="card text-left bg-dark mt-1 mb-1 ml-4 mr-4">
-            <div class="card-header" style="color:rgb(255, 196, 0);">
+        <div class="card  bg-dark mt-1 mb-2 ml-4 mr-4" style="box-shadow: none;" >
+            <div class="card-header ">
               <!-- Naziv posla-->
-                    <%-posao.naziv%>
+                    <span class = 'text-warning'><%-posao.naziv%></span>
               <!-- /Naziv posla-->
+                    <br>
+                    <span class='text-secondary small'><%-posao.datum%></span>
             </div>
             
             <div class="card-body ">
@@ -194,8 +202,9 @@
                 <p class="card-text" style="padding-left: 30px;">
                    
                     <br>
-                    <p class ='text-secondary'>Broj prijava : </p>
-                    <a href=""> Detaljnije...</a>
+                   
+                    <p><a href=""> Detaljnije...</a></p>
+                    
                 </p>
                
              
@@ -205,6 +214,7 @@
                 
                 <!-- Prijava na poslu-->
                 <div class = 'text-right'>
+                    <p class ='text-secondary small'>Broj prijava : <%-posao.br_prijava%></p>
                     <i class="fas fa-pen text-info mr-3"></i>
                     <i class="fas fa-trash text-danger mr-3"></i>
                     <a href = '' class='ml-3'> Prijavi se</a>
@@ -215,48 +225,56 @@
           <%}%>
     </div>
     <!-- /Spisak oglasa-->
-
-
-
-
-
+    
+    
+    <!-- Prikaz kad nema poslova za prikazivanje -->
+    <% if (ukupnoPoslova <= 0) {%>
+    <h2 class="text-center">Trenutno nema nijednog oglasa za prikazivanje!</h2>
+    <%}%>
+    <!-- Prikaz kad nema poslova za prikazivanje -->
+   
+    
     <!-- Paginacija -->
     <nav>
         <!-- Telo paginacije-->
         <ul class="pagination justify-content-center mt-5    ">
 
             <!-- Prethodna -->
-            <form action="" method="GET" >
-                <button class="btn text-white bg-dark" name = 'strana' value="0" >Prethodna</button> 
+            <form action="/sve_kategorije/kategorija/<%-kategorija[0].id%>" method="GET" >
+                <%if (strana != 1) {%>
+                <button class="btn text-white bg-dark" name = 'strana' value= <%-prethodnaStrana%> >Prethodna</button> 
+                <%}%>
+
 
                   <!-- Filteri -->
-                  <input name = 'kljucnaRec' value = ''  hidden />  
-                  <input name = 'sortiranje' value = ''  hidden /> 
+                  <input name = 'kljucneReci' value = '<%-kljucneReci%>'  hidden />  
+                  <input name = 'sortiranje' value = '<%-sortiranje%>'  hidden /> 
                   <!-- /Filteri -->
                 
             </form>
             <!-- Prethodna -->
 
             <!-- Trenutna -->
-            <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#">1 </a></li>
+            <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#"><%-strana%></a></li>
             <!-- Trenutna -->
 
+            <%if(ukupnoPoslova > 10){%>
             <!-- Sledeća -->
-            <form action="" method="GET" >
-                <button class="btn text-white bg-dark" name = 'strana' value="0" >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 
+            <form action="/sve_kategorije/kategorija/<%-kategorija[0].id%>" method="GET" >
+                <button class="btn text-white bg-dark" name = 'strana' value= <%-sledecaStrana%> >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 
                 <!-- Filteri -->
-                    <input name = '' value = ''  hidden />  
+                <input name = 'kljucneReci' value = '<%-kljucneReci%>'  hidden />  
+                <input name = 'sortiranje' value = '<%-sortiranje%>'  hidden /> 
                  <!-- /Filteri -->               
             </form>
             <!-- /Sledeća -->
+            <%}%>
         </ul>
         <!-- /Telo paginacije-->
     </nav>
     <!-- /Paginacija -->
 
-
-
-
+   
 
     <!-- Footer -->
     <div class="container-fluid fixed-bottom footer">
