@@ -45,14 +45,26 @@ module.exports.getKategorija = async (req, res) =>
         
 
         console.log(kljucneReci);
+
+
     // Id kategorije uzet od URL upita
     var id = parseInt(req.params.id);
-       
+    if(isNaN(id))
+    {
+        res.end('Izabrana kategorija ne postoji !');
+    }
+
+
+    
    /**Dobijanje podataka iz baze: */
 
     // Dobijanje iz baze 1 kategorije selektovane pomoću Id-jem ( Označava onu u kojoj je korisnik pristigao)
     var kategorija = await kategorijeModel.vratiKategoriju(id,trenutnaStrana); 
-    
+
+    if(kategorija == '')
+    {
+        res.end('Izabrana kategorija ne postoji !');
+    }
 
     // Vracanje poslova iz baze za kategoriju na kojoj je prostoigao korisnik
     // pomoću parametara prosleđenih preko URL
