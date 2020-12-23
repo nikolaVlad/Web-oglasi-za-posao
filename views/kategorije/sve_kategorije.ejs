@@ -200,7 +200,19 @@
     </div>
     <!-- /Izlistavanje kartice-->
                     
-    
+    <!-- Slucaj kad nema nikakvih podataka za prikaz -->
+       <% if (prikazaneKategorije == 0) {%>
+        <div class = 'container'>
+            <h3 class="text-center text-secondary">Trenutno nema aktivnih kategorija za prikazivanje!</h3>
+        </div> 
+        <%}%>
+
+    <!-- /Slucaj kad nema nikakvih podataka za prikaz -->
+
+
+
+
+
      <!-- Paginacija -->
      <nav>
         <!-- Telo paginacije-->
@@ -227,7 +239,7 @@
             <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#"><%-strana%></a></li>
             <!-- Trenutna -->
 
-            <% if (ukupnoKategorija > 10) {%>
+            <% if (prikazaneKategorije > 9) {%>
             <!-- Sledeća -->
             <form action="/sve_kategorije" method="GET" >
                 <button class="btn text-white bg-dark" name = 'strana' value= <%-sledecaStrana%> >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 

@@ -1,4 +1,5 @@
 // Referenca na konekciju sa bazom
+const { type } = require('jquery');
 const { query } = require('../config/db');
 const conn = require('../config/db');
 
@@ -66,18 +67,22 @@ module.exports.vratiKategoriju = (id) =>
 
 
 /** Vraća sve kategorije sa mogućnostima za : pretraživanje, sortiranje i paginaciju */
-module.exports.vratiSveKategorije = (pretrazi, sortiraj, offset) =>
+module.exports.vratiSveKategorije = (pretrazi, sortiraj, offset, limit) =>
 {
     return new Promise((res,rej)=>
     {
+        if(typeof limit == 'undefined')
+        {
+            limit = 10;
+        }
         var query = `   SELECT 
                         * FROM kategorije
                         WHERE naziv LIKE'%${pretrazi}%'
                         ORDER BY naziv ${sortiraj}
-                        LIMIT ? , 9 `
+                        LIMIT ? , ? `
 
         offset = (offset  * 10)-10; 
-        conn.query(query,[offset], (err,result)=>
+        conn.query(query,[offset,limit], (err,result)=>
         {
             console.log(query);
             if (err)    rej(err);
@@ -101,7 +106,29 @@ module.exports.vratiNazivKategorije = (ime) =>
     })
 }
 
+/** Vraća naziv i id kategorije, selektovan pomoću id-a */
+module.exports.vratiNaziviIdKategorije = (id) =>
+{
+    return new Promise( (res, rej)=>
+    {
+        if (typeof id == 'undefined')
+        {
+            var query = 'SELECT id,naziv FROM kategorije ORDER BY naziv ASC';
+        }
 
+        else
+        {
+            var query = ' SELECT id, naziv FROM kategorije WHERE id = ? ORDER BY naziv ASC';
+        }
+
+        conn.query(query,[id],(err, resoult)=>
+        {
+            if (err)    rej(err);
+            else        res(resoult);
+        });
+        
+    });
+}
 
 
 

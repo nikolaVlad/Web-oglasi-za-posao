@@ -1,4 +1,5 @@
 // Referenca na konekciju sa bazom
+const { query } = require('../config/db');
 const conn = require('../config/db');
 
 // Učitavanje globalnih funkcija
@@ -7,7 +8,7 @@ const globalneFje = require('../globalneFje');
 
 
 // Vraća limitiran broj poslova 
-module.exports.vratiPoslove = (limit) =>
+module.exports.vratiPoslove = (limit,offset) =>
 {
     return new Promise((res, rej)=>
     {
@@ -17,33 +18,58 @@ module.exports.vratiPoslove = (limit) =>
         {
             query = `SELECT * FROM poslovi`;
         }
-        else
+
+        if(typeof offset == 'undefined')
         {
-            query = `SELECT * FROM poslovi LIMIT ?`;
+            query = 'SELECT * FROM poslovi ORDER BY br_prijava DESC  LIMIT ?';
         }
 
-        conn.query(query,[limit], (err,result)=>
+        else
         {
-            if(err) rej(err);
-            else    res(result);
-        });
+            query = `SELECT * FROM poslovi ORDER BY br_prijava DESC LIMIT ?,?`;
+            offset = (offset * 10) - 10;
+        }
+        
+
+        if (typeof offset == 'undefined' || typeof limit == 'undefined')
+        {
+            conn.query(query,[limit], (err,result)=>
+            {
+                console.log(query);
+                if(err) rej(err);
+                else    res(result);
+            });
+        }
+
+        else
+        {
+            conn.query(query,[offset,limit], (err,result)=>
+            {
+                console.log(query);
+                if(err) rej(err);
+                else    res(result);
+            });
+        }
+
+
 
     });
 }
 
 /** Vraća sve poslove iz date kategorije sortirane po datumu ASC/DESC sa Limitom 10 i kljucnom rejcu za pretrazivanje  */
-module.exports.vratiPosloveIzKategorijeSort = (idKategorije, kljucnaRec,strana, sortiranje) => //idKategorije, kljucnaRec, sortiranje
+module.exports.vratiPosloveIzKategorijeSort = (idKategorije, kljucneReci,strana, sortiranje) => //idKategorije, kljucnaRec, sortiranje
 {
     return new Promise((res, rej)=>
     {
         var query = `   SELECT * 
                         FROM poslovi    
-                        WHERE kategorija_id = ? AND
+                        WHERE kategorija_id LIKE ? AND
                         
                         ((
-                        naziv LIKE "%${kljucnaRec}%" OR
-                        pozeljne_vestine LIKE "%${kljucnaRec}%" OR
-                        potrebne_vestine LIKE "%${kljucnaRec}%"))
+                            ${globalneFje.stringZaPretrazivanje(['naziv','pozeljne_vestine','potrebne_vestine'],
+                                                            kljucneReci
+                        )} 
+                        ))
                         ORDER BY datum ${sortiranje}
                         LIMIT ?,10
                         `
@@ -76,7 +102,7 @@ module.exports.vratiPosloveIzKategorije = (idKategorije, kljucneReci, strana) =>
 
 
                     AND
-                    poslovi.kategorija_id = ?
+                    poslovi.kategorija_id LIKE ?
                     ORDER BY br_prijava DESC
                     LIMIT ?,10
                     `;

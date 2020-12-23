@@ -52,7 +52,7 @@ module.exports.getSveKategorije = async (req, res) =>
                 sledecaStrana : sledecaStrana,
                 prethodnaStrana : prethodnaStrana,
                 ukupnoKategorija : ukupnoKategorija,
-                prikazaneKategorije : kategorije.length
+                prikazaneKategorije : kategorije.length * trenutnaStrana
             });
 }
 
@@ -123,9 +123,9 @@ module.exports.getKategorija = async (req, res) =>
          }
      }
     
-     // Proracunavanje poslova
-     var ukupnoPoslova = poslovi.length;
-     var prikazaniPoslovi = (ukupnoPoslova < 10) ? ukupnoPoslova : trenutnaStrana * 10; 
+     // Proracunavanje broja ukupnih i prikazanih poslova
+     var ukupnoPoslova = await posloviModel.vratiPosloveIzKategorije(id,[''],1);
+     var prikazaniPoslovi = poslovi.length * trenutnaStrana;
 
 
 
@@ -140,8 +140,8 @@ module.exports.getKategorija = async (req, res) =>
         kljucneReci : kljucneReci.join(','),
         sortiranje : sortiranje,
         poslovi : poslovi,
-        ukupnoPoslova : ukupnoPoslova,
-        prikazaniPoslovi : prikazaniPoslovi
+        ukupnoPoslova : ukupnoPoslova.length,
+        prikazaniPoslovi : prikazaniPoslovi 
     });
 }
 

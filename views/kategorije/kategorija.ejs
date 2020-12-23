@@ -234,6 +234,20 @@
     <%}%>
     <!-- Prikaz kad nema poslova za prikazivanje -->
    
+    <!-- Slucaj kad nema nikakvih podataka za prikaz -->
+        <% if (prikazaniPoslovi == 0) {%>
+            <div class = 'container'>
+                <h3 class="text-center text-secondary">Trenutno nema aktivnih oglasa za prikazivanje!</h3>
+            </div> 
+        <%}%>
+
+    <!-- /Slucaj kad nema nikakvih podataka za prikaz -->
+
+
+
+
+
+
     
     <!-- Paginacija -->
     <nav>
@@ -261,7 +275,7 @@
             <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#"><%-strana%></a></li>
             <!-- Trenutna -->
 
-            <%if(ukupnoPoslova > 10){%>
+            <%if(prikazaniPoslovi > 10){%>
             <!-- Sledeća -->
             <form action="/sve_kategorije/kategorija/<%-kategorija[0].id%>" method="GET" >
                 <button class="btn text-white bg-dark" name = 'strana' value= <%-sledecaStrana%> >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 

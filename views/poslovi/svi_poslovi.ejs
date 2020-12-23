@@ -90,38 +90,43 @@
     <!-- /Novi oglas-->
         <br>
     <!-- Filteri -->
-        <form action='' method=''>
+        <form action='/svi_poslovi' method='GET'>
             <div class = 'row '>
 
-                <!-- Naziv-->
+                <!-- Pretrazivanje-->
                 <div class="col-xl-3 ">
-                    <input type="text" class="form-control filter-style" placeholder="Naziv oglasa" >
+                    <input type="text" class="form-control filter-style" placeholder="Ključne reči"  
+                    name = 'kljucneReci' value = '<%-kljucneReci%>'>
                 </div>
-                <!-- /Naziv-->
+                <!-- /Pretrazivanje -->
 
-                <!-- Kategorija -->
+                <!-- Izbor kategorije -->
                 <div class="col-xl-3">
 
-                    <select class ='form-control filter-style'>
-                        <option>
-                             Sve kategorije
+                    <select class ='form-control filter-style' name = 'kategorijaId' >
+                        <option value = 'sve'>Sve kategorije</option>
+                        <% for(kategorija of sveKategorije){ %>
+                        <option value="<%-kategorija.id%>" <%if (kategorija.id == kategorijaId){%>selected <%}%> >
+                            <%-kategorija.naziv%>
                         </option>
-                        <option value="">
-                             Kategorija 1
-                      </option>
+                      <%}%>
                     </select>
 
                 </div>
-                <!-- /Kategorija-->
+                <!-- /Izbor kategorije -->
+                
 
                 <!-- Datum-->
                 <div class="col-xl-3">
 
-                   <select class ='form-control filter-style'>
-                       <option value="" >
+                   <select class ='form-control filter-style' name = 'sortiranje'>
+                    <option value='br_brijava' <% if (sortiranje == 'br_prijava'){%> selected <%}%>  >
+                        Prvo : Aktuelni
+                    </option>
+                       <option value='desc' <% if (sortiranje == 'desc'){%> selected <%}%>  >
                             Prvo : Najnoviji
                        </option>
-                       <option value="">
+                       <option value='asc' <% if (sortiranje == 'asc'){%> selected <%}%>  >
                             Prvo : Najstariji
                      </option>
                    </select>
@@ -131,8 +136,8 @@
 
                 <!-- Dugmici -->
                 <div class="col-xl-3">
-                   <input type="button" value="Filtriraj" class="btn btn-success ">
-                   <input type="button" value="Poništi" class="btn btn-danger ">
+                   <input type="submit" value="Filtriraj" class="btn btn-success ">
+                   <a href="/svi_poslovi" class="btn btn-danger ">Poništi</a>
                 </div>
                 <!-- /Dugmici -->
 
@@ -151,119 +156,139 @@
         <h2>Svi aktivni oglasi</h2>
     </div>
 
-     <!-- Spisak aktivnih poslova u kategoriji-->
-     <div class="container">
+    <!-- Broj prikazanih i ukupno oglasa -->
+    <div class="container"><p class="ml-4">Prikazani oglasi : <b><%-prikazaniPoslovi%></b> / <%-ukupnoPoslova%>  </p></div>
 
+    <!-- /Broj prikazanih i ukupno oglasa-->
+
+     <!-- Poslovi -->
         <!-- Posao 1-->
-        <div class="card text-left bg-dark m-1" style="box-shadow: none;">
-            <div class="card-header" style="color:rgb(255, 196, 0);">
-              Naziv posla
-            </div>
+        <% for(posao of poslovi) {%>
+        <div class="container ">
+            <div class="card  bg-dark mt-1 mb-2 ml-4 mr-4" style="box-shadow: none;" >
+                <div class="card-header ">
+                  <!-- Naziv -->
+                        <span class = 'text-warning'><%-posao.naziv%></span> <br>
+                        <span class = ''>[<a href="/sve_kategorije/kategorija/<%-posao.kategorija_id%>" class="small"> <%-posao.nazivKategorije%> </a>]</span>
+                  <!-- /Naziv posla-->
+                        <br>
+                        <span class='text-secondary small'></span>
 
-            <div class="card-body ">
-                <a href=''>Naziv kategorije</a>
-                <p class ='card-text text-success'>
-                    #java #net #npm
-                </p>
-                <p class="card-text" style="padding-left: 30px;">
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla.
-                    <br>
-                    <a href=""> Detaljnije...</a>
-                </p>
-               
-             
-            </div>
-            <div class="card-footer ">
-                <!-- Izmena i brisanej (admin) i odredjeni korisnik-->
-                
-                <!-- Prijava na poslu-->
-                <div class = 'text-right'>
-                    <i class="fas fa-pen text-info mr-3"></i>
-                    <i class="fas fa-trash text-danger mr-3"></i>
-                    <a href = '' class='ml-3'> Prijavi se</a>
+                        
                 </div>
-            </div>
-          </div>
-          <!-- /Posao1-->
-
-
-        <!-- Posao 1-->
-        <div class="card text-left bg-dark m-1" style="box-shadow: none;">
-            <div class="card-header" style="color:rgb(255, 196, 0);">
-              Naziv posla
-            </div>
-
-            <div class="card-body ">
-                <a href=''>Naziv kategorije</a>
-                <p class ='card-text text-success'>
-                    #java #net #npm
-                </p>
-                <p class="card-text" style="padding-left: 30px;">
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla.
-                    <br>
-                    <a href=""> Detaljnije...</a>
-                </p>
-               
-             
-            </div>
-            <div class="card-footer ">
-                <!-- Izmena i brisanej (admin) i odredjeni korisnik-->
                 
-                <!-- Prijava na poslu-->
-                <div class = 'text-right'>
-                    <i class="fas fa-pen text-info mr-3"></i>
-                    <i class="fas fa-trash text-danger mr-3"></i>
-                    <a href = '' class='ml-3'> Prijavi se</a>
+                <div class="card-body ">
+                    <!-- Potrebne vestine -->
+                    <p class ='card-text text-success'>
+                       <%-posao.potrebne_vestine%>
+                    </p>
+                    <!-- /Potrebne vestine -->
+    
+                    <!-- Kratak opis -->
+                    <p>
+                       <%-posao.kratak_opis%>
+                    </p>
+                     <!-- /Kratak opis -->
+    
+                    <p class="card-text" style="padding-left: 30px;">
+                       
+                        <br>
+                       
+                        <p><a href=""> Detaljnije...</a></p>
+                        
+                    </p>
+                   
+                 
                 </div>
-            </div>
-          </div>
-          <!-- /Posao1-->
-
-                  <!-- Posao 1-->
-        <div class="card text-left bg-dark m-1" style="box-shadow: none;">
-            <div class="card-header" style="color:rgb(255, 196, 0);">
-              Naziv posla
-            </div>
-
-            <div class="card-body ">
-                <a href=''>Naziv kategorije</a>
-                <p class ='card-text text-success'>
-                    #java #net #npm
-                </p>
-                <p class="card-text" style="padding-left: 30px;">
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla
-                    Kratak opis posla Kratak opis poslaKratak opis poslaKratak opis poslaKratak opis poslaKratak opis posla.
-                    <br>
-                    <a href=""> Detaljnije...</a>
-                </p>
-               
-             
-            </div>
-            <div class="card-footer ">
-                <!-- Izmena i brisanej (admin) i odredjeni korisnik-->
-                
-                <!-- Prijava na poslu-->
-                <div class = 'text-right'>
-                    <i class="fas fa-pen text-info mr-3"></i>
-                    <i class="fas fa-trash text-danger mr-3"></i>
-                    <a href = '' class='ml-3'> Prijavi se</a>
+                <div class="card-footer ">
+                    <!-- Izmena i brisanej (admin) i odredjeni korisnik-->
+                    
+                    <!-- Prijava na poslu-->
+                    <div class = 'text-right'>
+                        <p class ='text-secondary small'>Broj prijava : <%-posao.br_prijava%></p>
+                        <i class="fas fa-pen text-info mr-3"></i>
+                        <i class="fas fa-trash text-danger mr-3"></i>
+                        <a href = '' class='ml-3'> Prijavi se</a>
+                    </div>
                 </div>
-            </div>
-          </div>
-          <!-- /Posao1-->
+              </div>
+        </div>
+        <%}%>
+        <!-- /Posao1-->
 
-
-    </div>
     <!-- /Poslovi-->
     
+
+
+     <!-- Slucaj kad nema nikakvih podataka za prikaz -->
+     <% if (prikazaniPoslovi == 0) {%>
+        <div class = 'container'>
+            <h3 class="text-center text-secondary">Trenutno nema aktivnih oglasas za prikazivanje!</h3>
+        </div> 
+        <%}%>
+
+    <!-- /Slucaj kad nema nikakvih podataka za prikaz -->
+
+
+
+
+
+
+
+
+
+         <!-- Paginacija -->
+    <nav>
+        <!-- Telo paginacije-->
+        <ul class="pagination justify-content-center mt-5    ">
+
+            <!-- Prethodna -->
+            <%if (strana != 1) {%>
+            <form action="/svi_poslovi" method="GET" >
+                
+                <button class="btn text-white bg-dark" name = 'strana' value= <%-prethodnaStrana%> >Prethodna</button> 
+               
+
+
+                  <!-- Filteri -->
+                  <input name = 'kljucneReci' value = '<%-kljucneReci%>'  hidden />  
+                  <input name = 'sortiranje' value = '<%-sortiranje%>'  hidden />
+                  <input name = 'kategorijaId' value = '<%-kategorijaId%>' hidden /> 
+                  <!-- /Filteri -->
+                
+            </form>
+            <%}%>
+            <!-- Prethodna -->
+
+            <!-- Trenutna -->
+            <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#"><%-strana%></a></li>
+            <!-- Trenutna -->
+
+            <% if (prikazaniPoslovi > 10) {%>
+            <!-- Sledeća -->
+            <form action="/svi_poslovi" method="GET" >
+                <button class="btn text-white bg-dark" name = 'strana' value= <%-sledecaStrana%> >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 
+                <!-- Filteri -->
+                <input name = 'kljucneReci' value = '<%-kljucneReci%>'  hidden />  
+                <input name = 'sortiranje' value = '<%-sortiranje%>'  hidden /> 
+                <input name = 'kategorijaId' value = '<%-kategorijaId%>' hidden /> 
+                 <!-- /Filteri -->               
+            </form>
+            <!-- /Sledeća -->
+            <%}%>
+        </ul>
+        <!-- /Telo paginacije-->
+    </nav>
+    <!-- /Paginacija -->
+
+
+
+
+
+
+
+
+
     
     <!-- Footer -->
     <div class="container-fluid fixed-bottom footer">
