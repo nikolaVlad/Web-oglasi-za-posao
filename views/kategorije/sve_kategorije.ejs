@@ -81,7 +81,7 @@
         <div class="row">
 
            
-            <div class = 'col-lg-4 col-sm-5 mt-3 mb-3'>
+            <div class = 'col-lg-5 col-sm-5 mt-3 mb-3'>
 
             <!-- Forma za pretrazivanje -->
                 <form action ='/sve_kategorije' method = 'GET' 
@@ -106,8 +106,8 @@
             </div>
 
             <!-- Sortiranje A-Z -->
-            <div class="col-lg-5 col-sm-3 mt-3 mb-3 text-center">
-                <form action="/sve_kategorije" method="get" class="form-inline col-4">
+            <div class="col-lg-4 col-sm-3 mt-3 mb-3 text-center">
+                <form action="/sve_kategorije" method="get" class="form-inline">
                     <input name = 'pretrazi' value = '<%-pretrazi%>' hidden>
                     <input name = 'strana'   value = '<%-strana%>' hidden>
                     <input name = 'sortiraj' 
@@ -128,11 +128,11 @@
 
                 </form>
             </div>
-            <!-- Sortiranje A-Z -->
+            <!-- /Sortiranje A-Z -->
 
             <!-- Link za dodavanje kategorije-->
             <div class = 'col-lg-3 col-sm-3 mt-3 mb-3`'>
-                   <a href = '#' style=" color :rgb(255, 255, 255);">
+                   <a href = '/sve_kategorije/nova_kategorija' style=" color :rgb(255, 255, 255);">
                     <i class="fas fa-plus mr-1 text-success"></i>
                        Dodaj novu kategoriju
                    </a>

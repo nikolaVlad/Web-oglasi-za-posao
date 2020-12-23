@@ -83,7 +83,7 @@
             </div>
             <hr>
             <div class="col-xl-12">
-                <a href =" " class="" style="color: white;"><i class="fas fa-edit " style="color : rgb(0, 204, 255)"></i> Izmeni kategoriju</a>
+                <a href ="/sve_kategorije/kategorija/<%-kategorija[0].id%>/izmena_kategorije" class="" style="color: white;"><i class="fas fa-edit " style="color : rgb(0, 204, 255)"></i> Izmeni kategoriju</a>
                 <a href =" " class="m-3" style="color: white;"><i class="fas fa-trash" style="color : rgb(255, 64, 64)"></i> Obriši kategoriju</a>
             </div>
         </div>
@@ -230,7 +230,7 @@
     
     <!-- Prikaz kad nema poslova za prikazivanje -->
     <% if (ukupnoPoslova <= 0) {%>
-    <h2 class="text-center">Trenutno nema nijednog oglasa za prikazivanje!</h2>
+    <h2 class="text-center text-secondary">Trenutno nema nijednog oglasa za prikazivanje!</h2>
     <%}%>
     <!-- Prikaz kad nema poslova za prikazivanje -->
    

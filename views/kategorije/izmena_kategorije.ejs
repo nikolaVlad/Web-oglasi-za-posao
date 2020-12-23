@@ -106,8 +106,17 @@
                     <textarea name = 'kratakOpis' class="form-control center-style" ><%-kategorija[0].kratak_opis%></textarea>
                     <!-- /Ostali deo forme-->
                     <br>
-                    <!-- Submit -->
-                    <button type="submit" class="btn btn-success">Izmeni kategoriju</button>
+                    <!-- Submit dugme -->
+                    <button type="submit" class="btn btn-success" >
+                        Izmeni kategoriju
+                    </button>
+                    
+
+                    <!-- Odustani -->
+                    <a href = '/sve_kategorije/kategorija/<%-kategorija[0].id%>' class="btn btn-danger">Odustani</a> 
+                    
+
+
                 </div>
                 <!-- /Telo forme-->
             </form>
@@ -115,7 +124,7 @@
         </div>
         <!-- /Unos podataka -->
 
-   
+        
 
     <!-- Footer -->
     <div class="container-fluid fixed-bottom footer">
