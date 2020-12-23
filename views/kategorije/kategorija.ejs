@@ -119,10 +119,10 @@
                             Prvo : Aktuelni
                         </option>
 
-                           <option value="asc" <% if(sortiranje == 'asc'){ %> selected <%}%>  >
+                           <option value="desc" <% if(sortiranje == 'desc'){ %> selected <%}%>  >
                                 Prvo : Najnoviji
                            </option>
-                           <option value="desc" <% if(sortiranje == 'desc'){ %> selected <%}%>>
+                           <option value="asc" <% if(sortiranje == 'asc'){ %> selected <%}%>>
                                 Prvo : Najstariji
                          </option>
                        </select>
@@ -153,6 +153,7 @@
         <div class="container">
             <div class = 'text-center  kategorija-naslov'>
                 <h1> <%- kategorija[0].naziv %> </h1>
+                <!-- DODATI KRATAK OPIS !!!!!!!!!!!!!!-->
             </div>
         </div>
     <!-- /Detalji o kategoriji-->
@@ -240,10 +241,11 @@
         <ul class="pagination justify-content-center mt-5    ">
 
             <!-- Prethodna -->
+            <%if (strana != 1) {%>
             <form action="/sve_kategorije/kategorija/<%-kategorija[0].id%>" method="GET" >
-                <%if (strana != 1) {%>
+                
                 <button class="btn text-white bg-dark" name = 'strana' value= <%-prethodnaStrana%> >Prethodna</button> 
-                <%}%>
+               
 
 
                   <!-- Filteri -->
@@ -252,6 +254,7 @@
                   <!-- /Filteri -->
                 
             </form>
+            <%}%>
             <!-- Prethodna -->
 
             <!-- Trenutna -->

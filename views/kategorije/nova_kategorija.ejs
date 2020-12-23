@@ -82,24 +82,56 @@
         <!-- Unos podataka -->
         <div class ='container center'>
             <!-- Forma -->
-            <form action="" method= ''>
+            <form action="/sve_kategorije/nova_kategorija" method= 'POST'>
                 <!-- Telo forme-->
                 <div class="form-group ">
                     <!-- Mesto za sliku -->
                     <div style="width: 250px; height: 150px; background-color: rgba(36, 36, 36, 0.219); "></div>
+                    <input name = 'slika' 
+                    <% if (greska != '') {%>
+                    value = '<%- kategorija[0].slika %>'
+                    <%}%>
+                    >
                     <!-- Button za dodavanje fajla-->
-                    <input type="file" value='dodaj' class=' mt-3 mb-3'><br>
+                    <a class ='btn btn-info m-3'>Dodaj sliku</a><br>
 
                     <!-- Ostali deo forme-->
-                    <label>Naziv kategorije :</label>
-                    <input type="text" class='form-control center-style'>
+                    <label>Naziv kategorije :</label> 
 
+                   
+                    <!-- Naziv kategorije-->
+                    <input type="text" class='form-control center-style'   maxlength="100" name= 'naziv'
+                    <% if (greska != '') {%> 
+                        value = '<%-kategorija[0].naziv%>' 
+                    <%}%>
+                    required>
+                     <!-- /Naziv kategorije-->
+                         <!-- GRESKA : IZABRANA KATEGORIJA VEC POSTOJI-->
+                    <% if (greska != '') {%> 
+                        <p class="small text-danger"><%-greska%></p>
+                       <%}%>  
+
+
+
+                     <!-- Kratak opis-->
                     <lavel>Kratak opis :</lavel><br>
-                    <textarea class="form-control center-style"></textarea>
+                    <!-- Ako ima greske -->
+                    <% if (greska != ''){%>
+                        <textarea maxlength="300" class="form-control center-style" name = 'kratakOpis'><%-kategorija[0].kratak_opis%></textarea>
+                    <%} else{%>
+                        <textarea maxlength="300" class="form-control center-style" name = 'kratakOpis'></textarea>
+                    <%}%>
+                    <!-- Ako nema greske-->
+                     <!-- /Kratak opis-->
+                    
+                    
+
                     <!-- /Ostali deo forme-->
                     <br>
                     <!-- Submit -->
-                    <button type="submit" class="btn btn-success">Kreiraj kategoriju</button>
+                    <button type="submit" class="btn btn-success ">Kreiraj kategoriju</button>
+                    <!-- Odustani -->
+                    <a class="btn btn-danger " href = '/sve_kategorije'>Odustani</a>
                 </div>
                 <!-- /Telo forme-->
             </form>

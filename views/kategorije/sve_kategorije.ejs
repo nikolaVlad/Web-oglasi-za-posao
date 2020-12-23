@@ -74,16 +74,27 @@
     </div>
     <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
     
-    <!-- Pretrazivanje i dodavanje-->
-    <div class="container mb-5">
+
+
+    <!-- Pretrazivanje, sortiranje i dodavanje-->
+    <div class="container mb-1">
         <div class="row">
+
+           
+            <div class = 'col-lg-4 col-sm-5 mt-3 mb-3'>
+
             <!-- Forma za pretrazivanje -->
-            <div class = 'col-8'>
-                <form action ='' method = '' 
-                class="form-inline d-flex justify-content-center md-form form-sm";">
+                <form action ='/sve_kategorije' method = 'GET' 
+                class="form-inline form-sm";">
                     
                     <input class="form-control form-control-sm mr-3 w-75" type="search" placeholder="Pretraži kategorije"
-                    aria-label="Search" style="background-color: #23395d00; color: aliceblue; ">
+                    aria-label="Search" style="background-color: #23395d00; color: aliceblue; " 
+                    name = 'pretrazi' 
+                    value='<%-pretrazi%>'>
+                    <input name = 'sortiraj' value='<%-sortiraj%>' hidden />
+                    <input name = 'strana' value = '<%-strana%>' hidden />
+                   
+
 
                     <button type="submit" style=" padding: 0;
                     border: none;
@@ -91,11 +102,36 @@
                         <i class="fas fa-search" aria-hidden="true" style=" color:rgb(255, 255, 255)"></i>
                     </button>
                 </form>
-                <!-- /Forma za pretrazivanje -->
+            <!-- /Forma za pretrazivanje -->
             </div>
 
+            <!-- Sortiranje A-Z -->
+            <div class="col-lg-5 col-sm-3 mt-3 mb-3 text-center">
+                <form action="/sve_kategorije" method="get" class="form-inline col-4">
+                    <input name = 'pretrazi' value = '<%-pretrazi%>' hidden>
+                    <input name = 'strana'   value = '<%-strana%>' hidden>
+                    <input name = 'sortiraj' 
+                        value = <% if(sortiraj == 'asc'){ %> 'desc' 
+                        <%} else if(sortiraj == 'desc'){%> 'asc' <%}%>
+                         hidden />
+                    
+
+
+                   <button type="submit" class="btn btn-secondary btn-sm ">
+
+                       Sortiranje: 
+                       <% if(sortiraj == 'asc'){ %>   <b>A/Z</b>
+                       <%} else if(sortiraj == 'desc'){%>  <b>Z/A </b><%}%> 
+                    
+                       
+                    </button>
+
+                </form>
+            </div>
+            <!-- Sortiranje A-Z -->
+
             <!-- Link za dodavanje kategorije-->
-            <div class = 'col-4'>
+            <div class = 'col-lg-3 col-sm-3 mt-3 mb-3`'>
                    <a href = '#' style=" color :rgb(255, 255, 255);">
                     <i class="fas fa-plus mr-1 text-success"></i>
                        Dodaj novu kategoriju
@@ -106,17 +142,26 @@
     </div>
     <!-- /Pretrazivanje i dodavanje-->
 
+
+
+
     <hr class = 'container col-9 ' style=" background-color: dimgray;">
 
+
+
+    
+
+
     <div class="container text-center"><h2>Sve kategorije</h2></div>
+    <div class="container">Prikazane kategorije : <b><%- prikazaneKategorije %></b> / <%-ukupnoKategorija%></div>
     <!-- Izlistavanje kategorije -->
-    <div class="container mt-4">
+    <div class="container mt-4 ">
 
         <!-- Red -->
         <div class="row">
-
+            <% for(kategorija of kategorije) {%>
             <!-- Kolona -->
-            <div class="col-lg-4 mt-1 mb-3 ">
+            <div class="col-lg-4 col-sm-6 mt-1 mb-3 ">
                 <!-- Kartica za kategoriju-->
                 <div class="card" style="width: 20rem; background-color: rgb(61, 61, 61);">
                     <!-- Slika kategorije -->
@@ -124,15 +169,20 @@
                     <!-- Sadrzaj kartice-->
                     <div class="card-body">
                         <!-- Naziv kategorije-->
-                            <div align='center'><p style="color: rgb(255, 255, 255);">Web programiranje</p></div>
+                            <a href = '/sve_kategorije/kategorija/<%-kategorija.id%>'class="text-center"><p style="color: rgb(255, 255, 255);"><%-kategorija.naziv%></p></a>
                         <!-- Akcije nad kategorijom-->
-                        <div align = 'center'>                        
-                            <!-- Vidi-->
-                            <a href ="" class='mr-4'><i class="fas fa-eye" style=" color:rgb(238, 255, 0)"></i></a>
+                        <div  class = 'justify-content-center d-flex'>                        
                             <!-- Izmeni #Admin-->
-                            <a href ="" class ='mr-4'><i class="fas fa-edit"></i></a>
+                            <a href ="/sve_kategorije/kategorija/<%-kategorija.id%>/izmena_kategorije"
+                             class ='mr-4 btn btn-outline-info br'><i class="fas fa-edit"></i></a>
                             <!-- Obrisi #Admin-->
-                            <a href =""><i class="fas fa-trash " style='color:tomato';"></i></a>
+                            <form class="form form-inline" method="POST" action="/sve_kategorije/kategorija/<%-kategorija.id%>/obrisi_kategoriju">
+                                
+                                
+                                <button class="btn btn-outline-danger br"><i class="fas fa-trash " style='color:tomato';></i></button>
+                                
+                            
+                            </form>
                         </div>
                     </div>
                     <!-- /Sadrzaj kartice-->
@@ -140,32 +190,8 @@
                 <!-- /Kartica za kateforiju-->
             </div>
             <!--/Kolona-->
+            <% }%>
 
-             <!-- Kolona -->
-             <div class="col-xl-4 mt-2 mb-3">
-                <!-- Kartica za kategoriju-->
-                <div class="card" style="width: 20rem; background-color: rgb(61, 61, 61);">
-                    <!-- Slika kategorije -->
-                    <img class="card-img-top " src="../static/img/wb.jpg" alt="Card image cap">
-                    <!-- Sadrzaj kartice-->
-                    <div class="card-body">
-                        <!-- Naziv kategorije-->
-                            <div align='center'><p style="color: rgb(255, 255, 255);">Web programiranje</p></div>
-                        <!-- Akcije nad kategorijom-->
-                        <div align = 'center'>                        
-                            <!-- Vidi-->
-                            <a href ="" class='mr-4'><i class="fas fa-eye" style=" color:rgb(238, 255, 0)"></i></a>
-                            <!-- Izmeni #Admin-->
-                            <a href ="" class ='mr-4'><i class="fas fa-edit"></i></a>
-                            <!-- Obrisi #Admin-->
-                            <a href =""><i class="fas fa-trash " style='color:tomato';"></i></a>
-                        </div>
-                    </div>
-                    <!-- /Sadrzaj kartice-->
-                </div>
-                <!-- /Kartica za kateforiju-->
-            </div>
-            <!--/Kolona-->
         </div>
         <!-- /Red-->
 
@@ -173,7 +199,61 @@
 
     </div>
     <!-- /Izlistavanje kartice-->
-                          
+                    
+    
+     <!-- Paginacija -->
+     <nav>
+        <!-- Telo paginacije-->
+        <ul class="pagination justify-content-center mt-5    ">
+
+            <!-- Prethodna -->
+            <%if (strana != 1) {%>
+            <form action="/sve_kategorije" method="GET" >
+               
+                <button class="btn text-white bg-dark" name = 'strana' value= <%-prethodnaStrana%> >Prethodna</button> 
+               
+
+
+                  <!-- Filteri -->
+                  <input name = 'pretrazi' value = '<%-pretrazi%>'  hidden />  
+                  <input name = 'sortiraj' value = '<%-sortiraj%>'  hidden /> 
+                  <!-- /Filteri -->
+                
+            </form>
+            <%}%>
+            <!-- Prethodna -->
+
+            <!-- Trenutna -->
+            <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#"><%-strana%></a></li>
+            <!-- Trenutna -->
+
+            <% if (ukupnoKategorija > 10) {%>
+            <!-- Sledeća -->
+            <form action="/sve_kategorije" method="GET" >
+                <button class="btn text-white bg-dark" name = 'strana' value= <%-sledecaStrana%> >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 
+                <!-- Filteri -->
+                <input name = 'pretrazi' value = '<%-pretrazi%>'  hidden />  
+                <input name = 'sortiraj' value = '<%-sortiraj%>'  hidden /> 
+                 <!-- /Filteri -->               
+            </form>
+            <!-- /Sledeća -->
+           <%}%>
+        </ul>
+        <!-- /Telo paginacije-->
+    </nav>
+    <!-- /Paginacija -->
+
+
+
+
+    
+
+    
+
+
+
+
+
     
         <!-- Footer -->
         <div class="container-fluid fixed-bottom footer">
