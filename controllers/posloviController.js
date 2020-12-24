@@ -232,12 +232,23 @@ module.exports.postNoviPosao = async(req,res) =>
 }
 
 
-
-
-
-
 /** Get /svi_poslovi/posao<id>/izmena_posla */
 module.exports.getIzmenaPosla = (req,res) =>
 {
-    res.render('./poslovi/izmena_posla', {title : 'Izmena posla'});
+     // Uzimanje id posla(oglasa) prosleđen preko URL putanje
+     var id = req.params.id;
+
+     /** Selektovanje posla pomoću dobijenog id-a */
+        var posao = posloviModel.vratiPosao(id);
+    
+    
+
+
+
+    res.render('./poslovi/izmena_posla', {
+        title : 'Izmena posla',
+        posao : posao,
+        greska : ''
+    
+    });
 }
