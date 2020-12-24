@@ -103,14 +103,6 @@ module.exports.getSviPoslovi = async(req, res) =>
     
 }
 
-
-/**Get /svi_poslovi/novi_posao */
-module.exports.getNoviPosao = (req, res) =>
-{
-    res.render('./poslovi/novi_posao',{title : 'Novi posao'});
-}
-
-
 /** Get /svi_poslovi/posao/<id> */
 module.exports.getPosao = async (req,res) =>
 {
@@ -157,6 +149,91 @@ module.exports.getPosao = async (req,res) =>
     
     });
 }
+
+
+/**Get /svi_poslovi/novi_posao */
+module.exports.getNoviPosao = async(req, res) =>
+{
+    // Proveravamo da li je prosledjena kategorija preko upita
+    var kategorijaId = ( typeof req.query.kategorijaId == 'undefined') ? '' : req.query.kategorijaId;
+    
+    
+   
+    /** Iscitavamo sve kategorije iz baze radi upisa u padajći meni */
+        var sveKategorije = await kategorijeModel.vratiNaziviIdKategorije();
+
+
+    res.render('./poslovi/novi_posao',{
+        greska : '',
+        title : 'Novi oglas', 
+        sveKategorije : sveKategorije,
+        kategorijaId : kategorijaId
+    });
+}
+
+
+/** POST /svi_poslovi/novi_posao */
+module.exports.postNoviPosao = async(req,res) =>
+{
+    /** Uzimanje podataka iz forme */
+        var naziv = req.body.naziv;
+        var kratakOpis = req.body.kratakOpis;
+        var punOpis = req.body.punOpis;
+        var potrebneVestine = req.body.potrebneVestine;
+        var pozeljneVestine = req.body.pozeljneVestine;
+        var datum =  new Date();
+        var kategorijaId = req.body.kategorijaId;
+        // POINT 
+        var korisnikId = 1;
+
+        var brPrijava = 0;
+
+    /** Iscitavamo sve kategorije iz baze radi upisa u padajći meni */
+        var sveKategorije = await kategorijeModel.vratiNaziviIdKategorije();
+
+
+    /** Provera posal da li već postoji u toj kategorije */
+        var posao = await posloviModel.vratiPosaoIzKategorijeSaNazivom(naziv,kategorijaId);
+       
+
+    // Promenljiva koja sliži za čuvanje greske
+        var greska;
+
+
+    // U slučaju da ovakav posao već postoji u datoj kategoriji
+    if(posao.length != 0)
+    {
+       greska = {
+           ime : 'Posao sa ovim nazivom već postoji u ovoj kategoriji!',
+           naziv : naziv,
+           kratakOpis : kratakOpis,
+           punOpis : punOpis,
+           potrebneVestine : potrebneVestine,
+           pozeljneVestine : pozeljneVestine,
+           kategorijaId : kategorijaId,
+       }
+
+       return res.render('./poslovi/novi_posao',{
+            greska : greska,
+            title : 'Novi oglas',
+            sveKategorije : sveKategorije,
+            kategorijaId : kategorijaId
+       })
+    }
+
+
+    // U slusaju da posao ne postoji upisujemo posao u bazi
+
+    /** Upit ka bazi za upis posla */
+      var noviPosao = await posloviModel.dodajPosao(naziv,kratakOpis,punOpis,potrebneVestine,pozeljneVestine,datum,kategorijaId,korisnikId,brPrijava);
+
+    // Vracanje stranice sa dodatim poslom :
+    res.redirect(`/svi_poslovi/posao/${noviPosao.insertId}`);
+}
+
+
+
+
 
 
 /** Get /svi_poslovi/posao<id>/izmena_posla */

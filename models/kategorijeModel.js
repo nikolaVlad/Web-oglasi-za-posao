@@ -130,9 +130,6 @@ module.exports.vratiNaziviIdKategorije = (id) =>
     });
 }
 
-
-
-
 // end Vraćanje podataka ----------------------------------------------------------------------
 
 

@@ -16,10 +16,6 @@
                     <b >Web oglasi za posao</b>
                 </a>
                 
-                         
-
-
-              
 
                 <!--Ostali deo menia-->
                 <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
@@ -72,7 +68,7 @@
         <!-- Razdvajanje menija od sadrzaja-->
     </div>
     <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
-    
+
 
     <!-- Forma za kreiranje nove kategorije-->
     <!-- Naslov -->
@@ -82,31 +78,53 @@
     <!-- Unos podataka -->
     <div class="container center">
      <!-- Forma -->
-        <form action="" method= ''>
+        <form action="/svi_poslovi/novi_posao" method= 'POST'>
             <!-- Telo forme-->
             <div class="form-group ">
                 <!-- Kategorija-->
-                <label>Kategorija : </label><br>
-                <select class = 'form-control center-style bg-dark' >
-                    <option>Naziv_kategorije</option>
+                <label>*Kategorija : </label><br>
+                <select class = 'form-control center-style bg-dark'  name = 'kategorijaId' required >
+                    
+                    <% for(kategorija of sveKategorije) {%>
+                    <option value = '<%-kategorija.id%>' <%if( kategorijaId == kategorija.id){%> selected <%}%> >
+                        <%-kategorija.naziv%>
+                    </option>
+                    <%}%>
                 </select>
                 <!-- Naziv oglasa-->
-                <label>Naziv oglasa : </label>
-                <input type="text" class="form-control center-style">
+                <label>*Naziv oglasa : </label>
+                <input type="text" class="form-control center-style" 
+                name = 'naziv' required maxlength="100" 
+                <%if (greska != '') {%> value =  '<%-greska.naziv%>' <%}%>
+                >
+                <!-- Labela koja oznacava gresku-->
+                <%if(greska != ''){%>
+                    <p class="small text-danger"><%-greska.ime%></p>
+                <%}%>
+
                 <!-- Kratak opis-->
-                <label>Kratak opis : </label><br>
-                <textarea maxlength="" class = 'form-control center-style' style = 'height : 150px'></textarea>
+                <label>*Kratak opis : </label><br>
+                <textarea maxlength="" class = 'form-control center-style' style = 'height : 150px' 
+                name = 'kratakOpis' 
+                required maxlength="150"><%if (greska != ''){%><%-greska.kratakOpis%><%}%></textarea>
                 <!-- Pun opis -->
-                <label>Pun opis posla</label>
-                <textarea maxlength="" class="form-control center-style" style="height: 250px;"></textarea>
+                <label>*Pun opis posla</label>
+                <textarea class="form-control center-style" style="height: 250px;" 
+                name = 'punOpis' required><%if(greska!=''){%><%-greska.punOpis%><%}%></textarea>
                 <!-- Potrebne veštine -->
-                <label>Potrebne veštine, koje kandidat mora da poznaje : </label><br>
-                <textarea maxlength="" class="form-control center-style"></textarea><br>
+                <label>*Potrebne veštine, koje kandidat mora da poznaje : </label><br>
+                <textarea maxlength="" class="form-control center-style" 
+                name = 'potrebneVestine' required><%if (greska != ''){%><%-greska.potrebneVestine%><%}%></textarea><br>
                 <!-- Poželjne veštine -->
                 <label>Poželjne veštine : </label><br>
-                <textarea maxlength="" class="form-control center-style"></textarea><br>
+                <textarea maxlength="" class="form-control center-style" 
+                name = 'pozeljneVestine'><%if (greska != ''){%><%-greska.pozeljneVestine%><%}%></textarea><br>
+
+
+
                 <!-- Submit -->
                 <button type="submit" class="btn btn-success">Dodaj oglas</button>
+                <a href = '/svi_poslovi' class="btn btn-danger">Odustani</a>
             </div>
         </form>
     </div>
