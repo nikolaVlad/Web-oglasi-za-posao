@@ -3,7 +3,9 @@ var posloviModel = require('../models/posloviModel');
 
 var kategorijeModel = require('../models/kategorijeModel');
 
+var korisniciModel = require('../models/korisniciModel');
 
+var prijaveModel = require('../models/prijaveModel');
 
 /**Get /svi_poslovi */
 module.exports.getSviPoslovi = async(req, res) =>
@@ -110,9 +112,50 @@ module.exports.getNoviPosao = (req, res) =>
 
 
 /** Get /svi_poslovi/posao/<id> */
-module.exports.getPosao = (req,res) =>
+module.exports.getPosao = async (req,res) =>
 {
-    res.render('./poslovi/posao', {title : 'Posao'});
+    // Dobijanej id posla
+    var id = req.params.id;
+
+    /** Vraćanje podatke o poslu iz tabele poslovi  */
+        // Vraća oglas na koje je korisnik pristigao
+        var posao = await posloviModel.vratiPosao(id);
+
+        // U slucaju da posao ne postoji
+        if(posao.length == 0)
+        {
+            res.end('Izabrani posao ne postoji');
+        }
+    
+
+        // Vraća korsinika, koji je postavio taj posao
+        var korisnik = await korisniciModel.vratiKorisnika((posao[0].korisnik_id));
+
+
+        // Modifikovanje podataka iz tabele posao - kolona potrebne_vestine
+            posao[0].potrebne_vestine = posao[0].potrebne_vestine.split(',');
+
+        // Kategorija kojoj pripada određeni posao
+        var kategorija = await kategorijeModel.vratiKategoriju(posao[0].kategorija_id);
+       
+        // Prijave na posao
+        var prijaveKorisnici = await prijaveModel.vratiKorisnikeZaPosao(posao[0].id);
+
+        
+
+
+
+
+    // Renderovanje stranice
+    res.render('./poslovi/posao', {
+        title : posao[0].naziv,
+        posao : posao,
+        korisnik : korisnik,
+        kategorija : kategorija,
+        prijaveKorisnici : prijaveKorisnici,
+        brPrijava : prijaveKorisnici.length
+    
+    });
 }
 
 

@@ -120,4 +120,20 @@ module.exports.vratiPosloveIzKategorije = (idKategorije, kljucneReci, strana) =>
     });
 }
 
-  
+
+/** Vraća 1 posao selektovan pomoću id-a */
+module.exports.vratiPosao = (id) =>
+{
+    return new Promise((res,rej)=>
+    {
+        var query = ` SELECT * FROM poslovi WHERE id = ?`;
+
+        conn.query(query,[id],(err,result)=>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        })
+    })
+}
+
+/** Vraća podatke o korisniku koji je postavio određen posao, selektovan pomoću Id-a */

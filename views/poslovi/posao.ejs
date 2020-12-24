@@ -77,7 +77,7 @@
 
 
 
-
+    
     <!-- Telo oglasa-->
     <div class="container-fluid">
         
@@ -89,16 +89,24 @@
                 <div class="card text-white bg-dark mb-3" >
                     <div class="card-header ">Veštine i tehnologije :</div>
                     <div class="card-body">
+
                       <h5 class="card-title  text-secondary">Obavezne : </h5>
+
                       <!-- Obavezne -->
                       <p class="card-text" style="color: rgba(0, 255, 149, 0.753);">
-                          #css, <br>#html,<br> #js,<br> #express,<br> #nodejs,<br> #jquery
+                          <%for (vestina of posao[0].potrebne_vestine) {%>
+                            <a href = '/svi_poslovi?kljucneReci=<%-vestina%>' class='text-success'>#<%-vestina%></a><br>
+                          <%}%>
                       </p>
                       <hr style=" background-color: rgb(92, 92, 92);">
+
+
+
+
                       <!-- Pozeljne -->
                       <h5 class="card-title  text-secondary">Poželjne : </h5>
                       <p style=" color :rgba(255, 255, 255, 0.815)">
-                          rad sa bazama, nesto1, nesto2, nrsto3
+                          <%-posao[0].pozeljne_vestine%>
                       </p>
                     </div>
                 </div>
@@ -111,12 +119,12 @@
                     <!-- Kartica -->
                     <div class="card text-left bg-dark ">
                         <!-- Naziv oglasa -->
-                        <div class = 'text-center h4'><> <spna class="text-success">Web oglas za posao PHP dev</spna> <> </div>
+                        <div class = 'text-center h4'><> <spna class="text-success"><%-posao[0].naziv%></spna> <> </div>
                         
                         <!-- Korisnik koji je postavio i datum postavljanja-->
                         <div class="card-header" >
-                            Oglas postavio : <b>Ime korisnika </b>
-                            <span class="ml-3 text-center">Datum  </span>
+                            Oglas postavio :  <a href='/svi_korisnici/korisnik/<%-korisnik[0].id%>'><b class="text-warning"><%-korisnik[0].ime%></b></a>
+                            <span class="ml-5 text-right small "><%-posao[0].datum%></span>
                       
                         </div>
                         <!-- /Korisnik i datum-->
@@ -124,30 +132,18 @@
                         <!-- Informacije o oglasu-->
                         <div class="card-body ">
                             <!-- Kategoriji kojoj pripada -->
-                            <a href=''>#Kategorija</a>
+                            <a href='/sve_kategorije/kategorija/<%-kategorija[0].id%>'>#<%-kategorija[0].naziv%></a>
                             <br><br>
                             <!-- /Kategoriji kojoj pripada -->
 
                             <!-- Kratak opis -->
                             <p class="text-secondary">Kratak opis :</p>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                                Nesciunt accusamus quia, beatae atque obcaecati, 
-                                animi qui nostrum pariatur eum eius ducimus est rem omnis quibusdam, 
-                                perspiciatis dignissimos quos reprehenderit natus?</p>
+                            <p>
+                                <%-posao[0].kratak_opis%>
+                            </p>
                             <p class = 'text-secondary'>Pun opis posla : </p>
                             <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                                Nesciunt accusamus quia, beatae atque obcaecati, 
-                                animi qui nostrum pariatur eum eius ducimus est rem omnis quibusdam, 
-                                perspiciatis dignissimos quos reprehenderit natus?<br><br>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                                Nesciunt accusamus quia, beatae atque obcaecati, 
-                                animi qui nostrum pariatur eum eius ducimus est rem omnis quibusdam, 
-                                perspiciatis dignissimos quos reprehenderit natus?
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-                                Nesciunt accusamus quia, beatae atque obcaecati, 
-                                animi qui nostrum pariatur eum eius ducimus est rem omnis quibusdam, 
-                                perspiciatis dignissimos quos reprehenderit natus?
+                                <%-posao[0].pun_opis%>
                             </p>
                          
                         </div>
@@ -156,16 +152,21 @@
                             
 
                             <!--Akcije u vezi posla-->
-                            <div class = 'text-right'>
+                            
                                 <!-- Forma za prijavu na posao-->
                                 <form class = 'form text-center' action ='' method=''>
-                                    <input type="button" class="btn btn-danger btn" value="Prijavi se za posao"> 
+                                    <button type="submit" class="btn btn-danger">Prijavi se</button>
                                  </form>
                                   <!-- /Forma za prijavu na posao-->
+                                <div class = 'justify-content-end d-flex'>
+                                <!-- Brisanje i izmena-->
+                                <!-- Izmena -->
+                                <a href = '/svi_poslovi/posao/<%-posao[0].id%>/izmena_posla'class="btn"><i class="fas fa-pen text-info mr-1 "></i></a>
 
-                                <!-- Brisanej i izmena-->
-                                <i class="fas fa-pen text-info mr-3"></i>
-                                <i class="fas fa-trash text-danger mr-3"></i>
+                                <!-- Brisanje -->
+                                <form action="" method="POST" class=" form form-inline">
+                                    <button type="submit" class="btn"><i class="fas fa-trash text-danger mr-3"></i></button>
+                                </form>
                                 <!-- /Brisanej i izmena-->
                             </div>
                         </div>
@@ -178,19 +179,42 @@
                      <!-- Kartica -->
                     <div class="card text-white bg-dark mb-3">
                         <!-- Naslov kartice -->
-                        <div class="card-header">Prijavljeni korisnici : <b>Broj_korisnika</b></div>
+                        <div class="card-header">Prijavljeni korisnici : <b><%-brPrijava%></b></div>
                         <!-- Telo kartice-->
                         <div class="card-body">
                           <!-- Korisnici -->
+                          <% for(prijavljeniKorisnik of prijaveKorisnici) {%>
                           <div class="row">
                               <div class="col-6">
-                                <a href = ''>Ime korisnika</a>
+                                <a href = '/svi_korisnici/korisnik/<%-prijavljeniKorisnik.id%>'>
+                                    <%-prijavljeniKorisnik.ime%> <%-prijavljeniKorisnik.prezime%>
+                                </a>
                               </div>
-                              <div class="col-6">
-                                <i class="fas fa-check-circle text-success h4"></i>
-                                <i class="fas fa-times-circle text-danger h4"></i>
+                              <!-- AKCIJE PRIJAVE -->
+                              <div class="col-6 justify-content-end d-flex">
+
+                                <!-- Forma za prihvatanje -->
+                                <form action ='' method =''>
+                                    <button type="submit" class="btn ">
+                                        <i class="fas fa-check-circle text-success h4"></i>
+                                    </button>
+                                </form>
+                                <!-- /Forma za prihvatanje -->
+                                
+
+                                <!-- Forma za odbijanje prijave-->
+                                <form action ='' method =''>
+                                    <button type="submit" class="btn ">
+                                        <i class="fas fa-times-circle text-danger h4"></i>
+                                    </button>
+                                </form>
+    
+                               
+                                <!-- /Forma za odbijanje prijave-->
                               </div>
+                              <!-- /AKCIJE PRIJAVE -->
                         </div>
+                        <%}%>
                         <!-- /Row -->
 
                         </div>
@@ -203,6 +227,7 @@
         <!-- /Row -->
     </div>
     <!-- /Telo oglasa-->
+    
     
     
     <!-- Footer -->
