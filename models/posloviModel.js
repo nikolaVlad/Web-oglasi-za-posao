@@ -174,3 +174,31 @@ module.exports.dodajPosao = (naziv, kratakOpis, punOpis, potrebneVestine,pozeljn
 
     });
 }
+
+
+/** Izmena 1 posla(oglasa) u tabeli poslovi */
+module.exports.izmeniPosao = (naziv,kratakOpis,punOpis,potrebneVestine,pozeljneVestine,datum,kategorijaId, id) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `
+                        UPDATE poslovi 
+                        SET naziv = ?,
+                        kratak_opis = ?,
+                        pun_opis = ?,
+                        pozeljne_vestine = ?,
+                        potrebne_vestine = ?,
+                        datum = ?,
+                        kategorija_id = ?
+
+                        WHERE id = ?
+                    `
+
+        conn.query(query, [naziv,kratakOpis,punOpis,pozeljneVestine,potrebneVestine,datum,kategorijaId,id],
+            (err,result)=>
+            {
+                if (err)    rej(err);
+                else        { res(result)};
+            });
+    })
+}

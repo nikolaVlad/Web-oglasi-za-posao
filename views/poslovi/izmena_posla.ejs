@@ -81,31 +81,45 @@
     <!-- Unos podataka -->
     <div class="container center">
      <!-- Forma -->
-        <form action="" method= ''>
+        <form action="/svi_poslovi/posao/<%-posao[0].id%>/izmena_posla" method= 'POST'>
             <!-- Telo forme-->
             <div class="form-group ">
                 <!-- Kategorija-->
-                <label>Kategorija : </label><br>
-                <select class = 'form-control center-style bg-dark' >
-                    <option>Naziv_kategorije</option>
+                <label>*Kategorija : </label><br>
+                <select class = 'form-control center-style bg-dark' name = 'kategorijaId' required>
+                    <% for(kategorija of sveKategorije) {%>
+                        <option value = '<%-kategorija.id%>' <%if( kategorijaId == kategorija.id){%> selected <%}%> >
+                            <%-kategorija.naziv%>
+                        </option>
+                    <%}%>
                 </select>
                 <!-- Naziv oglasa-->
                 <label>Naziv oglasa : </label>
-                <input type="text" class="form-control center-style">
+                <input type="text" class="form-control center-style" name = 'naziv' value = '<%- posao[0].naziv %>' 
+                <% if(greska != ''){ %>    autofocus <%}%>
+                
+                required>
                 <!-- Kratak opis-->
+                <!-- Greska -->
+                <%if (greska != ''){%>
+                    <p class="small text-danger"><%-greska%></p>
+                <%}%>
+                <!-- /Greska -->
+
                 <label>Kratak opis : </label><br>
-                <textarea maxlength="" class = 'form-control center-style' style = 'height : 150px'></textarea>
+                <textarea maxlength="" class = 'form-control center-style' style = 'height : 150px' name = 'kratakOpis' required><%-posao[0].kratak_opis%></textarea>
                 <!-- Pun opis -->
                 <label>Pun opis posla</label>
-                <textarea maxlength="" class="form-control center-style" style="height: 250px;"></textarea>
+                <textarea maxlength="" class="form-control center-style" style="height: 250px;" name = 'punOpis' required><%-posao[0].pun_opis%></textarea>
                 <!-- Potrebne veštine -->
                 <label>Potrebne veštine, koje kandidat mora da poznaje : </label><br>
-                <textarea maxlength="" class="form-control center-style"></textarea><br>
+                <textarea maxlength="" class="form-control center-style" name = 'potrebneVestine'><%-posao[0].potrebne_vestine%></textarea><br>
                 <!-- Poželjne veštine -->
                 <label>Poželjne veštine : </label><br>
-                <textarea maxlength="" class="form-control center-style"></textarea><br>
+                <textarea maxlength="" class="form-control center-style" name ='pozeljneVestine'><%-posao[0].pozeljne_vestine%></textarea><br>
                 <!-- Submit -->
                 <button type="submit" class="btn btn-success">Sačuvaj izmene </button>
+                <a href='/svi_poslovi/posao/<%-posao[0].id%>' class="btn btn-danger">Odustani</a>
             </div>
         </form>
     </div>

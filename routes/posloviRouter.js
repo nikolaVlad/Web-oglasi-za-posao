@@ -24,6 +24,8 @@ router.post('/novi_posao', posloviController.postNoviPosao);
 /** Get /svi_poslovi/posao/<id>/izmena_posla */
 router.get('/posao/:id/izmena_posla', posloviController.getIzmenaPosla);
 
+/** POST /svi_poslovi/posao/<id>/izmena_posla */
+router.post('/posao/:id/izmena_posla', posloviController.postIzmenaPosla)
 
 
 

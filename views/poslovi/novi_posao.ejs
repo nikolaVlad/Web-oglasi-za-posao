@@ -84,7 +84,7 @@
                 <!-- Kategorija-->
                 <label>*Kategorija : </label><br>
                 <select class = 'form-control center-style bg-dark'  name = 'kategorijaId' required >
-                    
+                
                     <% for(kategorija of sveKategorije) {%>
                     <option value = '<%-kategorija.id%>' <%if( kategorijaId == kategorija.id){%> selected <%}%> >
                         <%-kategorija.naziv%>

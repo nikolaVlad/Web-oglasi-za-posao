@@ -30,7 +30,7 @@ module.exports.vratiKategorije = (limit) =>
         var query;
         if(typeof limit == 'undefined')
         {
-            query = `SELECT * FROM kategorije`;
+            query = `SELECT * FROM kategorije ORDER BY naziv asc`;
         }
         else
         {
