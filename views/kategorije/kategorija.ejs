@@ -78,7 +78,7 @@
     <div class = 'container bg'>
         <div class=" row text-right" >
             <div class="col-xl-12">
-                <a href="" style=" color : white" class=""><i class="fas fa-plus text-success" ></i> Dodaj oglas</a>
+                <a href="/svi_poslovi/novi_posao" style=" color : white" class=""><i class="fas fa-plus text-success" ></i> Dodaj oglas</a>
                 <a href ="/sve_kategorije" class="m-3" style="color: white;"><i class="fas fa-border-all text-warning"></i></i> Vidi sve kategorije</a>
             </div>
             <hr>
@@ -204,7 +204,7 @@
                    
                     <br>
                    
-                    <p><a href=""> Detaljnije...</a></p>
+                    <p><a href="/svi_poslovi/posao/<%-posao.id%>"> Detaljnije...</a></p>
                     
                 </p>
                
@@ -213,13 +213,31 @@
             <div class="card-footer ">
                 <!-- Izmena i brisanej (admin) i odredjeni korisnik-->
                 
-                <!-- Prijava na poslu-->
+                <!-- Prijava i izmena i brisanje posla -->
                 <div class = 'text-right'>
                     <p class ='text-secondary small'>Broj prijava : <%-posao.br_prijava%></p>
-                    <i class="fas fa-pen text-info mr-3"></i>
-                    <i class="fas fa-trash text-danger mr-3"></i>
-                    <a href = '' class='ml-3'> Prijavi se</a>
+                    <!-- Prijava -->
+                    <form class="form form-inline  justify-content-center d-flex">
+                        <button type="submit" class = 'btn btn-danger btn-sm' >Prijavi se</button>
+                    </form>
+                    <!-- /Prijava-->
+
+                    <!-- Brisanje i izmena -->
+                    <div class="justify-content-end d-flex"> 
+                        <!-- Izmena -->
+                        <a href="/svi_poslovi/posao/<%-posao.id%>/izmena_posla" class="btn"><i class="fas fa-pen text-info "></i></a>
+                        <!-- /Izmena-->
+
+                        <!-- Brisanje -->
+                        <form class = 'form form-inline'>
+                        
+                        <button type="submit" class="btn"><i class="fas fa-trash text-danger"></i> </button>
+                        </form>
+                         <!-- /Brisanje -->
+                    </div>
+                    <!-- /Brisanje i izmena -->
                 </div>
+                <!-- /Prijava i izmena i brisanje posla -->
             </div>
           </div>
           <!-- /Oglas1-->

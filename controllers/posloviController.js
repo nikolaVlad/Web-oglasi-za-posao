@@ -305,7 +305,7 @@ module.exports.postIzmenaPosla = async (req,res) =>
             // Izmena naziva posla, da bi korisnik u formi dobio ime koje je uneo(neispravno ime)
                 posao[0].naziv = posaoKojiPostojiNaziv;
 
-            var greska = 'U izabranoj kategoriji već postoji posao sa ovakvim imenom. Molimo promenite ili naziv posla ili izaberite drugu sličnu kategoriju!'
+            var greska = 'U izabranoj kategoriji već postoji posao sa ovakvim imenom. Molimo promenite naziv posla ili izaberite drugu sličnu kategoriju!'
             
             // Renderovanje strane u slucaju da je došlo do greške
             return res.render('./poslovi/izmena_posla', {

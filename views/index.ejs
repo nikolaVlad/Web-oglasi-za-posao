@@ -76,8 +76,8 @@
 
 
     <!-- Kategorije -->
-    <div class='kategorije bg-secondary' >
-        <div class= 'container bg-secondary'>
+    <div class='kategorije bg-secondary ' >
+        <div class= 'container bg-secondary ' >
             <div class = 'row'>
 
                 <!-- @Izlistavanej kategorija-->
@@ -160,7 +160,7 @@
                             <div class="posao-card">
                                 <i class="far fa-file-code" style="font-size: 30px; color: rgb(255, 230, 0);"></i>
                                 <!-- Naziv posla -->
-                                <a href=''><h5><%- posao.naziv %></h5></a>
+                                <a href='/svi_poslovi/posao/<%-posao.id%>'><h5><%- posao.naziv %></h5></a>
                                 <!-- Kratak opis posla -->
                                 <p class="small "> <%- posao.kratak_opis %></p>
                             </div>
