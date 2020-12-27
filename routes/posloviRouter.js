@@ -25,8 +25,9 @@ router.post('/novi_posao', posloviController.postNoviPosao);
 router.get('/posao/:id/izmena_posla', posloviController.getIzmenaPosla);
 
 /** POST /svi_poslovi/posao/<id>/izmena_posla */
-router.post('/posao/:id/izmena_posla', posloviController.postIzmenaPosla)
+router.post('/posao/:id/izmena_posla', posloviController.postIzmenaPosla);
 
-
+/** POST /svi_poslovi/posao/<id>/brisanje_posla */
+router.post('/posao/:id/brisanje_posla',posloviController.postBrisanjePosla);
 
 module.exports = router;

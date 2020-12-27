@@ -333,3 +333,15 @@ module.exports.postIzmenaPosla = async (req,res) =>
 
 
 }
+
+/** POST /svi_poslovi/posao/<id>/brisanje_posla */
+module.exports.postBrisanjePosla = async (req,res) =>
+{
+    // Dobijanje id posla za brisanje iz URL putanje
+    var id = req.params.id;
+
+    /** Upit za brisanje jednog posla */
+        console.log(await posloviModel.obrisiPosao(id));
+
+    res.redirect('/svi_poslovi');
+}

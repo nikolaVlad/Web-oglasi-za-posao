@@ -202,3 +202,18 @@ module.exports.izmeniPosao = (naziv,kratakOpis,punOpis,potrebneVestine,pozeljneV
             });
     })
 }
+
+/** Brisanje 1 posla(oglasa) u tabeli poslovi */
+module.exports.obrisiPosao = (id) =>
+{
+    return new Promise((res,rej)=>
+    {
+        var query = `DELETE FROM poslovi WHERE id = ?`;
+
+        conn.query(query,[id],(err,result)=>
+        {
+            if (err)    rej(err);
+            else        res(result);
+        })
+    });
+}
