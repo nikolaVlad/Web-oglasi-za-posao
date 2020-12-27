@@ -270,8 +270,12 @@ module.exports.obrisiKategoriju = async (req, res) =>
     // Uzimanja id kategorije za brisanje iz forme
     var id = req.params.id;
 
+    /**  Brisanje svih poslova iz te kategorije */
+        await posloviModel.obrisiPosloveIzKategoriju(id);
+
     /** Upit za brisanje */
         console.log(await kategorijeModel.obrisiKategoriju(id));
+    
 
     res.redirect('/sve_kategorije');
 

@@ -176,11 +176,46 @@
                             <a href ="/sve_kategorije/kategorija/<%-kategorija.id%>/izmena_kategorije"
                              class ='mr-4 btn btn-outline-info br'><i class="fas fa-edit"></i></a>
                             <!-- Obrisi #Admin-->
-                            <form class="form form-inline" method="POST" action="/sve_kategorije/kategorija/<%-kategorija.id%>/obrisi_kategoriju">
-                                
-                                
-                                <button class="btn btn-outline-danger br"><i class="fas fa-trash " style='color:tomato';></i></button>
-                                
+                            <form class="form form-inline" method="POST" action="/sve_kategorije/kategorija/<%-kategorija.id%>/brisanje_kategorije">
+
+                                <button type = 'button' class="btn btn-outline-danger br" data-toggle="modal" data-target="#modalBrisanjeKategorije<%-kategorija.id%>"><i class="fas fa-trash " style='color:tomato';></i></button>
+
+                                    <!-- Modal za brisanje -->
+                                        <div class="modal fade text-center" id="modalBrisanjeKategorije<%-kategorija.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                
+                                            <div class="modal-content bg-dark">
+                                                <div class="modal-header">
+                            
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Brisanje kategorije</h5>
+                                                
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true" class="text-danger">&times;</span>
+                                                </button>
+                                                
+                                                </div>
+                                                <!-- Pitanje -->
+                                                <div class="modal-body">
+                                                    Da li ste sigurni da želite da obrišete kategoriju :<br> 
+                                                    <span class="text-warning"><%-kategorija.naziv%></span> 
+                                                </div>
+                                                <!-- /Pitanje -->
+
+
+                            
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                                                    <!-- Potvrda -->
+                                                    <button type="submit" class="btn btn-primary">Potvrdi</button>
+                                                    <!-- Potvrda -->
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    <!-- /Modal za brisanje -->
+
+
+
                             
                             </form>
                         </div>

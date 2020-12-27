@@ -24,7 +24,7 @@ router.get('/nova_kategorija', kategorijeController.getNovaKategorija);
 router.post('/nova_kategorija', kategorijeController.postNovaKategorija);
 
 /**Delete /sve_kategorije/<kategorijaId> */ // Brisanje kategorije
-router.post('/kategorija/:id/obrisi_kategoriju', kategorijeController.obrisiKategoriju);
+router.post('/kategorija/:id/brisanje_kategorije', kategorijeController.obrisiKategoriju);
 
 
 

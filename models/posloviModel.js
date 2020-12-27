@@ -217,3 +217,20 @@ module.exports.obrisiPosao = (id) =>
         })
     });
 }
+
+
+/** Brisanje svih poslova iz kategorije  */
+module.exports.obrisiPosloveIzKategoriju = (idKategorije) =>
+{
+    return new Promise((res, rej)=>
+    {
+        var query = `DELETE FROM poslovi WHERE kategorija_id = ?`;
+
+        conn.query(query,[idKategorije], (err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        });
+
+    });
+}

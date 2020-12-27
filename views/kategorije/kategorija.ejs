@@ -82,9 +82,59 @@
                 <a href ="/sve_kategorije" class="m-3" style="color: white;"><i class="fas fa-border-all text-warning"></i></i> Vidi sve kategorije</a>
             </div>
             <hr>
-            <div class="col-xl-12">
-                <a href ="/sve_kategorije/kategorija/<%-kategorija[0].id%>/izmena_kategorije" class="" style="color: white;"><i class="fas fa-edit " style="color : rgb(0, 204, 255)"></i> Izmeni kategoriju</a>
-                <a href =" " class="m-3" style="color: white;"><i class="fas fa-trash" style="color : rgb(255, 64, 64)"></i> Obriši kategoriju</a>
+            <div class="col-xl-12 justify-content-end d-flex ">
+
+
+                <div class="d-flex">
+                    <a href ="/sve_kategorije/kategorija/<%-kategorija[0].id%>/izmena_kategorije" class="btn" style="color: white;"><i class="fas fa-edit " style="color : rgb(0, 204, 255)"></i> Izmeni kategoriju</a>
+                    
+                    <form class="form form-inline" action="/sve_kategorije/kategorija/<%-kategorija[0].id%>/brisanje_kategorije" method="POST">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#modalObrisiKategoriju" style="color: white;"><i class="fas fa-trash" style="color : rgb(255, 64, 64)"></i> Obriši kategoriju</button>
+                    
+                    
+                        <!-- Modal za brisanje -->
+                                <div class="modal fade text-center" id="modalObrisiKategoriju" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        
+                                    <div class="modal-content bg-dark">
+                                        <div class="modal-header">
+                    
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Brisanje kategorije</h5>
+                                        
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="text-danger">&times;</span>
+                                        </button>
+                                        
+                                        </div>
+                                        <!-- Pitanje -->
+                                        <div class="modal-body">
+                                            Da li ste sigurni da želite da obrišete kategoriju :<br> 
+                                            <span class="text-warning"><%-kategorija[0].naziv%></span> 
+                                        </div>
+                                        <!-- /Pitanje -->
+
+
+                    
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                                            <!-- Potvrda -->
+                                            <button type="submit" class="btn btn-primary">Potvrdi</button>
+                                            <!-- Potvrda -->
+                                        </div>
+                                    </div>
+                    
+                                    </div>
+                                </div>
+                        <!-- /Modal za brisanje -->
+
+                    
+                    
+                    
+                    
+                    </form>
+                </div>
+
+                
             </div>
         </div>
     </div>
@@ -163,7 +213,6 @@
     <!-- Prikaz broja oglasa-->
     <div class="container">
         <span class ='ml-4 mb-3'> 
-           
             Prikazani oglasi :  <b> <%-prikazaniPoslovi%> </b> / <%-ukupnoPoslova%>
         </span> 
     </div>
@@ -213,31 +262,52 @@
             <div class="card-footer ">
                 <!-- Izmena i brisanej (admin) i odredjeni korisnik-->
                 
-                <!-- Prijava i izmena i brisanje posla -->
+                <!-- Akcije -->
                 <div class = 'text-right'>
                     <p class ='text-secondary small'>Broj prijava : <%-posao.br_prijava%></p>
+
                     <!-- Prijava -->
-                    <form class="form form-inline  justify-content-center d-flex">
-                        <button type="submit" class = 'btn btn-danger btn-sm' >Prijavi se</button>
+                    <form class="form form-inline justify-content-center d-flex">
+                        <button type="button" class = 'btn btn-danger btn-sm' data-toggle="modal" data-target="#modalPrijaviSeZaPosao<%-posao.id%>">Prijavi se</button>
+
+
+                        <!-- Modal za prijavu -->
+                            <div class="modal fade text-center" id="modalPrijaviSeZaPosao<%-posao.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    
+                                <div class="modal-content bg-dark">
+                                    <div class="modal-header">
+                
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Prijavljivanje</h5>
+                                    
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" class="text-danger">&times;</span>
+                                    </button>
+                                    
+                                    </div>
+                                    <!-- Pitanje -->
+                                    <div class="modal-body">
+                                        Da li ste sigurni da želite da se prijavite na posao :<br> 
+                                        <span class="text-warning"><%-posao.naziv%></span> 
+                                    </div>
+                                    <!-- /Pitanje -->
+
+
+                
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                                        <!-- Potvrda -->
+                                        <button type="submit" class="btn btn-primary">Potvrdi</button>
+                                        <!-- Potvrda -->
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        <!-- /Modal za prijavu -->
                     </form>
                     <!-- /Prijava-->
-
-                    <!-- Brisanje i izmena -->
-                    <div class="justify-content-end d-flex"> 
-                        <!-- Izmena -->
-                        <a href="/svi_poslovi/posao/<%-posao.id%>/izmena_posla" class="btn"><i class="fas fa-pen text-info "></i></a>
-                        <!-- /Izmena-->
-
-                        <!-- Brisanje -->
-                        <form class = 'form form-inline'>
-                        
-                        <button type="submit" class="btn"><i class="fas fa-trash text-danger"></i> </button>
-                        </form>
-                         <!-- /Brisanje -->
-                    </div>
-                    <!-- /Brisanje i izmena -->
                 </div>
-                <!-- /Prijava i izmena i brisanje posla -->
+                <!-- /Akcije -->
             </div>
           </div>
           <!-- /Oglas1-->

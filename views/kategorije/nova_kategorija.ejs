@@ -88,18 +88,15 @@
             <form action="/sve_kategorije/nova_kategorija" method= 'POST'>
                 <!-- Telo forme-->
                 <div class="form-group ">
-                    <!-- Mesto za sliku -->
-                    <div style="width: 250px; height: 150px; background-color: rgba(36, 36, 36, 0.219); "></div>
-                    <input name = 'slika' 
+                   
                     <% if (greska != '') {%>
                     value = '<%- kategorija[0].slika %>'
                     <%}%>
-                    >
-                    <!-- Button za dodavanje fajla-->
-                    <a class ='btn btn-info m-3'>Dodaj sliku</a><br>
+                    
+                   
 
                     <!-- Ostali deo forme-->
-                    <label>Naziv kategorije :</label> 
+                    <label>*Naziv kategorije :</label> 
 
                    
                     <!-- Naziv kategorije-->
@@ -134,7 +131,7 @@
                     <!-- Submit -->
                     <button type="submit" class="btn btn-success ">Kreiraj kategoriju</button>
                     <!-- Odustani -->
-                    <a class="btn btn-danger " href = '/sve_kategorije'>Odustani</a>
+                    <button type="button" class="btn btn-danger" onclick="window.history.back();">Odustani</button>
                 </div>
                 <!-- /Telo forme-->
             </form>

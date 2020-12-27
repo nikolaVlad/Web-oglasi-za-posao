@@ -86,11 +86,7 @@
             <form action='/sve_kategorije/kategorija/<%-kategorija[0].id%>/izmena_kategorije' method= 'POST'>
                 <!-- Telo forme-->
                 <div class="form-group ">
-                    <!-- Mesto za sliku -->
-                    <div style="width: 250px; height: 150px; background-color: rgba(36, 36, 36, 0.219); "></div>
-                    <input name = 'slika' value = '<%-kategorija[0].slika%>'>
-                    <!-- Button za dodavanje fajla-->
-                    <a class ='btn btn-info m-3'>Dodaj sliku</a><br>
+                  
 
                     <!-- Ostali deo forme-->
                     <label>Naziv kategorije :</label>
@@ -113,7 +109,7 @@
                     
 
                     <!-- Odustani -->
-                    <a href = '/sve_kategorije/kategorija/<%-kategorija[0].id%>' class="btn btn-danger">Odustani</a> 
+                    <button type="button" class="btn btn-danger" onclick="window.history.back()">Odustani</button>
                     
 
 
