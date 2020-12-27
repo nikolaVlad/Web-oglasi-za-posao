@@ -255,13 +255,8 @@ module.exports.postNovaKategorija = async (req,res) =>
 
     // U slucaju da kategorija ne postoji
     /** Upisivanje kategorije u bazi */
-        console.log( await kategorijeModel.dodajKategoriju(naziv, kratakOpis, slika));
-        res.redirect('/sve_kategorije');
-
-
-
-
-
+        var novaKategorija = await kategorijeModel.dodajKategoriju(naziv, kratakOpis, slika);
+        res.redirect(`/sve_kategorije/kategorija/${novaKategorija.insertId}`);
     
 }
 

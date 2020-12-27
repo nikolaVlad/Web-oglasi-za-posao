@@ -177,13 +177,15 @@
             <!-- /Sadrzaj-->
     <!-- / Aktuelni poslovi-->
 
-
+    <% if( poslovi.length > 0) {%>
     <!-- Svi Poslovi-->
             <div class="col-xs-1 text-center mb-5" >
                 <h5>Ne dopada ti se nijedan aktuelan posao, pogledaj <a href = '/svi_poslovi' ><u>sve poslove na sajtu.</u></a></h5>
             </div>
     <!-- /Svi Poslovi-->
-
+    <%} else {%>
+        <h1 class="text-center text-secondary">Trenutno nema nijedan aktuelan posao za prikazivanje!</h1>
+    <%}%>
 
     <!-- Footer -->
     <div class="container-fluid fixed-bottom footer">
