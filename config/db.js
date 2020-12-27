@@ -7,6 +7,5 @@ module.exports = mysql.createConnection(
         host : 'localhost',
         user : 'root',
         database : 'wop',
-        multipleStatements: true
     }
 );
