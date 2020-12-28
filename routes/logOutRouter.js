@@ -3,8 +3,8 @@ var router = express.Router();
 
 // Ucitavanje logOutController-a
 const logOutController = require('../controllers/logOutController');
-const { route } = require('./logInRouter');
 
+/** GET /logOut */
 router.get('/', logOutController.logOut);
 
 
