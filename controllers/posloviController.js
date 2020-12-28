@@ -6,6 +6,7 @@ var kategorijeModel = require('../models/kategorijeModel');
 var korisniciModel = require('../models/korisniciModel');
 
 var prijaveModel = require('../models/prijaveModel');
+const { data } = require('jquery');
 
 /**Get /svi_poslovi */
 module.exports.getSviPoslovi = async(req, res) =>
@@ -124,8 +125,9 @@ module.exports.getPosao = async (req,res) =>
         var korisnik = await korisniciModel.vratiKorisnika((posao[0].korisnik_id));
 
 
-        // Modifikovanje podataka iz tabele posao - kolona potrebne_vestine
+        // Modifikovanje podataka iz tabele posao - kolona potrebne_vestine i datum
             posao[0].potrebne_vestine = posao[0].potrebne_vestine.split(',');
+            posao[0].datum  = (posao[0].datum + '').slice(0,25);
 
         // Kategorija kojoj pripada određeni posao
         var kategorija = await kategorijeModel.vratiKategoriju(posao[0].kategorija_id);

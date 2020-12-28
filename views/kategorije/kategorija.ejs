@@ -233,7 +233,7 @@
                     <span class = 'text-warning'><%-posao.naziv%></span>
               <!-- /Naziv posla-->
                     <br>
-                    <span class='text-secondary small'><%-posao.datum%></span>
+                    <span class='text-secondary small'><%-(posao.datum + '').slice(0,25)%></span>
             </div>
             
             <div class="card-body ">
@@ -266,46 +266,7 @@
                 <div class = 'text-right'>
                     <p class ='text-secondary small'>Broj prijava : <%-posao.br_prijava%></p>
 
-                    <!-- Prijava -->
-                    <form class="form form-inline justify-content-center d-flex">
-                        <button type="button" class = 'btn btn-danger btn-sm' data-toggle="modal" data-target="#modalPrijaviSeZaPosao<%-posao.id%>">Prijavi se</button>
-
-
-                        <!-- Modal za prijavu -->
-                            <div class="modal fade text-center" id="modalPrijaviSeZaPosao<%-posao.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    
-                                <div class="modal-content bg-dark">
-                                    <div class="modal-header">
-                
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Prijavljivanje</h5>
-                                    
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true" class="text-danger">&times;</span>
-                                    </button>
-                                    
-                                    </div>
-                                    <!-- Pitanje -->
-                                    <div class="modal-body">
-                                        Da li ste sigurni da želite da se prijavite na posao :<br> 
-                                        <span class="text-warning"><%-posao.naziv%></span> 
-                                    </div>
-                                    <!-- /Pitanje -->
-
-
-                
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
-                                        <!-- Potvrda -->
-                                        <button type="submit" class="btn btn-primary">Potvrdi</button>
-                                        <!-- Potvrda -->
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        <!-- /Modal za prijavu -->
-                    </form>
-                    <!-- /Prijava-->
+                   
                 </div>
                 <!-- /Akcije -->
             </div>

@@ -62,7 +62,7 @@ module.exports.postLogIn = async(req,res) =>
         else
         {
 
-            // U pisivanje korisnika u sesiji :
+            // Upisivanje korisnika u sesiji :
             req.session.ulogovaniKorisnik = await korisniciModel.vratiKorisnikaSaEmailom(email);
             req.session.ulogovaniKorisnik = req.session.ulogovaniKorisnik[0];
             req.session.ulogovan = true;

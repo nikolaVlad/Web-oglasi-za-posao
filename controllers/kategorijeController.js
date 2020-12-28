@@ -127,8 +127,7 @@ module.exports.getKategorija = async (req, res) =>
      var ukupnoPoslova = await posloviModel.vratiPosloveIzKategorije(id,[''],1);
      var prikazaniPoslovi = poslovi.length * trenutnaStrana;
 
-
-
+     
   
     // Renderovanje :
     res.render('./kategorije/kategorija',{
