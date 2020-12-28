@@ -21,10 +21,8 @@ module.exports.postRegistracija = async (req,res) =>
     var prezime = req.body.prezime;
     var email = req.body.email;
     var lozinka = req.body.lozinka;
-    var slika = 'nema';
-   
-
-
+    var slika = req.body.slika;
+    
 
    /** Provera email-a */
     var proveraEmail = await korisniciModel.vratiKorisnikaSaEmailom(email);
@@ -54,9 +52,14 @@ module.exports.postRegistracija = async (req,res) =>
     {
         // Hashovanje lozinke  
             var hashovanaLozinka = bcrypt.hashSync(lozinka,3); 
+
+        // Dodavanje imena slici
+            slika = Date.now() + slika;
+
         /** Upisivanje korisnika */
             await korisniciModel.dodajKorisnika(ime,prezime,email,hashovanaLozinka,slika);
 
+        
         // Kreiranje obavetenja kad je registracija uspela
         var obavestenje = {
             text : 'Registracija uspešna!',

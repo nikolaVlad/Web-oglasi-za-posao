@@ -77,19 +77,29 @@
 
     <!-- Naslov -->
     <div class="container mt-4 mb-4 text-center">
-        <h1>Registracija</h1>
+        <h1 style="border-radius: 30px; box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.274);">Registracija</h1>
     </div>
 
     <!-- Telo za kreiranje novog korisnika-->
-    <div class="container center" >
+    <div class="container center " >
         <!-- Forma -->
         <form action='/registracija' method ='POST'  style="display: flex; justify-content: center;">
             <!-- Red -->
            <div class="form-group col-sm-6" >
                 <!-- Slika -->
-                <div class = 'mb-3' style=" width : 150px; height : 100px; background-color: rgba(0, 0, 0, 0.336);"></div>
-                <input type="file"><br>
-
+                <div class="  d-flex justify-content-center">
+                    <div class="form-group mt-3">
+                        <!--Dodavanje slike-->
+                        <label for="slika">
+                            <img id="slika_pregled" src="/images/site/place1.png" width="190" height="140" class="rounded-0" style=" border-radius: 10px; border: 2px solid rgba(255, 255, 255, 0.308);;" />
+                        </label>
+                        <br>
+                        <label for="slika" class="btn btn-outline-light" style="width: 190px;"><i class="fas fa-upload"></i></label>
+                        <input type="file" accept="image/*" class="custom-file-input" hidden id="slika" name="slika">
+                    </div>
+                </div>
+                <!-- /Slika-->
+                
                <!-- Ime -->
                    <label>*Ime</label>
                    <input type="text" class="form-control center-style" name = 'ime' required <%if (greska != ''){%> value = '<%-greska.ime%>'<%}%>> 
@@ -117,13 +127,13 @@
                 
 
                 <!-- Submit -->
-                    <button type="submit" class = 'btn btn-success mb-3 mt-3' >Registruj se</button>
+                    <button type="submit" class = 'btn btn-info text-light  mb-3 mt-3' style="width: 100%;" ><b>Registruj se</b></button>
                 <!-- /Submit -->
 
 
                 <br>
                 <!-- Log in-->
-                <span class="h6">Već imaš nalog - <a href = '/login'>uloguj se.</a></span>
+                <span class="h6 justify-content-center d-flex">Već imate nalog - <a href = '/login'>ulogujte se.</a></span>
                 <!-- /Log in-->
 
         </form>
