@@ -40,6 +40,9 @@ const session = require('express-session');
     /** O nama */
     var oNamaRouter = require('./routes/oNamaRouter');
 
+    /** LogOut */
+    var logOutRouter = require('./routes/logOutRouter');
+
 // end Ruteri----------------------------------------------
 
 
@@ -115,6 +118,9 @@ app.use(session({
 
     // o_nama
     app.use('/o_nama', oNamaRouter);
+
+    // logOut
+    app.use('/logOut', logOutRouter);
 
 // end Rute
 

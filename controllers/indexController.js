@@ -5,6 +5,9 @@ const posloviModel = require('../models/posloviModel');
 /**Get index */
 module.exports = async (req, res)=>
 {
+    // Sesija
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
 
     // Iscitavanje 3 kategorija 
     var kategorije = await kategorijeModel.vratiKategorije(3);
@@ -18,5 +21,8 @@ module.exports = async (req, res)=>
     res.render('index', {
         title : 'Web oglasi za posao', 
         kategorije : kategorije, 
-        poslovi : poslovi});
+        poslovi : poslovi,
+        ulogovaniKorisnik : ulogovaniKorisnik    
+    
+    });
 };

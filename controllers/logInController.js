@@ -58,10 +58,17 @@ module.exports.postLogIn = async(req,res) =>
             res.render('./log_reg/login',{title:'Uloguj se' , obavestenje : '', greska : greska})
         }
 
-        // Isptavno
+        // Isptavno - Loguje se korisnik u sesiji
         else
         {
-            res.end('Iste su ');
+
+            // U pisivanje korisnika u sesiji :
+            req.session.ulogovaniKorisnik = await korisniciModel.vratiKorisnikaSaEmailom(email);
+            req.session.ulogovaniKorisnik = req.session.ulogovaniKorisnik[0];
+            req.session.ulogovan = true;
+
+            // Redirektovanje na index stranici
+            res.redirect('/');
         }
     }
 
