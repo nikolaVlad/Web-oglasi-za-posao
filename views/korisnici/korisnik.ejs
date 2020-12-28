@@ -101,21 +101,21 @@
                         <!-- Ime -->
                         <tr>
                           <td>Ime :</td>
-                          <td class = 'text-warning'> Nikola</td>
+                          <td class = 'text-warning'><%-korisnik[0].ime%></td>
                         </tr>
                         <!-- /Ime -->
 
                         <!-- Prezime -->
                         <tr>
                           <td>Prezime : </td>
-                          <td class = 'text-warning'>Vladimirov</td>
+                          <td class = 'text-warning'> <%-korisnik[0].prezime %></td>
                         </tr>
                         <!-- /Prezime -->
 
                         <!-- Email-->
                         <tr>
                           <td>Email : </td>
-                          <td class = 'text-warning'>nikolavlad@gmail.com</td>
+                          <td class = 'text-warning'><%-korisnik[0].email%></td>
                         </tr>
                         <!-- /Email-->
                       </tbody>
@@ -125,9 +125,20 @@
                 <hr>
                 <!-- Akcije nad korisnikom-->
                 <div>
-                   
-                   <a href ='' class='m-3 text-info'><i class="fas fa-pen-square"></i> </a>
-                   <a href ='' class='m-3 text-danger'><i class="fas fa-user-minus"></i></a>
+                    <!-- Izmena profila -->
+                   <a href ='' class='btn btn-outline-info text-info justify-content-center d-flex'>
+                        Izmenite svoj profil 
+                    </a>
+                    <!-- /Izmena profila -->
+                    <br>
+                    <!-- Brisanje profila (Admin)-->
+                    <form class=' justify-content-center d-flex ' action="" class="">
+                       <button type = 'submit' class="btn btn-outline-danger"  style="width: 100%;> 
+                            <i class="fas fa-user-minus"></i>Obriši korisnika
+                        </button> 
+                    </form>
+                    <!-- /Brisanje profila -->
+
                 </div>
                 <!-- /Akcije nad korisnikom-->
                 
@@ -137,12 +148,14 @@
 
             <!-- /Kolona sa podacima o korisniku-->
 
+            <% if(oglasiMeni == 'aktivni') {%>
             <!-- Kolona sa postavljenim oglasima -->
             <div class="col-lg-6 col-sm-12 mb-5  ">
                
-                <form class = 'in-line mb-2'>
-                    <input type="button" name = 'jedan' value = 'Aktivni oglasi' class ='btn btn-outline-dark text-white'>
-                    <input type="button" name = 'jedan' value = 'Prijavljeni oglasi' class ='btn btn-outline-dark text-secondary'>
+                <form class = 'in-line mb-2' action="/svi_korisnici/profil/<%-korisnik[0].id%>" method="GET">
+                    <span class ='btn btn-outline-dark text-white' >Aktivni poslovi</span>
+                    <button type="submit"  class ='btn btn-outline-dark text-secondary'>Prijaviljeni poslovi</button>
+                    <input hidden name = 'oglasiMeni' value = 'prijavljeni'>
                 </form>
            
 
@@ -152,7 +165,7 @@
                 <hr style="background-color: rgba(255, 255, 255, 0.13);">
 
 
-                
+            
                 <!-- Telo sa oglasima -->
                 <div class="row">
                     <!-- Naziv oglasa -->
@@ -164,8 +177,8 @@
                     <!-- Akcije nad oglasima-->
                     <div class="col-2">
                         
-                        <a href ='' class='m-1 text-info'><i class="fas fa-edit"></i> </a>
-                        <a href ='' class='m-1 text-danger'><i class="fas fa-trash"></i></a>
+                        <a href ='' class='m-1 text-warning'><i class="fas fa-eye"></i> </a>
+                       
                     </div>
                      <!-- /Akcije nad oglasima-->
                 </div>
@@ -173,20 +186,18 @@
                 <hr style="background-color: rgb(146, 146, 146);">
             </div>
             <!-- /Kolona sa postavljenim oglasima-->
+            <%}%>
 
-
-
-
-           <!-- switvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh-->
-
-
-             <!-- Kolona sa prijavljenim oglasima -->
+            
+            <% if(oglasiMeni == 'prijavljeni') {%>
+            <!-- Kolona sa prijavljenim oglasima -->
              <div class="col-lg-6 col-sm-12 mb-5 ">
 
                 <!-- Naslov  MENI -->
-               <form class = 'in-line mb-2'>
-                    <input type="button" name = 'jedan' value = 'Aktivni oglasi' class ='btn btn-outline-dark text-secondary'>
-                    <input type="button" name = 'jedan' value = 'Prijavljeni oglasi' class ='btn btn-outline-dark text-white'>
+                <form class = 'in-line mb-2' action="/svi_korisnici/profil/<%-korisnik[0].id%>" method="GET">
+                    <button type="submit" class ='btn btn-outline-dark text-secondary'>Aktivni poslovi</button>
+                    <span   class ='btn btn-outline-dark text-white'>Prijavljeni poslovi</span>
+                    <input hidden name = 'oglasiMeni' value = 'aktivni'>
                 </form>
            
                 <!-- /Naslov  MENI-->
@@ -212,6 +223,8 @@
                 <!-- /Telo sa oglasima -->
             </div>
             <!-- /Kolona sa prijavljenim oglasima-->
+            <%}%>
+
             
         </div>
         <!-- /Red -->

@@ -7,7 +7,7 @@ module.exports.vratiKorisnika = (id) =>
 {
     return new Promise((res,rej) =>
     {
-        var query = `SELECT id, ime FROM korisnici WHERE id = ?`;
+        var query = `SELECT * FROM korisnici WHERE id = ?`;
         
         conn.query(query,[id],(err,result)=>
         {

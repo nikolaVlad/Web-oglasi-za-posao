@@ -21,7 +21,7 @@ module.exports.postRegistracija = async (req,res) =>
     var prezime = req.body.prezime;
     var email = req.body.email;
     var lozinka = req.body.lozinka;
-    var slika = req.body.slika;
+    var slika = '' //req.body.slika;
     
 
    /** Provera email-a */
@@ -54,7 +54,7 @@ module.exports.postRegistracija = async (req,res) =>
             var hashovanaLozinka = bcrypt.hashSync(lozinka,3); 
 
         // Dodavanje imena slici
-            slika = Date.now() + slika;
+            //slika = Date.now() + slika;
 
         /** Upisivanje korisnika */
             await korisniciModel.dodajKorisnika(ime,prezime,email,hashovanaLozinka,slika);
