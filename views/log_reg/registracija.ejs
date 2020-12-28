@@ -83,7 +83,7 @@
     <!-- Telo za kreiranje novog korisnika-->
     <div class="container center" >
         <!-- Forma -->
-        <form action='' method =''  style="display: flex; justify-content: center;">
+        <form action='/registracija' method ='POST'  style="display: flex; justify-content: center;">
             <!-- Red -->
            <div class="form-group col-sm-6" >
                 <!-- Slika -->
@@ -91,29 +91,40 @@
                 <input type="file"><br>
 
                <!-- Ime -->
-                   <label>Ime</label>
-                   <input type="text" class="form-control center-style">
+                   <label>*Ime</label>
+                   <input type="text" class="form-control center-style" name = 'ime' required <%if (greska != ''){%> value = '<%-greska.ime%>'<%}%>> 
                 <!-- /Ime -->
 
                <!-- Prezime -->
-                    <label>Prezime</label>
-                    <input type="text" class="form-control center-style">
+                    <label>*Prezime</label>
+                    <input type="text" class="form-control center-style" name = 'prezime' required <%if (greska != ''){%> value = '<%-greska.ime%>'<%}%>>
                 <!-- Prezime-->
 
                 <!-- Email -->
-                    <label>Email</label>
-                    <input type="email" class="form-control center-style">
+                    <label>*Email</label>
+                    <input type="email" class="form-control center-style" name = 'email' required <%if (greska != ''){%> value = '<%-greska.email%>' autofocus<%}%>
                 <!-- /Email -->
 
+                    <!-- Email greska -->
+                        <%if (greska != ''){%> <spam class="text-danger small">Ovaj email već postoji!</spam> <br><%}%>
+                    <!-- Email greska -->
+
+
                 <!-- Lozinka -->
-                    <label>Lozinka</label>
-                    <input type="password" class="form-control center-style">
+                    <label>*Lozinka</label>
+                    <input type="password" class="form-control center-style" name = 'lozinka' required>
                 <!-- /Lozinka -->
+                
 
                 <!-- Submit -->
-                    <button type="submit" class = 'btn btn-success mb-3 mt-3'>Registruj se</button>
+                    <button type="submit" class = 'btn btn-success mb-3 mt-3' >Registruj se</button>
                 <!-- /Submit -->
-            
+
+
+                <br>
+                <!-- Log in-->
+                <span class="h6">Već imaš nalog - <a href = '/login'>uloguj se.</a></span>
+                <!-- /Log in-->
 
         </form>
     </div>

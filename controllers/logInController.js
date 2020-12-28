@@ -1,7 +1,9 @@
 
 
 /** Get /logIn */
-module.exports.getLogIn = (req, res) =>
+module.exports.getLogIn = async (req, res) =>
 {
-    res.render('./log_reg/logIn', {title : 'Uloguj se'});
+    res.render('./log_reg/logIn', {title : 'Uloguj se', obavestenje: ''});
 }
+
+/** POST /logIn */

@@ -10,6 +10,10 @@ var logger = require('morgan');
 // Layouts za kreiranje templejta
 const expressLayouts = require('express-ejs-layouts');
 
+// Sesije za login sistem i role
+const session = require('express-session');
+
+
 
 
 
@@ -76,6 +80,13 @@ app.use('/img', express.static(__dirname + 'public/images'));
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap')));
 app.use(express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free')));
 app.use(express.static(path.join(__dirname, 'node_modules/jquery')));
+
+// Sesije
+app.use(session({
+  secret : 'secret-key',
+  resave : false,
+  saveUninitialized : false,
+}))
 
 
 }
