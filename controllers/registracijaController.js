@@ -3,7 +3,8 @@
 const korisniciModel = require('../models/korisniciModel');
 
 // Hashovanje lozinke
-var passwordHash = require('password-hash');
+var bcrypt = require('bcrypt');
+
 
 
 /** Get /registracija */
@@ -19,7 +20,7 @@ module.exports.postRegistracija = async (req,res) =>
     var ime = req.body.ime;
     var prezime = req.body.prezime;
     var email = req.body.email;
-    var lozinka = req.body.email;
+    var lozinka = req.body.lozinka;
     var slika = 'nema';
    
 
@@ -48,11 +49,11 @@ module.exports.postRegistracija = async (req,res) =>
     }
 
 
-    // U slucaju da ne postoji - novi korisnik se upisuhe u bazi
+    // U slucaju da ne postoji - novi korisnik se upisuje u bazi
     else
     {
         // Hashovanje lozinke  
-            var hashovanaLozinka = passwordHash.generate(lozinka);
+            var hashovanaLozinka = bcrypt.hashSync(lozinka,3); 
         /** Upisivanje korisnika */
             await korisniciModel.dodajKorisnika(ime,prezime,email,hashovanaLozinka,slika);
 
@@ -63,12 +64,7 @@ module.exports.postRegistracija = async (req,res) =>
         }
 
         // Redirektovanje na login formu
-        res.render('./log_reg/logIn', {title: 'Uloguj se', obavestenje : obavestenje});
+        res.render('./log_reg/logIn', {title: 'Uloguj se', obavestenje : obavestenje, greska : ''});
     }
-    // U slučaju da ne postoji - registracija uspešna
-    
-
-
-
 
 }

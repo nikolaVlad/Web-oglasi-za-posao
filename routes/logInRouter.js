@@ -4,8 +4,11 @@ var router = express.Router();
 // Ucitavanje indexControllera
 const logInController = require('../controllers/logInController');
 
-/** Get logIn */
+/** Get /logIn */
 router.get('/', logInController.getLogIn);
+
+/** POST /logIn */
+router.post('/', logInController.postLogIn);
 
 
 

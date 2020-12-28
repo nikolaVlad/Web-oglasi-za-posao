@@ -116,7 +116,7 @@
     <!-- LogIn-->
   
     <div class="container ">
-        <form action='' method ='' style="display: flex; justify-content: center;" >
+        <form action='/logIn' method ='POST' style="display: flex; justify-content: center;" >
             <div class="form-group col-sm-6  log-form"  >
             <!-- Naslov-->
                 <div class = 'text-center mb-4 text-warning'><> Web oglasi za posao <&#47></div>
@@ -127,16 +127,41 @@
 
             <!-- Email -->
                 <label class>Email</label>
-                <input type="email" class="form-control center-style" 
+                <input type="email" class="form-control center-style" name = 'email'
                 <%if (obavestenje != '') {%> 
                     value = <%-obavestenje.email %> autofocus
-                <%%>  <%}%>  
+                <%}%> 
+
+                <%if (greska.email != '') {%> 
+                    value = '<%-greska.email %>' 
+                <%}%> 
             <!-- /Email -->
+                
+            <!-- Greska neispravan email-->
+                <%if (greska.textEmail != '') {%> 
+                    <span class="small text-danger"><%-greska.textEmail %></span>
+                <%}%> <br>
+            <!-- /Greska neispravan email-->
+
+
+
 
             <!-- Lozinka -->
                 <label>Lozinka</label>
-                <input type="password" class="form-control center-style">
+                <input type="password" class="form-control center-style" name = 'lozinka'
+                <% if(greska.textLozinka != ''){%>
+                    value = '<%-greska.lozinka%>' autofocus
+                <%}%>
+                >
             <!-- /Lozinka -->
+            <!-- Greska neispravan email-->
+                <%if (greska.textLozinka != '') {%> 
+                    <span class="small text-danger"><%-greska.textLozinka %></span>
+                <%}%> <br>
+            <!-- /Greska neispravan email-->
+    
+
+
 
             <!-- Prijavi se-->
                 <button type="submit" class = 'btn btn-primary mt-3'>Uloguj se</button>

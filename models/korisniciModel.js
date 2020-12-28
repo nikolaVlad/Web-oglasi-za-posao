@@ -22,7 +22,7 @@ module.exports.vratiKorisnikaSaEmailom = (email) =>
 {
     return new Promise((res,rej)=>
     {
-        var query = `SELECT email FROM korisnici where email = ?`
+        var query = `SELECT * FROM korisnici where email = ?`
 
         conn.query(query,[email],(err,result) =>
         {
