@@ -84,12 +84,13 @@
             <hr>
             <div class="col-xl-12 justify-content-end d-flex ">
 
-
+            <% if(ulogovaniKorisnik) {%>
+                <% if (ulogovaniKorisnik.rola == 'admin'){%>
                 <div class="d-flex">
-                    <a href ="/sve_kategorije/kategorija/<%-kategorija[0].id%>/izmena_kategorije" class="btn" style="color: white;"><i class="fas fa-edit " style="color : rgb(0, 204, 255)"></i> Izmeni kategoriju</a>
+                    <a href ="/sve_kategorije/kategorija/<%-kategorija[0].id%>/izmena_kategorije" class="btn btn-outline-dark" style="color: white;"><i class="fas fa-edit " style="color : rgb(0, 204, 255)"></i> Izmeni kategoriju</a>
                     
                     <form class="form form-inline" action="/sve_kategorije/kategorija/<%-kategorija[0].id%>/brisanje_kategorije" method="POST">
-                        <button type="button" class="btn" data-toggle="modal" data-target="#modalObrisiKategoriju" style="color: white;"><i class="fas fa-trash" style="color : rgb(255, 64, 64)"></i> Obriši kategoriju</button>
+                        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modalObrisiKategoriju" style="color: white; "><i class="fas fa-trash" style="color : rgb(255, 64, 64)"></i> Obriši kategoriju</button>
                     
                     
                         <!-- Modal za brisanje -->
@@ -133,7 +134,10 @@
                     
                     </form>
                 </div>
+                <%}%>
+            <% } %>
 
+                
                 
             </div>
         </div>

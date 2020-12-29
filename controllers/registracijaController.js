@@ -9,7 +9,16 @@ var bcrypt = require('bcrypt');
 
 /** Get /registracija */
 module.exports.getRegistracija = async (req, res) =>
-{
+{   
+    /** Rola */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Ako korisnik nije ulogovan
+    if(ulogovaniKorisnik)
+    {
+        res.redirect('/');
+    }
+
     res.render('./log_reg/registracija', {title : 'Registracija', greska : ''});
 }
 

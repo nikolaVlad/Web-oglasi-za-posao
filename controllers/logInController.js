@@ -9,6 +9,15 @@ var bcrypt = require('bcrypt');
 /** Get /logIn */
 module.exports.getLogIn = async (req, res) =>
 {
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Ako je korisnik već ulogovan
+    if(ulogovaniKorisnik)
+    {
+        res.redirect('/');
+    }
+
     res.render('./log_reg/logIn', {title : 'Uloguj se', obavestenje: '', greska: ''});
 }
 
@@ -65,7 +74,6 @@ module.exports.postLogIn = async(req,res) =>
             // Upisivanje korisnika u sesiji :
             req.session.ulogovaniKorisnik = await korisniciModel.vratiKorisnikaSaEmailom(email);
             req.session.ulogovaniKorisnik = req.session.ulogovaniKorisnik[0];
-            req.session.ulogovan = true;
 
             // Redirektovanje na index stranici
             res.redirect('/');

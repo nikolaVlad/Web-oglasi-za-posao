@@ -124,7 +124,8 @@
                         <!-- Korisnik koji je postavio i datum postavljanja-->
                         <div class="card-header" >
                             Oglas postavio :  <a href=''><b class="text-warning"> Ime korisnika </b></a>
-                            <span class="ml-5 text-right small "><%-posao[0].datum%></span>
+                            <br>
+                            <span class=" text-right small text-info "><%-posao[0].datum%></span>
                       
                         </div>
                         <!-- /Korisnik i datum-->
@@ -155,7 +156,7 @@
                             
                                 <!-- Forma za prijavu na posao-->
                                 <form class = 'form text-center' action ='' method=''>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalPrijaviSeZaPosao<%-posao[0].id%>">Prijavi se</button>
+                                    <button type="button" class="btn btn-danger" style="width: 100%;" data-toggle="modal" data-target="#modalPrijaviSeZaPosao<%-posao[0].id%>">Prijavi se</button>
                                     <!-- Modal za prijavu posla -->
                                         <div class="modal fade text-center" id="modalPrijaviSeZaPosao<%-posao[0].id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -196,6 +197,8 @@
 
                                  </form>
                                   <!-- /Forma za prijavu na posao-->
+
+
                                 <div class = 'justify-content-end d-flex'>
                                 <!-- Brisanje i izmena-->
                                 <!-- Izmena -->
@@ -253,8 +256,11 @@
                     <div class="card text-white bg-dark mb-3">
                         <!-- Naslov kartice -->
                         <div class="card-header">Prijavljeni korisnici : <b><%-brPrijava%></b></div>
+
+
                         <!-- Telo kartice-->
                         <div class="card-body">
+                        <% if(ulogovaniKorisnik) {%>
                           <!-- Korisnici -->
                           <% for(prijavljeniKorisnik of prijaveKorisnici) {%>
                           <div class="row">
@@ -288,10 +294,17 @@
                               <!-- /AKCIJE PRIJAVE -->
                         </div>
                         <%}%>
+                        <%} else {%>
+                            <div class=" text-center"><a href="/logIn" class="text-center">Ulogujte se</a><br>   da bi videli ko se sve prijavio za ovaj posao.</div>
+                        <%}%>
                         <!-- /Row -->
 
                         </div>
                         <!-- /Telo kartice-->
+
+
+
+
                       </div>
                       <!-- /Kartica-->
                     </div>

@@ -5,9 +5,10 @@ const posloviModel = require('../models/posloviModel');
 /**Get index */
 module.exports = async (req, res)=>
 {
-    // Sesija
-    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
-
+ 
+    /** Role */
+     const ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+    
 
     // Iscitavanje 3 kategorija 
     var kategorije = await kategorijeModel.vratiKategorije(3);

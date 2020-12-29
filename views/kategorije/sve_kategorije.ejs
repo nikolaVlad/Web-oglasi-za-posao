@@ -130,14 +130,18 @@
             </div>
             <!-- /Sortiranje A-Z -->
 
-            <!-- Link za dodavanje kategorije-->
-            <div class = 'col-lg-3 col-sm-3 mt-3 mb-3`'>
-                   <a href = '/sve_kategorije/nova_kategorija' style=" color :rgb(255, 255, 255);">
-                    <i class="fas fa-plus mr-1 text-success"></i>
-                       Dodaj novu kategoriju
-                   </a>
-            </div>
-            <!-- /Link za dodavanje kategorije -->
+            <% if(ulogovaniKorisnik) {%>
+                <% if(ulogovaniKorisnik.rola == 'admin') {%>
+                <!-- Link za dodavanje kategorije-->
+                <div class = 'col-lg-3 col-sm-3 mt-3 mb-3`'>
+                    <a href = '/sve_kategorije/nova_kategorija' style=" color :rgb(255, 255, 255);">
+                        <i class="fas fa-plus mr-1 text-success"></i>
+                        Dodaj novu kategoriju
+                    </a>
+                </div>
+                <!-- /Link za dodavanje kategorije -->
+                <%}%>
+            <%}%>
         </div>
     </div>
     <!-- /Pretrazivanje i dodavanje-->
@@ -169,7 +173,9 @@
                     <!-- Sadrzaj kartice-->
                     <div class="card-body">
                         <!-- Naziv kategorije-->
-                            <a href = '/sve_kategorije/kategorija/<%-kategorija.id%>'class="text-center"><p style="color: rgb(255, 255, 255);"><%-kategorija.naziv%></p></a>
+                            <a href = '/sve_kategorije/kategorija/<%-kategorija.id%>'class="text-center"><p class="text-success"><b><%-kategorija.naziv%></b></p></a>
+
+                        <%if(ulogovaniKorisnik && ulogovaniKorisnik.rola == 'admin'){%>
                         <!-- Akcije nad kategorijom-->
                         <div  class = 'justify-content-center d-flex'>                        
                             <!-- Izmeni #Admin-->
@@ -219,6 +225,9 @@
                             
                             </form>
                         </div>
+                        <!-- Akcije nad kategorijom-->
+                        <%}%>
+
                     </div>
                     <!-- /Sadrzaj kartice-->
                 </div>

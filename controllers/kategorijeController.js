@@ -4,10 +4,15 @@ var posloviModel = require('../models/posloviModel')
 
 
 
-/** Get sve_kategorije */
+
+
+/** Get /sve_kategorije */ 
 module.exports.getSveKategorije = async (req, res) =>
 {
-   
+
+    /** Role */
+    const ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
     
     /** Paginacija */
      // RaČunanje trenutne strane (Koji će sluziti kao limit u bazi)
@@ -52,7 +57,8 @@ module.exports.getSveKategorije = async (req, res) =>
                 sledecaStrana : sledecaStrana,
                 prethodnaStrana : prethodnaStrana,
                 ukupnoKategorija : ukupnoKategorija,
-                prikazaneKategorije : kategorije.length * trenutnaStrana
+                prikazaneKategorije : kategorije.length * trenutnaStrana,
+                ulogovaniKorisnik : ulogovaniKorisnik
             });
 }
 
@@ -60,6 +66,10 @@ module.exports.getSveKategorije = async (req, res) =>
 module.exports.getKategorija = async (req, res) =>
 {  
   
+    /** Role */
+        const ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+
 
     /** Paginacija  */
         // Racunanje trenutne strane (Koji će sluziti kao limit u bazi)
@@ -140,7 +150,8 @@ module.exports.getKategorija = async (req, res) =>
         sortiranje : sortiranje,
         poslovi : poslovi,
         ukupnoPoslova : ukupnoPoslova.length,
-        prikazaniPoslovi : prikazaniPoslovi 
+        prikazaniPoslovi : prikazaniPoslovi,
+        ulogovaniKorisnik : ulogovaniKorisnik,
     });
 }
 
@@ -150,8 +161,27 @@ module.exports.getKategorija = async (req, res) =>
 /** Get /sve_kategorije/kategorija<id>/izmena_kategorije */
 module.exports.getIzmenaKategorije = async(req,res) =>
 {
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Ako korisnik nije ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+    
+
     // Uzimanje id-a sa URL putanje:
     var id = req.params.id;
+
+
+    // Ako koirnsik nije ulogovan kao admin
+    if(ulogovaniKorisnik.rola != 'admin')
+    {
+        res.redirect(`/sve_kategorije/kategorija/${id}`);
+    }
+
 
     /** Dobijanje podataka iz baze za datu kategoriju */
         var kategorija = await kategorijeModel.vratiKategoriju(id);
@@ -167,7 +197,6 @@ module.exports.getIzmenaKategorije = async(req,res) =>
 
 
 /** POST /sve_kategorije/kategorija<id>/izmena_kategorije */
-
 module.exports.postIzmenaKategorije = async(req,res) =>
 {
     // Dobijanje podataka iz forme
@@ -219,6 +248,21 @@ module.exports.postIzmenaKategorije = async(req,res) =>
 /** Get /sve_kategorije/nova_kategorija */
 module.exports.getNovaKategorija = async(req,res) =>
 {
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Ako korisnik nije ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+    // Ako korinik nije ulogovan kao admin
+    if(ulogovaniKorisnik.rola != 'admin')
+    {
+        res.redirect('/sve_kategorije');
+    }
+
 
     res.render('./kategorije/nova_kategorija', {title : 'Nova kategorija', greska: ''});
 }
@@ -264,6 +308,7 @@ module.exports.postNovaKategorija = async (req,res) =>
 
 // Brisanje kategorije
 
+/** Post /sve_kategorije/kategorija/<id>/brisanje_kategorije */
 module.exports.obrisiKategoriju = async (req, res) =>
 {
     // Uzimanja id kategorije za brisanje iz forme
@@ -274,12 +319,8 @@ module.exports.obrisiKategoriju = async (req, res) =>
 
     /** Upit za brisanje */
         console.log(await kategorijeModel.obrisiKategoriju(id));
-    
 
     res.redirect('/sve_kategorije');
-
-
-
 }
 
 

@@ -11,6 +11,9 @@ const { data } = require('jquery');
 /**Get /svi_poslovi */
 module.exports.getSviPoslovi = async(req, res) =>
 {
+   
+
+
      /** Paginacija  */
         // Racunanje trenutne strane (Koji će sluziti kao limit u bazi)
         var trenutnaStrana = parseInt(req.query.strana);
@@ -98,7 +101,7 @@ module.exports.getSviPoslovi = async(req, res) =>
         sledecaStrana : sledecaStrana,
         prethodnaStrana : prethodnaStrana,
         ukupnoPoslova : ukupnoPoslova.length,
-        prikazaniPoslovi : poslovi.length * trenutnaStrana    
+        prikazaniPoslovi : poslovi.length * trenutnaStrana, 
     })
     
     
@@ -107,6 +110,10 @@ module.exports.getSviPoslovi = async(req, res) =>
 /** Get /svi_poslovi/posao/<id> */
 module.exports.getPosao = async (req,res) =>
 {
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+
     // Dobijanej id posla
     var id = req.params.id;
 
@@ -147,7 +154,8 @@ module.exports.getPosao = async (req,res) =>
         korisnik : korisnik,
         kategorija : kategorija,
         prijaveKorisnici : prijaveKorisnici,
-        brPrijava : prijaveKorisnici.length
+        brPrijava : prijaveKorisnici.length,
+        ulogovaniKorisnik : ulogovaniKorisnik
     
     });
 }
@@ -156,6 +164,15 @@ module.exports.getPosao = async (req,res) =>
 /**Get /svi_poslovi/novi_posao */
 module.exports.getNoviPosao = async(req, res) =>
 {
+    /** Role */
+    const ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+
     // Proveravamo da li je prosledjena kategorija preko upita
     var kategorijaId = ( typeof req.query.kategorijaId == 'undefined') ? '' : req.query.kategorijaId;
     
@@ -237,6 +254,16 @@ module.exports.postNoviPosao = async(req,res) =>
 /** Get /svi_poslovi/posao<id>/izmena_posla */
 module.exports.getIzmenaPosla = async (req,res) =>
 {
+    /** Rola */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Ako korisnik nije ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+
      // Uzimanje id posla(oglasa) prosleđen preko URL putanje
      var id = req.params.id;
 
@@ -339,6 +366,17 @@ module.exports.postIzmenaPosla = async (req,res) =>
 /** POST /svi_poslovi/posao/<id>/brisanje_posla */
 module.exports.postBrisanjePosla = async (req,res) =>
 {
+    // IMA GRESKEEEEEEEEEEE
+
+    /** Rola */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Ako korisnik nije ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
     // Dobijanje id posla za brisanje iz URL putanje
     var id = req.params.id;
 
