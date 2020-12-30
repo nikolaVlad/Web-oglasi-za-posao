@@ -10,6 +10,16 @@ module.exports.getSviKorisnici = (req, res)=>
 /** Get /svi_korisnici/profil/<id> */
 module.exports.getKorisnik = async (req,res) =>
 {
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Ako korisnik nije ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+
     // Uzimanje id korisnika
     var id = req.params.id;
 

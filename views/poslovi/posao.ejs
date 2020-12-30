@@ -123,7 +123,7 @@
                         
                         <!-- Korisnik koji je postavio i datum postavljanja-->
                         <div class="card-header" >
-                            Oglas postavio :  <a href=''><b class="text-warning"> Ime korisnika </b></a>
+                            Oglas postavio :  <a href='/svi_korisnici/profil/<%-korisnik[0].id%>'><b class="text-warning"><%-korisnik[0].ime%></b></a>
                             <br>
                             <span class=" text-right small text-info "><%-posao[0].datum%></span>
                       
@@ -153,53 +153,108 @@
                             
 
                             <!--Akcije u vezi posla-->
-                            
-                                <!-- Forma za prijavu na posao-->
-                                <form class = 'form text-center' action ='' method=''>
-                                    <button type="button" class="btn btn-danger" style="width: 100%;" data-toggle="modal" data-target="#modalPrijaviSeZaPosao<%-posao[0].id%>">Prijavi se</button>
-                                    <!-- Modal za prijavu posla -->
-                                        <div class="modal fade text-center" id="modalPrijaviSeZaPosao<%-posao[0].id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                
-                                            <div class="modal-content bg-dark">
-                                                <div class="modal-header">
-                            
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Prijavljivanje</h5>
-                                                
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true" class="text-danger">&times;</span>
-                                                </button>
-                                                
-                                                </div>
-                                                <!-- Pitanje -->
-                                                <div class="modal-body">
-                                                    Da li ste sigurni da želite da se prijavite na posao :<br> 
-                                                    <span class="text-warning"><%-posao[0].naziv%></span> 
-                                                </div>
-                                                <!-- /Pitanje -->
+
+                                <!-- Samo tekuci ulogovani korisnik ne može da ih vidi-->
+
+                                <%if(!locked) { %>
+                                    <!-- Ako se korisnik nije prijavio na posao-->
+                                    <% if (prijava == '') {%>
+                                    <!-- Forma za prijavu na posao-->
+                                    <form class = 'form text-center' action ='/svi_poslovi/posao/<%-posao[0].id%>/prijavljivanje_posla' method='POST'>
+                                        <button type="button" class="btn btn-danger" style="width: 100%;" data-toggle="modal" data-target="#modalPrijaviSeZaPosao<%-posao[0].id%>">Prijavi se</button>
+                                        <!-- Modal za prijavu posla -->
+                                            <div class="modal fade text-center" id="modalPrijaviSeZaPosao<%-posao[0].id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    
+                                                <div class="modal-content bg-dark">
+                                                    <div class="modal-header">
+                                
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Prijavljivanje posla</h5>
+                                                    
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true" class="text-danger">&times;</span>
+                                                    </button>
+                                                    
+                                                    </div>
+                                                    <!-- Pitanje -->
+                                                    <div class="modal-body">
+                                                        Da li ste sigurni da želite da se prijavite na posao :<br> 
+                                                        <span class="text-warning"><%-posao[0].naziv%></span> 
+                                                    </div>
+                                                    <!-- /Pitanje -->
 
 
-                            
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
-                                                    <!-- Potvrda -->
-                                                    <button type="submit" class="btn btn-primary">Potvrdi</button>
-                                                    <!-- Potvrda -->
+                                
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                                                        <!-- Potvrda -->
+                                                        <button type="submit" class="btn btn-primary">Potvrdi</button>
+                                                        <!-- Potvrda -->
+                                                    </div>
+                                                </div>
                                                 </div>
                                             </div>
+                                        <!-- /Modal za prijavu -->
+
+
+
+
+
+                                    </form>
+                                    <!-- /Forma za prijavu na posao-->
+                                    <%} else {%>
+
+                                    <!-- Ako se je prijavio-->
+                                    <!-- Forma za odjavu posla-->
+                                    <form class = 'form text-center' action ='/svi_poslovi/posao/<%-posao[0].id%>/odjavljivanje_posla' method='POST'>
+                                        <button type="button" class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#modalOdjaviSeZaPosao<%-posao[0].id%>">Prijavljeni ste <i class="fas fa-check"></i></button>
+                                        <!-- Modal za prijavu posla -->
+                                            <div class="modal fade text-center" id="modalOdjaviSeZaPosao<%-posao[0].id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    
+                                                <div class="modal-content bg-dark">
+                                                    <div class="modal-header">
+                                
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Odjavljivanje posla</h5>
+                                                    
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true" class="text-danger">&times;</span>
+                                                    </button>
+                                                    
+                                                    </div>
+                                                    <!-- Pitanje -->
+                                                    <div class="modal-body">
+                                                        Da li ste sigurni da želite povućete prijavu za posao :<br> 
+                                                        <span class="text-warning"><%-posao[0].naziv%></span> 
+                                                    </div>
+                                                    <!-- /Pitanje -->
+
+
+                                
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                                                        <!-- Potvrda -->
+                                                        <button type="submit" class="btn btn-primary">Potvrdi</button>
+                                                        <!-- Potvrda -->
+                                                    </div>
+                                                </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    <!-- /Modal za prijavu -->
+                                        <!-- /Modal za prijavu -->
 
 
 
 
 
-                                 </form>
-                                  <!-- /Forma za prijavu na posao-->
+                                    </form>
+                                    <%}%>
+                                    <%}%>
+                              
 
-
+                                <!-- Samo tekuci ulogovani korisnik i admin moze da ih vidi-->
                                 <div class = 'justify-content-end d-flex'>
+                                    
+                                <% if (ulogovaniKorisnik && (ulogovaniKorisnik.rola == 'admin' || ulogovaniKorisnik.id == korisnik[0].id)) { %>
                                 <!-- Brisanje i izmena-->
                                 <!-- Izmena -->
                                 <a href = '/svi_poslovi/posao/<%-posao[0].id%>/izmena_posla'class="btn"><i class="fas fa-pen text-info mr-1 "></i></a>
@@ -244,18 +299,24 @@
 
                                 </form>
                                 <!-- /Brisanej i izmena-->
+                                <% } %>
+
                             </div>
                         </div>
                       </div>
                 </div>
-                <!-- /Glavni deo-->
+
+
+                <!-- /Glavni deo (informacije o oglasu)-->
+
+
 
                  <!-- Desna strana (*Vestine)-->
                  <div class = "col-xl-3 mb-5">
                      <!-- Kartica -->
                     <div class="card text-white bg-dark mb-3">
                         <!-- Naslov kartice -->
-                        <div class="card-header">Prijavljeni korisnici : <b><%-brPrijava%></b></div>
+                        <div class="card-header">Prijavljeni korisnici : <b><%-ukupno%></b></div>
 
 
                         <!-- Telo kartice-->
@@ -265,8 +326,8 @@
                           <% for(prijavljeniKorisnik of prijaveKorisnici) {%>
                           <div class="row">
                               <div class="col-6">
-                                <a href = '/svi_korisnici/korisnik/<%-prijavljeniKorisnik.id%>'>
-                                    <%-prijavljeniKorisnik.ime%> <%-prijavljeniKorisnik.prezime%>
+                                <a href = '/svi_korisnici/profil/<%-prijavljeniKorisnik.id%>'>
+                                    <%-prijavljeniKorisnik.ime%>
                                 </a>
                               </div>
                               <!-- AKCIJE PRIJAVE -->
@@ -287,17 +348,53 @@
                                         <i class="fas fa-times-circle text-danger h4"></i>
                                     </button>
                                 </form>
-    
-                               
                                 <!-- /Forma za odbijanje prijave-->
                               </div>
                               <!-- /AKCIJE PRIJAVE -->
                         </div>
                         <%}%>
+                           <!-- Paginacija -->
+                           <nav>
+                            <!-- Telo paginacije-->
+                            <ul class="pagination justify-content-center mt-5    ">
+                    
+                                <% if(strana > 1) {%>
+                                <!-- Prethodna -->
+                                <form action="/svi_poslovi/posao/<%-posao[0].id%>" method="" >
+                                    
+                                    <button class="btn text-white bg-dark btn-lg" name = 'strana' value= <%-prethodnaStrana%> ><i class="fas fa-arrow-circle-left"></i></button> 
+                                   
+                                </form>
+                                <% }%>
+                               
+                                <!-- Prethodna -->
+                    
+                                <!-- Trenutna -->
+                                <li class="page-item  active"><a class="btn-sm page-link text-warning bg-dark" href="#"><%-strana%></a></li>
+                                <!-- Trenutna -->
+                    
+                                <% if (brPrijava < ukupno) {%>
+                                <!-- Sledeća -->
+                                <form action="/svi_poslovi/posao/<%-posao[0].id%>" method="GET" >
+
+                                    <button class="btn text-white bg-dark btn-lg " name = 'strana' value= <%-sledecaStrana%> ><i class="fas fa-arrow-circle-right"></i></button> 
+                                          
+                                </form>
+                                <!-- /Sledeća -->
+                                <% }%>
+                            </ul>
+                            <!-- /Telo paginacije-->
+                        </nav>
+                        <!-- Paginacija-->
                         <%} else {%>
                             <div class=" text-center"><a href="/logIn" class="text-center">Ulogujte se</a><br>   da bi videli ko se sve prijavio za ovaj posao.</div>
                         <%}%>
                         <!-- /Row -->
+
+                        
+                        
+
+
 
                         </div>
                         <!-- /Telo kartice-->

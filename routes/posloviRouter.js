@@ -30,4 +30,14 @@ router.post('/posao/:id/izmena_posla', posloviController.postIzmenaPosla);
 /** POST /svi_poslovi/posao/<id>/brisanje_posla */
 router.post('/posao/:id/brisanje_posla',posloviController.postBrisanjePosla);
 
+
+/** POST /svi_poslovi/posao/<id>/prijavljivanje_posla */
+router.post('/posao/:id/prijavljivanje_posla', posloviController.postPrijavljivanjePosla)
+
+
+/** POST /svi_poslovi/posao/<id>/odjavljivanje_posla */
+router.post('/posao/:id/odjavljivanje_posla', posloviController.postOdjavljivanjePosla)
+
+
+
 module.exports = router;

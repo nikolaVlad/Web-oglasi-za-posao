@@ -6,7 +6,6 @@ var kategorijeModel = require('../models/kategorijeModel');
 var korisniciModel = require('../models/korisniciModel');
 
 var prijaveModel = require('../models/prijaveModel');
-const { data } = require('jquery');
 
 /**Get /svi_poslovi */
 module.exports.getSviPoslovi = async(req, res) =>
@@ -112,24 +111,66 @@ module.exports.getPosao = async (req,res) =>
 {
     /** Role */
     var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+ 
+    /** Paginacija  */
+        // Racunanje trenutne strane (Koji će sluziti kao limit u bazi)
+        var trenutnaStrana = parseInt(req.query.strana);
+        if (isNaN(trenutnaStrana) || trenutnaStrana === 0)
+        {
+            trenutnaStrana = 1;
+        }
+
+        // Racunanje pretgodne i sledece strane 
+        var prethodnaStrana = new Number(trenutnaStrana - 1);
+        var sledecaStrana =   new Number(trenutnaStrana + 1);
 
 
-    // Dobijanej id posla
+
+
+
+    // Dobijanje id posla
     var id = req.params.id;
 
+    
+    /** Proveravanje da li se ulogovani korisnik prijavio na posao  */
+    var prijava = '';
+    if(ulogovaniKorisnik)
+    {
+        var prijava = await prijaveModel.vratiJednuPrijavu(ulogovaniKorisnik.id,id);
+        if(prijava.length == 0)
+        {
+            prijava = '';
+        }
+        
+    }
+
+   
+
+
+
+
     /** Vraćanje podatke o poslu iz tabele poslovi  */
-        // Vraća oglas na koje je korisnik pristigao
+        // Vraća posao (oglas) na koje je korisnik pristigao
         var posao = await posloviModel.vratiPosao(id);
 
         // U slucaju da posao ne postoji
         if(posao.length == 0)
         {
-            res.end('Izabrani posao ne postoji');
+            res.render('error_404',{title : 'Page not foint - wop'});
         }
     
 
         // Vraća korsinika, koji je postavio taj posao
         var korisnik = await korisniciModel.vratiKorisnika((posao[0].korisnik_id));
+
+
+        // Provera da li je ulogovani korisnik postavio oglas na koji je pristigao
+        if(ulogovaniKorisnik && ulogovaniKorisnik.id == korisnik[0].id)
+        {
+            var locked = 1;
+        }
+
+
 
 
         // Modifikovanje podataka iz tabele posao - kolona potrebne_vestine i datum
@@ -140,9 +181,15 @@ module.exports.getPosao = async (req,res) =>
         var kategorija = await kategorijeModel.vratiKategoriju(posao[0].kategorija_id);
        
         // Prijave na posao
-        var prijaveKorisnici = await prijaveModel.vratiKorisnikeZaPosao(posao[0].id);
+        var prijaveKorisnici = await prijaveModel.vratiKorisnikeZaPosao(posao[0].id,trenutnaStrana);
 
+     
+        // Ukupno korisnika prijavljenih za posao
+        var ukupno = await prijaveModel.vratiBrojPrijavljenihKorisnika(id);
+        var ukupno = ukupno.length;
         
+        
+
 
 
 
@@ -155,7 +202,13 @@ module.exports.getPosao = async (req,res) =>
         kategorija : kategorija,
         prijaveKorisnici : prijaveKorisnici,
         brPrijava : prijaveKorisnici.length,
-        ulogovaniKorisnik : ulogovaniKorisnik
+        ulogovaniKorisnik : ulogovaniKorisnik,
+        prijava : prijava,
+        strana : trenutnaStrana,
+        prethodnaStrana : prethodnaStrana,
+        sledecaStrana : sledecaStrana,
+        ukupno : ukupno,
+        locked : locked
     
     });
 }
@@ -203,7 +256,7 @@ module.exports.postNoviPosao = async(req,res) =>
         var datum =  new Date();
         var kategorijaId = req.body.kategorijaId;
         // POINT 
-        var korisnikId = 1;
+        var korisnikId = req.session.ulogovaniKorisnik.id;
 
         var brPrijava = 0;
 
@@ -384,4 +437,56 @@ module.exports.postBrisanjePosla = async (req,res) =>
         console.log(await posloviModel.obrisiPosao(id));
 
     res.redirect('/svi_poslovi');
+}
+
+
+
+
+// Prijavljivanje i odjavljivanje posla
+
+/** POST /svi_poslovi/posao/<id>/prijavljivanje_posla */
+module.exports.postPrijavljivanjePosla = async (req,res) => 
+{
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Ako korisnik nije ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        return res.redirect('/logIn');
+    }
+
+
+    // Ako je ulogovan
+    
+
+    // Uzimanje korisnika
+    var korisnikId = ulogovaniKorisnik.id;
+
+    // Uzimanje id posla
+    var posaoId = req.params.id; 
+
+
+
+
+    /** Unos podataka u bazi - tabela prijave */
+    console.log(await prijaveModel.novaPrijava(korisnikId,posaoId,new  Date(),'na čekanju',''));
+    res.redirect('back');
+
+}
+
+
+/** POST /svi_poslovi/posao/<id>/odjavljivanje_posla */
+module.exports.postOdjavljivanjePosla = async (req, res) =>
+{
+    /** Role */ 
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Dobijanje id posla za odjavljivanje
+    var id = req.params.id;
+
+    /** Brisanje prijave za posao */
+        console.log(await prijaveModel.obrisiPrijavu(ulogovaniKorisnik.id,id));
+
+    return res.redirect('back');
 }
