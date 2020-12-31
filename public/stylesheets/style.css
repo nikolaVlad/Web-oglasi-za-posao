@@ -338,7 +338,8 @@ body
   /* ? korisik.html*/
   .profilna
   {
-      width: 180px;
+      width: 110px;
+      height: 110px;
       background-color: black;
   }
 

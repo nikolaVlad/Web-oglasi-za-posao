@@ -208,7 +208,7 @@
                                     <!-- Forma za odjavu posla-->
                                     <form class = 'form text-center' action ='/svi_poslovi/posao/<%-posao[0].id%>/odjavljivanje_posla' method='POST'>
                                         <button type="button" class="btn btn-success" style="width: 100%;" data-toggle="modal" data-target="#modalOdjaviSeZaPosao<%-posao[0].id%>">Prijavljeni ste <i class="fas fa-check"></i></button>
-                                        <!-- Modal za prijavu posla -->
+                                        <!-- Modal za odjavu posla -->
                                             <div class="modal fade text-center" id="modalOdjaviSeZaPosao<%-posao[0].id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     
@@ -420,7 +420,7 @@
                     
                                 <% if(strana > 1) {%>
                                 <!-- Prethodna -->
-                                <form action="/svi_poslovi/posao/<%-posao[0].id%>" method="" >
+                                <form action="/svi_poslovi/posao/<%-posao[0].id%>" method="get" >
                                     
                                     <button class="btn text-white bg-dark btn-lg" name = 'strana' value= <%-prethodnaStrana%> ><i class="fas fa-arrow-circle-left"></i></button> 
                                    

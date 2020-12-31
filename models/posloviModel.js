@@ -1,5 +1,4 @@
 // Referenca na konekciju sa bazom
-const { query } = require('../config/db');
 const conn = require('../config/db');
 
 // Učitavanje globalnih funkcija
@@ -234,3 +233,43 @@ module.exports.obrisiPosloveIzKategoriju = (idKategorije) =>
 
     });
 }
+
+
+ /** Vraća limitiran br poslova, koje je postavio određeni korisnik selektovane pomoću korisnik.id */
+ module.exports.vratiSvePosloveZaKorisnika = (korisnikId, offset) =>
+ {
+     return new Promise((res, rej) =>
+     {
+
+        if(typeof offset != 'undefined')
+        {
+            var query = `  SELECT poslovi.naziv, poslovi.id
+                            FROM poslovi 
+                            INNER JOIN korisnici 
+                            ON poslovi.korisnik_id = korisnici.id 
+                            WHERE poslovi.korisnik_id = ?
+                            ORDER by datum DESC 
+                            LIMIT ?,8
+                        `
+            offset = (offset * 8) - 8;
+        }
+
+        else
+        {
+            var query = ` SELECT poslovi.naziv, poslovi.id
+                            FROM poslovi 
+                            INNER JOIN korisnici 
+                            ON poslovi.korisnik_id = korisnici.id 
+                            WHERE poslovi.korisnik_id = ?
+                            ORDER by datum DESC 
+                        `
+        }
+
+
+        conn.query(query,[korisnikId,offset], (err,result) =>
+        {
+            if (err)    rej(err);
+            else        res(result);
+        })
+     })
+ }

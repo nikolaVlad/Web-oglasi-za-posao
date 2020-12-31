@@ -1,4 +1,4 @@
-const { queue } = require('jquery');
+// Referenca na konekciu sa bazom
 const conn = require('../config/db');
 
 
@@ -136,4 +136,50 @@ module.exports.prihvatiPrijavu = (korisnikId, posaoId, datum) =>
          });
  
      })
+ }
+
+
+
+
+
+
+ /** Vraća limitiran broj poslova, na koje se prijavio određeni korisnik */
+ module.exports.vratiPrijavljenePosloveKorisnika = (korisnikId, offset) =>
+ {
+    return new Promise((res,rej) =>
+    {
+        if(typeof offset != 'undefined')
+        {
+
+        
+        var query = `   SELECT poslovi.naziv, poslovi.id,
+                        prijave.status as status
+                        FROM poslovi 
+                        INNER JOIN prijave
+                        ON poslovi.id = prijave.posao_id
+                        WHERE prijave.korisnik_id = ?
+                        ORDER BY prijave.datum ASC
+                        LIMIT ?,8
+                    `
+        }
+        else
+        {
+            query =  `   SELECT poslovi.naziv, poslovi.id,
+                        prijave.status as status
+                        FROM poslovi 
+                        INNER JOIN prijave
+                        ON poslovi.id = prijave.posao_id
+                        WHERE prijave.korisnik_id = ?
+                        ORDER BY prijave.datum ASC
+                    `
+        }
+
+        offset = (offset * 8) - 8;
+
+        conn.query(query,[korisnikId, offset], (err,result) =>
+        {
+            if (err)        rej(err);
+            else            res(result);
+        })
+    });
  }
