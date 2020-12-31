@@ -470,7 +470,7 @@ module.exports.postPrijavljivanjePosla = async (req,res) =>
 
 
     /** Unos podataka u bazi - tabela prijave */
-    console.log(await prijaveModel.novaPrijava(korisnikId,posaoId,new  Date(),'na čekanju',''));
+    console.log(await prijaveModel.novaPrijava(korisnikId,posaoId,new  Date(),'na cekanju',''));
     res.redirect('back');
 
 }
@@ -489,4 +489,58 @@ module.exports.postOdjavljivanjePosla = async (req, res) =>
         console.log(await prijaveModel.obrisiPrijavu(ulogovaniKorisnik.id,id));
 
     return res.redirect('back');
+}
+
+
+
+// POINT
+
+// Prihvatanje i odbijanje prijave za posao (oglas) (od strane korisnika koji je postavio posao)
+
+/** POST /svi_poslovi/posao/<id>/prihvatanje_prijave */
+module.exports.postPrihvatanjePrijave = async (req,res) =>
+{
+    // Uzimanje podataka iz forme
+
+    // Korisnik koji se prijavio na posao
+    var prijavljeniKorisnikId = req.body.prijavljeniKorisnikId;
+    // Posao na koji se prijavio
+    var prijavljeniPosaoId = req.body.prijavljeniPosaoId;
+
+   
+
+    /** Upit ka bazi za promenu statusa prijave */
+        console.log(await prijaveModel.prihvatiPrijavu(prijavljeniKorisnikId,prijavljeniPosaoId,new Date()));
+    
+
+    // Vracanje na stranici sa poslom
+    res.redirect('back');
+   
+   
+}
+
+
+
+
+/** POST /svi_poslovi/<id>/odbijanje_prijave */
+module.exports.postOdbijanjePrijave = async (req,res) =>
+{
+    // Uzimanje podataka iz forme
+
+    // Korisnik koji se prijavio na posao
+    var prijavljeniKorisnikId = req.body.prijavljeniKorisnikId;
+    // Posao na koji se prijavio
+    var prijavljeniPosaoId = req.body.prijavljeniPosaoId;
+
+   
+    /** Upit ka bazi za promenu statusa prijave */
+        console.log(await prijaveModel.odbijPrijavu(prijavljeniKorisnikId,prijavljeniPosaoId,new Date()));
+    
+
+    // Vracanje na stranici sa poslom
+    res.redirect('back');
+   
+
+   
+
 }

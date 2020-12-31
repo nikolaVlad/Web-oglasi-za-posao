@@ -31,12 +31,28 @@ router.post('/posao/:id/izmena_posla', posloviController.postIzmenaPosla);
 router.post('/posao/:id/brisanje_posla',posloviController.postBrisanjePosla);
 
 
+
+// Prijavljivanje i odjavljivanje posla
+
 /** POST /svi_poslovi/posao/<id>/prijavljivanje_posla */
-router.post('/posao/:id/prijavljivanje_posla', posloviController.postPrijavljivanjePosla)
+router.post('/posao/:id/prijavljivanje_posla', posloviController.postPrijavljivanjePosla);
 
 
 /** POST /svi_poslovi/posao/<id>/odjavljivanje_posla */
-router.post('/posao/:id/odjavljivanje_posla', posloviController.postOdjavljivanjePosla)
+router.post('/posao/:id/odjavljivanje_posla', posloviController.postOdjavljivanjePosla);
+
+
+
+// Prihvatanje i odbijanje prijave za posao (oglas) (od strane korisnika koji je postavio posao)
+
+/** POST /svi_poslovi/posao/<id>/prihvatanje_prijave */
+router.post('/posao/:id/prihvatanje_prijave', posloviController.postPrihvatanjePrijave);
+
+
+/** POST /svi_poslovi/<id>/odbijanje_prijave */
+router.post('/posao/:id/odbijanje_prijave', posloviController.postOdbijanjePrijave);
+
+
 
 
 

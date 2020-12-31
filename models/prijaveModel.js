@@ -8,10 +8,11 @@ module.exports.vratiKorisnikeZaPosao = (posaoId, offset) =>
     return new Promise((res,rej) =>
     {
         var query = `
-                    SELECT korisnici.ime,korisnici.prezime, korisnici.id FROM prijave 
+                    SELECT korisnici.ime,korisnici.prezime, korisnici.id, prijave.status as status FROM prijave 
                     INNER JOIN korisnici
                     ON prijave.korisnik_id = korisnici.id
                     WHERE prijave.posao_id = ?
+                    ORDER BY datum DESC
                     LIMIT ?, 5
                     `
         offset = (offset * 5) - 5;
@@ -57,14 +58,14 @@ module.exports.vratiJednuPrijavu = (korisnikId, posaoId) =>
 
 
 
-/** Nova prijava za posao  */
-module.exports.novaPrijava = (korisnikId, posaoId,datum,status,obavestenje) =>
+/** Nova prijava za posao (od strane korisnika koji konkuriše za posao) */
+module.exports.novaPrijava = (korisnikId, posaoId,datum,status) =>
 {
     return new Promise((res,rej)=>
     {
-        var query = ' INSERT INTO prijave (korisnik_id, posao_id, datum, status, obavestenje) VALUES(?,?,?,?,?)';
+        var query = ' INSERT INTO prijave (korisnik_id, posao_id, datum, status) VALUES(?,?,?,?)';
 
-        conn.query(query,[korisnikId,posaoId,datum,status,obavestenje], (err,result)=>
+        conn.query(query,[korisnikId,posaoId,datum,status], (err,result)=>
         {
             if (err)       rej(err);
             else           res(err);
@@ -72,7 +73,7 @@ module.exports.novaPrijava = (korisnikId, posaoId,datum,status,obavestenje) =>
     })
 }
 
-/** Brisanje prijave za posao */
+/** Brisanje prijave za posao (od strane korisnika koji konkuriše za posao) */
 module.exports.obrisiPrijavu = (korisnikId,posaoId) =>
 {
     return new Promise((res,rej) =>
@@ -87,3 +88,52 @@ module.exports.obrisiPrijavu = (korisnikId,posaoId) =>
     });
 }
 
+/** Prihvatanje prijave za posao (od strane korinika koji je postavio oglas). 
+ * Params : 
+ *          @korisnikId - predstavlja korisnika koji se prijavio na oglas (posao).
+ *          @posaoId - predstavlja posao na koji se je prijavio
+ *          @datum - kad se desilo prihvatanje.*/
+module.exports.prihvatiPrijavu = (korisnikId, posaoId, datum) =>
+{
+    return new Promise((res,rej) =>
+    {
+        // Upit koji će promeniti status  posla, koji je prihvaćen i dodati obavestenje.
+        var query = `UPDATE prijave 
+                    SET status = "prihvaćen",
+                        datum = ?
+                    WHERE korisnik_id = ? and posao_id = ? `;
+        
+        conn.query(query, [datum,korisnikId,posaoId], (err,result) =>
+        {
+            if (err)        rej(err);
+            else            res(result);
+        });
+
+    })
+}
+ 
+ 
+
+/** Odbijanje prijave za posao (od strane korinika koji je postavio oglas) 
+ * Params : 
+ *          @korisnikId - predstavlja korisnika koji se prijavio na oglas (posao).
+ *          @posaoId - predstavlja posao na koji se je prijavio
+ *          @datum - kad se desilo odbijanje. */
+ module.exports.odbijPrijavu = (korisnikId, posaoId,datum) =>
+ {
+     return new Promise((res,rej) =>
+     {
+         // Upit koji će promeniti status  posla, koji je prihvaćen i dodati obavestenje.
+         var query = `UPDATE prijave 
+                     SET status = "odbijen",
+                         datum = ?
+                     WHERE korisnik_id = ? and posao_id = ? `;
+         
+         conn.query(query, [datum,korisnikId,posaoId], (err,result) =>
+         {
+             if (err)        rej(err);
+             else            res(result);
+         });
+ 
+     })
+ }

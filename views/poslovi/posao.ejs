@@ -324,35 +324,95 @@
                         <% if(ulogovaniKorisnik) {%>
                           <!-- Korisnici -->
                           <% for(prijavljeniKorisnik of prijaveKorisnici) {%>
-                          <div class="row">
-                              <div class="col-6">
-                                <a href = '/svi_korisnici/profil/<%-prijavljeniKorisnik.id%>'>
-                                    <%-prijavljeniKorisnik.ime%>
-                                </a>
-                              </div>
-                              <!-- AKCIJE PRIJAVE -->
-                              <div class="col-6 justify-content-end d-flex">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href = '/svi_korisnici/profil/<%-prijavljeniKorisnik.id%>'>
+                                        <%-prijavljeniKorisnik.ime%>
+                                    </a>
+                                </div>
 
-                                <!-- Forma za prihvatanje -->
-                                <form action ='' method =''>
-                                    <button type="submit" class="btn ">
-                                        <i class="fas fa-check-circle text-success h4"></i>
-                                    </button>
-                                </form>
-                                <!-- /Forma za prihvatanje -->
                                 
+                                <!-- AKCIJE PRIJAVE --> 
 
-                                <!-- Forma za odbijanje prijave-->
-                                <form action ='' method =''>
-                                    <button type="submit" class="btn ">
-                                        <i class="fas fa-times-circle text-danger h4"></i>
-                                    </button>
-                                </form>
-                                <!-- /Forma za odbijanje prijave-->
-                              </div>
-                              <!-- /AKCIJE PRIJAVE -->
-                        </div>
+                                <!-- Akcije vidljive samo korisniku koji je postavio oglas i adminu-->
+                                <% if (ulogovaniKorisnik && (ulogovaniKorisnik.id == korisnik[0].id || ulogovaniKorisnik.rola == 'admin' )) {%>
+
+                            
+                                    <!-- Ako je status prijave  : na cekanju -->
+                                    <% if (prijavljeniKorisnik.status == 'na cekanju') {%>
+                                        <div class="col-6 justify-content-end d-flex">
+
+
+                                                <!-- Forma za prihvatanje prijave -->
+                                                <form action ='/svi_poslovi/posao/<%-posao[0].id%>/prihvatanje_prijave' method ='POST'>
+
+                                                    <!-- Slanje id korisnika koji se prijavio -->
+                                                    
+                                                    <input name = 'prijavljeniKorisnikId' value='<%-prijavljeniKorisnik.id%>' hidden>
+                                                    <input name = 'prijavljeniPosaoId' value = '<%-posao[0].id%>' hidden>
+
+                                                
+                                                
+                                                    <!-- Slanje podataka -->
+                                                    <button type="submit" class="btn ">
+                                                        <i class="fas fa-check-circle text-success h4"></i>
+                                                    </button>
+
+
+                                                </form>
+                                                <!-- /Forma za prihvatanje prijave -->
+                                                
+
+                                                <!-- Forma za odbijanje prijave-->
+                                                <form action ='/svi_poslovi/posao/<%-posao[0].id%>/odbijanje_prijave' method ='POST'>
+
+                                                    <!-- Slanje id korisnika koji se prijavio -->
+                                                    
+                                                    <input name = 'prijavljeniKorisnikId' value='<%-prijavljeniKorisnik.id%>' hidden>
+                                                    <input name = 'prijavljeniPosaoId' value = '<%-posao[0].id%>' hidden>
+                                                    
+
+                                                    <!-- Slanje podataka -->
+                                                    <button type="submit" class="btn ">
+                                                        <i class="fas fa-times-circle text-danger h4"></i>
+                                                    </button>
+
+
+                                                    
+                                                </form>
+                                                <!-- /Forma za odbijanje prijave-->
+
+
+
+                                        </div>
+                                        <!-- /AKCIJE PRIJAVE -->
+
+                                    <!-- Ako je status prijave : prihvacen -->
+                                    <%} else if(prijavljeniKorisnik.status == 'prihvaćen') { %>
+                                        <div class="col-6 justify-content-end d-flex font-italic font-italic text-success" >Prihvaćen</div>
+
+                                    <!-- Ako je status prijave : odbijen-->
+                                    <%} else {%>
+                                        <div class="col-6 justify-content-end d-flex font-italic text-danger ">Odbijen</div>
+                                    <%}%>
+
+
+
+
+                                <% } %>
+
+
+
+
+                            </div>
+                            <hr class="bg-info">
+
                         <%}%>
+
+
+
+
+
                            <!-- Paginacija -->
                            <nav>
                             <!-- Telo paginacije-->
@@ -386,12 +446,13 @@
                             <!-- /Telo paginacije-->
                         </nav>
                         <!-- Paginacija-->
+
                         <%} else {%>
                             <div class=" text-center"><a href="/logIn" class="text-center">Ulogujte se</a><br>   da bi videli ko se sve prijavio za ovaj posao.</div>
                         <%}%>
                         <!-- /Row -->
 
-                        
+                     
                         
 
 
