@@ -12,5 +12,15 @@ router.get('/profil/:id', korisniciController.getKorisnik)
 
 
 
+/** Get /svi_korisnici/profil/<id>/izmena_profila */
+router.get('/profil/:id/izmena_profila', korisniciController.getIzmenaProfila);
+/** POST /svi_korisnici/profil/<id>/izmena_profila */
+router.post('/profil/:id/izmena_profila', korisniciController.postIzmenaProfila);
+
+
+
+/** POST /svi_korisnici/profil/<id>/brisanje_profila */
+router.post('/profil/:id/brisanje_profila', korisniciController.postBrisanjeProfila);
+
 
 module.exports = router;

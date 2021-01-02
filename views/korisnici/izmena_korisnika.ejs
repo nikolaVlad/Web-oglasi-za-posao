@@ -74,6 +74,18 @@
     <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
     
 
+    <!-- Brisanej profila -->
+    <div class="container justify-content-end d-flex">
+        <form action="/svi_korisnici/profil/<%-korisnik[0].id%>/brisanje_profila" method="POST" >
+            <button type="submit" class="btn btn-outline-danger">     
+                Obrišite svoj profil
+            </button>    
+        </form>
+    </div>
+    <!-- /Brisanje profla-->
+
+    <hr class="container bg-light">
+
     <!-- Naslov -->
     <div class="container mt-4 mb-4 text-center">
         <h1>Izmena korisnika</h1>
@@ -82,45 +94,61 @@
     <!-- Telo za kreiranje novog korisnika-->
     <div class="container center" >
         <!-- Forma -->
-        <form action='' method =''  style="display: flex; justify-content: center;">
+        <form action='/svi_korisnici/profil/<%-korisnik[0].id%>/izmena_profila' method ='POST'  style="display: flex; justify-content: center;" id='izmenaProfilaForm'>
             <!-- Red -->
            <div class="form-group col-sm-6" >
                 <!-- Slika -->
-                <div class = 'mb-3' style=" width : 150px; height : 100px; background-color: rgba(0, 0, 0, 0.336);"></div>
-                <input type="file"><br>
+                <div class="d-flex justify-content-center">
+                    <div class="form-group mt-3">
+                        <!--Dodavanje slike-->
+                        <label for="slika">
+                            <img id="slika_pregled" src="/images/site/place1.png" width="190" height="140" class="rounded-0" style=" border-radius: 10px; border: 2px solid rgba(255, 255, 255, 0.308);;" />
+                        </label>
+                        <br>
+                        <label for="slika" class="btn btn-outline-light" style="width: 190px;"><i class="fas fa-upload"></i></label>
+                        <input type="file" accept="image/*" class="custom-file-input" hidden id="slika" name="slika">
+                    </div>
+                </div>
 
                <!-- Ime -->
-                   <label>Ime</label>
-                   <input type="text" class="form-control center-style">
+                   <label>*Ime</label>
+                   <input type="text" class="form-control center-style" name = 'ime' value="<%-korisnik[0].ime%>" required>
                 <!-- /Ime -->
 
                <!-- Prezime -->
-                    <label>Prezime</label>
-                    <input type="text" class="form-control center-style">
+                    <label>*Prezime</label>
+                    <input type="text" class="form-control center-style" name = 'prezime' value="<%-korisnik[0].prezime%>" required>
                 <!-- Prezime-->
 
                 <!-- Email -->
-                    <label>Email</label>
-                    <input type="email" class="form-control center-style">
+                    <label>*Email</label>
+                    <input type="email" class="form-control center-style" value="<%-korisnik[0].email%>" readonly style="background-color: rgba(138, 138, 138, 0.534);">
                 <!-- /Email -->
 
                 <!-- Stara lozinka-->
-                     <label>Unesite staru lozinku</label>
-                    <input type="password" class="form-control center-style">
+                     <label>*Unesite staru lozinku</label>
+                    <input type="password" class="form-control center-style" name = 'lozinka' required >
                 <!-- /Stara lozinka-->
+
+                <!-- Greska kod unosa lozinke (Ako postoji )-->
+                    <% if (typeof greska != 'undefined') {%>
+                        <var class="small text-danger"><%- greska.text %></var><br>
+                    <% } %>
+                <!-- /Greska kod unosa lozinke -->
+
 
 
                 <!-- Lozinka -->
-                    <label>Nova lozinka</label>
-                    <input type="password" class="form-control center-style">
+                    <label>*Nova lozinka</label>
+                    <input type="password" class="form-control center-style" name ='novaLozinka' required>
                 <!-- /Lozinka -->
 
                 <!-- Submit -->
-                    <button type="submit" class = 'btn btn-success mb-3 mt-3'>Sačuvaj izmene</button>
+                    <button type="submit" class = 'btn btn-success mb-3 mt-3' style="width: 50%;">Sačuvaj izmene</button>
                 <!-- /Submit -->
 
                 <!-- Odustani -->
-                    <input type="button" value = 'Odustani' class="btn btn-danger">
+                    <a href="/svi_korisnici/profil/<%-korisnik[0].id%>" class="btn btn-danger" style="width: 48%;">Odistani</a>
                 <!-- /Odustani-->
             
 

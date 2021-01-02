@@ -49,3 +49,42 @@ module.exports.dodajKorisnika = (ime,prezime,email,lozinka,slika) =>
         });
     });
 }
+
+
+/** Izmena postojećeg korisnika */
+module.exports.izmeniKorisnika = (ime,prezime,lozinka,slika,id) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `UPDATE korisnici 
+                    SET 
+                    ime = ?,
+                    prezime = ?,
+                    lozinka = ?,
+                    slika = ?
+                    WHERE id = ?
+        `
+
+        conn.query(query,[ime,prezime,lozinka,slika,id], (err,result) =>
+        {
+            if(err)         rej(err);
+            else            res(result);
+        })
+    })
+}
+
+
+/** Brisanje jednog korisnika */
+module.exports.obrisiKorisnika = (id) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `DELETE FROM korisnici WHERE id = ?`;
+
+        conn.query(query,[id], (err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        })
+    })
+}

@@ -183,3 +183,35 @@ module.exports.prihvatiPrijavu = (korisnikId, posaoId, datum) =>
         })
     });
  }
+
+
+ /** Vraćanje statusa prijave za ulogovanog korisnika i posla na koji je pristigao */
+ module.exports.vratiStatus = (korisnikId, posaoId) =>
+ {
+     return new Promise((res,rej) =>
+     {
+        var query = `SELECT status FROM prijave WHERE korisnik_id = ? AND posao_id = ?`;
+
+        conn.query(query,[korisnikId,posaoId],(err,result) =>
+            {
+                if(err)     rej(err);
+                else        res(result);
+            })
+     })
+ }
+
+
+ /** Brisanje svih prijava za posao, određenog korisnika */
+ module.exports.obrisiPrijave = (korisnikId) =>
+ {
+     return new Promise((res,rej) =>
+     {
+        var query = `DELETE FROM prijave WHERE korisnik_id = ?`;
+
+        conn.query(query,[korisnikId],(err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        })
+     });
+ }

@@ -1,6 +1,6 @@
 
 
-// Dodavanje slike na kod registracije
+/** Dodavanje slike na kod registracije  */
     $("#slika").on("change", function (e) {
     var reader = new FileReader();
     const file = e.target.files[0];
@@ -9,3 +9,5 @@
     };
     reader.readAsDataURL(file);
     });
+
+

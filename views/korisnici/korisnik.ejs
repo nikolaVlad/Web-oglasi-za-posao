@@ -91,7 +91,7 @@
 
                 <!-- Slika korisnika-->
                 <div class="justify-content-center d-flex p-3" style="background-color: rgba(250, 235, 215, 0.034);">
-                    <img src='/images/site/avatar.jpg' alt="Slika_korisnika" class="img-thumbnail profilna rounded-circle"   >
+                    <img src='/images/site/headPic.jpg' alt="Slika_korisnika" class="img-thumbnail profilna rounded-circle"  >
                     <!-- /Slika korisnika-->
                 </div>
 
@@ -134,21 +134,12 @@
                 <!-- Akcije nad korisnikom-->
                 <div>
                 <!-- Izmena profila -->
-                   <a href ='' class='btn btn-outline-info text-info justify-content-center d-flex'>
-                        Izmenite svoj profil 
+                   <a href ='/svi_korisnici/profil/<%-korisnik[0].id%>/izmena_profila' class='btn btn-outline-info text-info justify-content-center d-flex'>
+                        Izmenite i brisanje profila
                     </a>
                 <!-- /Izmena profila -->
 
 
-
-                    <br>
-                <!-- Brisanje profila (Admin)-->
-                    <form class=' justify-content-center d-flex ' action="" class="">
-                       <button type = 'submit' class="btn btn-outline-danger"  style="width: 100%;"> 
-                            <i class="fas fa-user-minus"></i>Obrišite svoj profil
-                        </button> 
-                    </form>
-                <!-- /Brisanje profila -->
 
                 </div>
                 <!-- /Akcije nad korisnikom-->
@@ -170,7 +161,7 @@
 
                     <% if (ulogovaniKorisnik.id == korisnik[0].id || ulogovaniKorisnik.rola == 'admin' ) {%>
                     <button type="submit"  class ='btn btn-outline-dark text-secondary' 
-                     >Prijaviljeni poslovi : 
+                     >Prijaviljeni poslovi 
                     </button>
                     <% } %>
 

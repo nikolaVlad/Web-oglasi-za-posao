@@ -234,6 +234,22 @@ module.exports.obrisiPosloveIzKategoriju = (idKategorije) =>
     });
 }
 
+/** Brisanje svih poslova odredjenog korisnika selektovanog pomoću Id-a */
+module.exports.obrisiPosloveKorisnika = (korisnikId) =>
+{
+    return new Promise( (res,rej) =>
+    {
+        var query = `DELETE FROM poslovi WHERE korisnik_id = ?`;
+        conn.query(query,[korisnikId],(err,result)=>
+        {
+            if (err)    rej(err);
+            else        res(result);
+        })
+    });
+}
+
+
+
 
  /** Vraća limitiran br poslova, koje je postavio određeni korisnik selektovane pomoću korisnik.id */
  module.exports.vratiSvePosloveZaKorisnika = (korisnikId, offset) =>

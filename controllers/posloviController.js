@@ -189,10 +189,23 @@ module.exports.getPosao = async (req,res) =>
         var ukupno = ukupno.length;
         
         
+        // Vraćanje statusa prijave za korisnika koji se je pirjvaio za posao na koji je pristigao
+        var status = '';
+        if(ulogovaniKorisnik)
+        {
+            status = await prijaveModel.vratiStatus(ulogovaniKorisnik.id, id);
+            if(status.length == 0)
+            {
+                status = '';
+            }
+            else
+            {
+                status = status[0].status;
+            }
+        }
 
 
-
-
+        console.log(status);
 
     // Renderovanje stranice
     res.render('./poslovi/posao', {
@@ -208,7 +221,8 @@ module.exports.getPosao = async (req,res) =>
         prethodnaStrana : prethodnaStrana,
         sledecaStrana : sledecaStrana,
         ukupno : ukupno,
-        locked : locked
+        locked : locked,
+        status : status
     
     });
 }
@@ -324,6 +338,14 @@ module.exports.getIzmenaPosla = async (req,res) =>
      /** Selektovanje posla pomoću dobijenog id-a */
         var posao = await posloviModel.vratiPosao(id);
     
+
+
+    //** Redirektovanje korisnika ako je pokušao da menja posao koji nije postavio */
+        if(posao[0].korisnik_id != ulogovaniKorisnik.id && ulogovaniKorisnik.rola != 'admin')
+        {
+            res.redirect(`/svi_poslovi/posao/${id}`);
+        }
+
 
     // Pronalazenje kategorija posla
         kategorijaId = posao[0].kategorija_id;
