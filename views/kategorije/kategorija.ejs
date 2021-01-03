@@ -236,7 +236,7 @@
         <div class="card  bg-dark mt-1 mb-2 ml-4 mr-4" style="box-shadow: none;" >
             <div class="card-header ">
               <!-- Naziv posla-->
-                    <span class = 'text-warning'><%-posao.naziv%></span>
+                    <a href = '/svi_poslovi/posao/<%-posao.id%>' class = 'text-warning'><%-posao.naziv%></a>
               <!-- /Naziv posla-->
                     <br>
                     <span class='text-secondary small'><%-(posao.datum + '').slice(0,25)%></span>
@@ -270,7 +270,7 @@
                 
                 <!-- Akcije -->
                 <div class = 'text-right'>
-                    <p class ='text-secondary small'>Broj prijava : <%-posao.br_prijava%></p>
+                    <p class ='text-secondary small'>Broj prijava : <span class="text-light"> <%-posao.br_prijava%> </span></p>
 
                    
                 </div>

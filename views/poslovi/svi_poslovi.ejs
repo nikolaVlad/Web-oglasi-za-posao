@@ -168,7 +168,7 @@
             <div class="card  bg-dark mt-1 mb-2 ml-4 mr-4" style="box-shadow: none;" >
                 <div class="card-header ">
                   <!-- Naziv -->
-                        <span class = 'text-warning'><%-posao.naziv%></span> <br>
+                        <a href="/svi_poslovi/posao/<%-posao.id%>" class = 'text-warning'><%-posao.naziv%></a> <br>
                         <span class = ''>[<a href="/sve_kategorije/kategorija/<%-posao.kategorija_id%>" class="small"> <%-posao.nazivKategorije%> </a>]</span>
                   <!-- /Naziv posla-->
                         <br>
@@ -206,7 +206,7 @@
                     <!-- Prijava na poslu-->
                     <div class = 'text-right'>
 
-                        <spann class ='text-secondary small text-right'>Broj prijava : <%-posao.br_prijava%></spann>
+                        <spann class ='text-secondary small text-right'>Broj prijava : <span class="text-light"><%-posao.br_prijava%></span></spann>
                         
                     </div>
                     <!-- /Akcije --> 

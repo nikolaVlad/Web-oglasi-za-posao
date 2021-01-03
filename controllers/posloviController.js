@@ -327,7 +327,7 @@ module.exports.getIzmenaPosla = async (req,res) =>
     // Ako korisnik nije ulogovan
     if(!ulogovaniKorisnik)
     {
-        res.redirect('/logIn');
+        return res.redirect('/logIn');
     }
 
 
@@ -528,9 +528,15 @@ module.exports.postPrijavljivanjePosla = async (req,res) =>
 
 
 
-
     /** Unos podataka u bazi - tabela prijave */
-    console.log(await prijaveModel.novaPrijava(korisnikId,posaoId,new  Date(),'na cekanju',''));
+        console.log(await prijaveModel.novaPrijava(korisnikId,posaoId,new  Date(),'na cekanju',''));
+
+    
+    /** Azuriranje kolone br_prijava u tabeli poslovi za odredjenog posla - tabela poslovi*/
+        console.log(await posloviModel.azurirajBrPoslova(posaoId));
+
+
+    // Redirektovanje 
     res.redirect('back');
 
 }
@@ -547,6 +553,10 @@ module.exports.postOdjavljivanjePosla = async (req, res) =>
 
     /** Brisanje prijave za posao */
         console.log(await prijaveModel.obrisiPrijavu(ulogovaniKorisnik.id,id));
+
+     /** Azuriranje kolone br_prijava u tabeli poslovi za odredjenog posla - tabela poslovi*/
+     console.log(await posloviModel.azurirajBrPoslova(id));
+
 
     return res.redirect('back');
 }
@@ -572,6 +582,7 @@ module.exports.postPrihvatanjePrijave = async (req,res) =>
     /** Upit ka bazi za promenu statusa prijave */
         console.log(await prijaveModel.prihvatiPrijavu(prijavljeniKorisnikId,prijavljeniPosaoId,new Date()));
     
+
 
     // Vracanje na stranici sa poslom
     res.redirect('back');

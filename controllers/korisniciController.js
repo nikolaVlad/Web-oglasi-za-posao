@@ -238,7 +238,7 @@ module.exports.postBrisanjeProfila = async (req,res) =>
     if(!ulogovaniKorisnik)
     {
         // Redirect na logIn stranicu]
-        res.redirect('/logIn');
+        return res.redirect('/logIn');
     }
 
     // Uzimanje id korisnika za brisanje
@@ -248,8 +248,12 @@ module.exports.postBrisanjeProfila = async (req,res) =>
     // Ako ulogovani korisnik i korisnik za brisanje nisu isti i ako rola nije admin
     if(ulogovaniKorisnik.id != id && ulogovaniKorisnik.rola != 'admin')
     {
-        res.redirect(`/svi_korisnici/profil/${id}`);
+        return res.redirect(`/svi_korisnici/profil/${id}`);
     }
+
+    
+    /** Ažuriranje kolone br_prijava, za sve poslove, na koje se korisnik prijavio */
+        //console.log(await posloviModel.)
 
 
     /** Upit za brisanje svih prijava za posao, na koje se prijavio korisnika */

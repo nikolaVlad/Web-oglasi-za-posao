@@ -1,4 +1,5 @@
 // Referenca na konekciju sa bazom
+const e = require('express');
 const conn = require('../config/db');
 
 // Učitavanje globalnih funkcija
@@ -289,3 +290,34 @@ module.exports.obrisiPosloveKorisnika = (korisnikId) =>
         })
      })
  }
+
+
+
+ /** Izmmena (ažuriranje) kolone br_poslova za jedan posao selektovan pomoću id posla */
+ module.exports.azurirajBrPoslova = (posaoId) =>
+ {
+     return new Promise((res,rej) =>
+     {
+         var query = `  UPDATE poslovi 
+                        SET 
+                        br_prijava = (SELECT COUNT(posao_id) FROM prijave WHERE posao_id = ?)
+                        WHERE id = ?
+         `;
+
+         conn.query(query,[posaoId,posaoId], (err,result)=>
+         {
+             if(err)        rej(err);
+             else           res(result);
+         })
+
+     })
+ }
+
+module.exports.azurirajBrPolsovaZaKorisnika = (korisnikId) =>
+{
+    return new Promise((res,rej) =>
+    {
+       
+       
+    })
+}
