@@ -313,11 +313,4 @@ module.exports.obrisiPosloveKorisnika = (korisnikId) =>
      })
  }
 
-module.exports.azurirajBrPolsovaZaKorisnika = (korisnikId) =>
-{
-    return new Promise((res,rej) =>
-    {
-       
-       
-    })
-}
+

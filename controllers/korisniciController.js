@@ -252,19 +252,27 @@ module.exports.postBrisanjeProfila = async (req,res) =>
     }
 
     
-    /** Ažuriranje kolone br_prijava, za sve poslove, na koje se korisnik prijavio */
-        //console.log(await posloviModel.)
-
+  
+    /** Čuvanje svih poslova na koje se prijavio korisnik, radi ažuriranja */
+        var posloviP = await prijaveModel.vratiPrijavljenePosloveKorisnika(id);
 
     /** Upit za brisanje svih prijava za posao, na koje se prijavio korisnika */
         console.log(await prijaveModel.obrisiPrijave(id));
+    
+    /** Algoritam za ažuriranje br_prijava svih poslova na koje se prijavio korisnik */
+        for (posao of posloviP)
+        {
+            await posloviModel.azurirajBrPoslova(posao.id);
+        }
+
 
     /** SLOZENI Upit za brisanje svih prijava za poslove koje je postavio korisnik */
         console.log(await prijaveModel.obrisiPrijaveZaPosloveKorisnika(id));
 
-    /**  Upit za brisanje svih postavljenih poslova(oglasa) korisnika i brisanje prijava za te poslove */
+    /**  Upit za brisanje svih postavljenih poslova(oglasa) korisnika */
         console.log(await posloviModel.obrisiPosloveKorisnika(id));
 
+    
     /** Upit za brisanje korisnika */
         console.log(await korisniciModel.obrisiKorisnika(id));
 
@@ -279,11 +287,8 @@ module.exports.postBrisanjeProfila = async (req,res) =>
           })
     }
 
-
-
-
     // Redirektovanje na stranici svi_korisnici ako je admin 
-    if(ulogovaniKorisnik.rola == 'admin')
+    else 
     {
         res.redirect('/svi_korisnici');
     }
