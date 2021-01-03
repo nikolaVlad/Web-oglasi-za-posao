@@ -252,15 +252,14 @@ module.exports.postBrisanjeProfila = async (req,res) =>
     }
 
 
-    /** Upit za brisanje svih prijava za posao, korisnika */
+    /** Upit za brisanje svih prijava za posao, na koje se prijavio korisnika */
         console.log(await prijaveModel.obrisiPrijave(id));
 
+    /** SLOZENI Upit za brisanje svih prijava za poslove koje je postavio korisnik */
+        console.log(await prijaveModel.obrisiPrijaveZaPosloveKorisnika(id));
 
-
-    //** Upit za brisanje svih postavljenih poslova(oglasa) korisnika */
+    /**  Upit za brisanje svih postavljenih poslova(oglasa) korisnika i brisanje prijava za te poslove */
         console.log(await posloviModel.obrisiPosloveKorisnika(id));
-
-
 
     /** Upit za brisanje korisnika */
         console.log(await korisniciModel.obrisiKorisnika(id));

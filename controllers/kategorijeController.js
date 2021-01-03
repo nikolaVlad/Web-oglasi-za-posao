@@ -1,7 +1,7 @@
 // Učitavanje potrebnih model fajlova
 var kategorijeModel = require('../models/kategorijeModel');
 var posloviModel = require('../models/posloviModel')
-
+var prijaveModel = require('../models/prijaveModel');
 
 
 
@@ -199,11 +199,30 @@ module.exports.getIzmenaKategorije = async(req,res) =>
 /** POST /sve_kategorije/kategorija<id>/izmena_kategorije */
 module.exports.postIzmenaKategorije = async(req,res) =>
 {
+    /** Role  */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
     // Dobijanje podataka iz forme
     var naziv = req.body.naziv;
     var kratakOpis = req.body.kratakOpis;
     var slika = req.body.slika;
     var id = req.params.id;
+
+    // Provera da li je ulogovani korisnik
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+    // Provera da li je ulogovani korisnik kao admin
+    if(ulogovaniKorisnik.rola != 'admin')
+    {
+        console.log(ulogovaniKorisnik.rola);
+        console.log('desio se');
+        res.redirect(`/sve_kategorije/kategorija/${id}`);
+    }
+
+
 
     /** Provera unetog naziva kategorije */
         var kategorija = await kategorijeModel.vratiNazivKategorije(naziv);
@@ -211,7 +230,11 @@ module.exports.postIzmenaKategorije = async(req,res) =>
     // U slucaju da naziv kategorije već postoji
     if(kategorija.length != 0)
     {
+        // Modifikacija naziva kategorije
+        kategorija[0].naziv = naziv;
+        kategorija[0].kratak_opis = kratakOpis;
 
+        // Vracanje stranice sa upozorenjem o gresci
         return res.render('./kategorije/izmena_kategorije', {
             title : 'Izmena kategorije', 
             greska : 'Kategorija sa ovim nazivom već postoji!',
@@ -226,12 +249,6 @@ module.exports.postIzmenaKategorije = async(req,res) =>
 
 
     res.redirect(`/sve_kategorije/kategorija/${id}`);
-
-
-    
-
-
-
 
 }
 
@@ -279,16 +296,16 @@ module.exports.postNovaKategorija = async (req,res) =>
 
     /** Provera unete kategorija da li već postoji u bazi */
     var kategorija = await kategorijeModel.vratiNazivKategorije(naziv);
-    console.log("Kategorija : " + kategorija);
-
-    // U slucaju da kategorija postoji :
+   
+    // U slucaju da naziv kategorija postoji :
     if(kategorija.length != 0)
     {
-        var greska = {
+       
+        // Modifikovanje naziva kategorije
+        kategorija[0].naziv = naziv;
+        kategorija[0].kratakOpis = kratakOpis;
 
-            nazivKategorije : naziv,
-            kratakOpis : kratakOpis
-        }
+
         return res.render('./kategorije/nova_kategorija',{
             title : 'Nova kategorija', 
             greska : 'Kategorija sa ovim nazivom već postoji!',
@@ -311,13 +328,36 @@ module.exports.postNovaKategorija = async (req,res) =>
 /** Post /sve_kategorije/kategorija/<id>/brisanje_kategorije */
 module.exports.obrisiKategoriju = async (req, res) =>
 {
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+    
+
     // Uzimanja id kategorije za brisanje iz forme
     var id = req.params.id;
+
+
+    // Proveravanje da li je korisnik ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+
+    // Proveravanje da li je ulogovani korisnik admin
+    if(ulogovaniKorisnik.rola != 'admin')
+    {
+        res.redirect(`/sve_kategorije/${id}`);
+    }
+
+
+
+    /** Brisanje prijava za poslove iz te kategorije */
+        console.log(await prijaveModel.obrisiPrijaveZaPosloveIzKategorije(id));
 
     /**  Brisanje svih poslova iz te kategorije */
         await posloviModel.obrisiPosloveIzKategoriju(id);
 
-    /** Upit za brisanje */
+    /** Brisanje kategorije */
         console.log(await kategorijeModel.obrisiKategoriju(id));
 
     res.redirect('/sve_kategorije');

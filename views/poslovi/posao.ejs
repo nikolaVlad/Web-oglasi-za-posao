@@ -269,7 +269,7 @@
                                 <!-- Brisanje -->
                                 <form action="/svi_poslovi/posao/<%-posao[0].id%>/brisanje_posla" method="POST" class=" form form-inline">
                                     <button type="button" class="btn" data-toggle="modal" data-target="#modalBrisanjePosla"><i class="fas fa-trash text-danger " ></i></button>
-                                        <!-- Modal za prijavu -->
+                                        <!-- Modal za brisanje -->
                                             <div class="modal fade text-center" id="modalBrisanjePosla" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     
@@ -285,7 +285,7 @@
                                                     </div>
                                                     <!-- Pitanje -->
                                                     <div class="modal-body">
-                                                        Da li ste sigurni da želite da se obrišete posao :<br> 
+                                                        Da li ste sigurni da želite da se obrišete oglas za posao :<br> 
                                                         <span class="text-warning"><%-posao[0].naziv%></span> 
                                                     </div>
                                                     <!-- /Pitanje -->
@@ -301,7 +301,7 @@
                                                 </div>
                                                 </div>
                                             </div>
-                                        <!-- /Modal za prijavu -->
+                                        <!-- /Modal za brisanje -->
 
 
                                 </form>

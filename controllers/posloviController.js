@@ -340,10 +340,10 @@ module.exports.getIzmenaPosla = async (req,res) =>
     
 
 
-    //** Redirektovanje korisnika ako je pokušao da menja posao koji nije postavio */
+    //** Redirektovanje korisnika ako je pokušao da menja posao koji nije on postavio */
         if(posao[0].korisnik_id != ulogovaniKorisnik.id && ulogovaniKorisnik.rola != 'admin')
         {
-            res.redirect(`/svi_poslovi/posao/${id}`);
+            return res.redirect(`/svi_poslovi/posao/${id}`);
         }
 
 
@@ -370,6 +370,9 @@ module.exports.getIzmenaPosla = async (req,res) =>
 /** POST /svi_poslovi/posao/<id>/izmena_posla */
 module.exports.postIzmenaPosla = async (req,res) =>
 {
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
     // Uzimanje podataka prosledjeni putem fome
     var kategorijaId = req.body.kategorijaId;
     var naziv = req.body.naziv;
@@ -381,8 +384,26 @@ module.exports.postIzmenaPosla = async (req,res) =>
     // Id posla poslat preko parametra
     var posaoId = req.params.id;
 
-    
-     /** Dobijanje svih kategorija radi upisa u padajući meni */
+    // Ako korisnik nije ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+    // Proveravanje posla da li pripada ulogovanom korisniku
+    var posaoP = await posloviModel.vratiPosao(posaoId);
+      //** Redirektovanje korisnika ako je pokušao da menja posao koji nije on postavio */
+      if(posaoP[0].korisnik_id != ulogovaniKorisnik.id && ulogovaniKorisnik.rola != 'admin')
+      {
+          return res.redirect(`/svi_poslovi/posao/${posaoId}`);
+      }
+  
+ 
+
+
+
+
+    /** Dobijanje svih kategorija radi upisa u padajući meni */
         var sveKategorije = await kategorijeModel.vratiKategorije(); 
 
    
@@ -390,6 +411,11 @@ module.exports.postIzmenaPosla = async (req,res) =>
     /** Proveravanje posla */
         var posao = await posloviModel.vratiPosaoIzKategorijeSaNazivom(naziv,kategorijaId); 
       
+
+    
+ 
+
+
 
     /** U SLUČAJU DA DOLAZI DO GREŠKE : Uneti naziv posla već postoji u izabranoj kategoriji */
 
@@ -441,7 +467,7 @@ module.exports.postIzmenaPosla = async (req,res) =>
 /** POST /svi_poslovi/posao/<id>/brisanje_posla */
 module.exports.postBrisanjePosla = async (req,res) =>
 {
-    // IMA GRESKEEEEEEEEEEE
+    
 
     /** Rola */
     var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
@@ -452,8 +478,20 @@ module.exports.postBrisanjePosla = async (req,res) =>
         res.redirect('/logIn');
     }
 
+
     // Dobijanje id posla za brisanje iz URL putanje
     var id = req.params.id;
+
+    // Proveravanje posla da li pripada ulogovanom korisniku
+    var posaoP = await posloviModel.vratiPosao(id);
+        //** Redirektovanje korisnika ako je pokušao da menja posao koji nije on postavio */
+        if(posaoP[0].korisnik_id != ulogovaniKorisnik.id && ulogovaniKorisnik.rola != 'admin')
+        {
+            return res.redirect(`/svi_poslovi/posao/${id}`);
+        }
+
+
+
 
     /** Upit za brisanje jednog posla */
         console.log(await posloviModel.obrisiPosao(id));
@@ -515,9 +553,9 @@ module.exports.postOdjavljivanjePosla = async (req, res) =>
 
 
 
-// POINT
 
-// Prihvatanje i odbijanje prijave za posao (oglas) (od strane korisnika koji je postavio posao)
+
+// Prihvatanje i odbijanje prijave za posao (oglas) (od strane korisnika koji je postavio oglas)
 
 /** POST /svi_poslovi/posao/<id>/prihvatanje_prijave */
 module.exports.postPrihvatanjePrijave = async (req,res) =>
