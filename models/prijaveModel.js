@@ -201,7 +201,7 @@ module.exports.prihvatiPrijavu = (korisnikId, posaoId, datum) =>
  }
 
 
- /** Brisanje svih prijava za posao, na koje se prijavio odredjeni korisnika */
+ /** Brisanje svih prijava za posao, na koje se prijavio odredjeni korisnik */
  module.exports.obrisiPrijave = (korisnikId) =>
  {
      return new Promise((res,rej) =>
@@ -218,7 +218,7 @@ module.exports.prihvatiPrijavu = (korisnikId, posaoId, datum) =>
 
 
 
-/** SLOZENI upit : Brisanje svih prijavA koje se odnose na te poslove, koje je postavio odredjeni korisnik*/
+/** SLOZENI upit : Brisanje svih prijava koje se odnose na te poslove, koje je postavio odredjeni korisnik*/
 module.exports.obrisiPrijaveZaPosloveKorisnika = (korisnikId) =>
 {
     return new Promise( (res,rej) =>
@@ -259,5 +259,21 @@ module.exports.obrisiPrijaveZaPosloveIzKategorije = (kategorijaId) =>
             if (err)    rej(err);
             else        res(result);
         })
+    })
+}
+
+
+/** Brisanje svih prijavljenih poslova selektovanih pomoću id posla */
+module.exports.obrisiPrijaveZaPosao = (posaoId) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `DELETE FROM prijave WHERE posao_id = ?`;
+
+        conn.query(query,[posaoId], (err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        });
     })
 }

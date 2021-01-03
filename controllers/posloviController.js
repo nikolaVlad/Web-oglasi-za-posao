@@ -492,7 +492,8 @@ module.exports.postBrisanjePosla = async (req,res) =>
 
 
 
-
+    /** Upit za brisanjea svih prijava koje se odnose na posao koji se briše */
+        await prijaveModel.obrisiPrijaveZaPosao(id);
     /** Upit za brisanje jednog posla */
         console.log(await posloviModel.obrisiPosao(id));
 
@@ -560,7 +561,6 @@ module.exports.postOdjavljivanjePosla = async (req, res) =>
 
     return res.redirect('back');
 }
-
 
 
 
