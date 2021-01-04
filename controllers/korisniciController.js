@@ -424,8 +424,11 @@ module.exports.postSlika = async (req,res) =>
         }
     });
 
+     // Redirektovanje korisnika na početnoj strani ako je tu 1. put
+    if(req.session.prviPut == true)
+        res.redirect('/');
+   
+    // U suprotnom redirektovanje korisnika na starnici svog profila
+    else res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`);
 
-
-    // Redirektovanje korisnika na početnoj strani
-    res.redirect('/');
 }

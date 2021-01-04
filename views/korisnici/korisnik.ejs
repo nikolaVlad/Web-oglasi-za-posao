@@ -91,10 +91,21 @@
 
                 <!-- Slika korisnika-->
                 <div class="justify-content-center d-flex p-3" style="background-color: rgba(250, 235, 215, 0.034);">
-                    <img src='/images/site/headPic.jpg' alt="Slika_korisnika" class="img-thumbnail profilna rounded-circle"  >
+                    <img  alt="Slika_korisnika" class=" profilna rounded-circle"  style="border: 2px solid rgb(100, 100, 100);" 
+                    <% if (korisnik[0].slika != '' ) {%>
+                        src = '/images/uploads/korisnici/<%-korisnik[0].slika%>'
+                    <%} else {%>
+                        src = '/images/site/place1.png'
+                    <% } %>
+                    />
                     <!-- /Slika korisnika-->
                 </div>
-
+                <% if(ulogovaniKorisnik.id == korisnik[0].id || ulogovaniKorisnik.rola == 'admin') {%>
+                <div class="text-center">
+                    <a href = '/svi_korisnici/profil/<%-korisnik[0].id%>/slika' class="text-info">Izmenite sliku</a>
+                </div>
+                <% } %>
+                
                 <br><br>
 
                 <!-- Podaci o korisniku-->
@@ -135,7 +146,7 @@
                 <div>
                 <!-- Izmena profila -->
                    <a href ='/svi_korisnici/profil/<%-korisnik[0].id%>/izmena_profila' class='btn btn-outline-info text-info justify-content-center d-flex'>
-                        Izmenite i brisanje profila
+                        Izmena i brisanje profila
                     </a>
                 <!-- /Izmena profila -->
 
