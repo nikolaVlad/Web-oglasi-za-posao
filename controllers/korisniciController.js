@@ -341,9 +341,9 @@ module.exports.getSlika = async (req,res) =>
 
 
     // Ako ulogovani korisnik i korisnik cija se slika menja nisu isti
-    if(ulogovaniKorisnik.id != id)
+    if(ulogovaniKorisnik.id != id && ulogovaniKorisnik.rola != 'admin')
     {
-        res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`);
+        res.redirect(`/svi_korisnici/profil/${id}`);
     }
 
     /** Upit za vraćanje korisnika */
@@ -377,9 +377,9 @@ module.exports.postSlika = async (req,res) =>
 
 
     // Ako ulogovani korisnik i korisnik ko menja/dodaje sliku nisu isti
-    if(ulogovaniKorisnik.id != id)
+    if(ulogovaniKorisnik.id != id && ulogovaniKorisnik.rola != 'admin')
     {
-        res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`);
+        res.redirect(`/svi_korisnici/profil/${id}`);
     }
 
     // Vracanje korisnika
