@@ -30,7 +30,7 @@ module.exports.postRegistracija = async (req,res) =>
     var prezime = req.body.prezime;
     var email = req.body.email;
     var lozinka = req.body.lozinka;
-    var slika = '' //req.body.slika;
+    var slika = ''; 
     
 
    /** Provera email-a */
@@ -62,21 +62,23 @@ module.exports.postRegistracija = async (req,res) =>
         // Hashovanje lozinke  
             var hashovanaLozinka = bcrypt.hashSync(lozinka,3); 
 
-        // Dodavanje imena slici
-            //slika = Date.now() + slika;
-
-        /** Upisivanje korisnika */
-            await korisniciModel.dodajKorisnika(ime,prezime,email,hashovanaLozinka,slika);
+        /** Upisivanje novnog korisnika u bazi */
+            var noviKorisnik = await korisniciModel.dodajKorisnika(ime,prezime,email,hashovanaLozinka,slika);
 
         
-        // Kreiranje obavetenja kad je registracija uspela
-        var obavestenje = {
-            text : 'Registracija uspešna!',
-            email : email
-        }
+        /** Upisivanje novnog korisnika u sesiji */
+            req.session.ulogovaniKorisnik = await korisniciModel.vratiKorisnikaSaEmailom(email);
+            req.session.ulogovaniKorisnik = req.session.ulogovaniKorisnik[0];
 
-        // Redirektovanje na login formu
-        res.render('./log_reg/logIn', {title: 'Uloguj se', obavestenje : obavestenje, greska : ''});
+        /** Promenljiva koja će služiti da korisniku koji se prvi put registruje na sajt - prikaže obaveštenje */
+            req.session.prviPut = true;
+
+
+
+        // Redirektovanje korisnika na sledeci korak registracije - gde dodaje sliku profila
+            return res.redirect(`/svi_korisnici/profil/${req.session.ulogovaniKorisnik.id}/slika`);
+            
+
     }
 
 }

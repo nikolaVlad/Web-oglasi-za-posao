@@ -6,6 +6,15 @@ var prijaveModel   = require('../models/prijaveModel');
 // Hashovanje lozinke
 var bcrypt = require('bcrypt');
 
+// Upload slike
+var formidable = require('formidable');
+
+// Rad sa path-ovima
+var path = require('path');
+
+// Brisanje stare slike
+var fs = require('fs');
+
 
 /** Get /svi_korisnici */
 module.exports.getSviKorisnici = (req, res)=>
@@ -251,7 +260,7 @@ module.exports.postBrisanjeProfila = async (req,res) =>
         return res.redirect(`/svi_korisnici/profil/${id}`);
     }
 
-    
+   
   
     /** Čuvanje svih poslova na koje se prijavio korisnik, radi ažuriranja */
         var posloviP = await prijaveModel.vratiPrijavljenePosloveKorisnika(id);
@@ -272,7 +281,23 @@ module.exports.postBrisanjeProfila = async (req,res) =>
     /**  Upit za brisanje svih postavljenih poslova(oglasa) korisnika */
         console.log(await posloviModel.obrisiPosloveKorisnika(id));
 
-    
+    /** Algoritam za brisanje slike korisnika, sa servera */
+        // Vraćanje imena slike 
+        var slika = await korisniciModel.vratiSlikuKorisnika(id);
+        slika = slika[0].slika;   
+        // Ako ime slike postoji
+        if(slika.length != 0)
+        {
+
+            // Brisanje slike
+            var path = require('path');
+            var fs   = require('fs');
+
+            fs.unlinkSync(path.join(__dirname,'..','public','images','uploads','korisnici',slika));
+            console.log('Slika korisnika obrisana.');
+        }
+
+
     /** Upit za brisanje korisnika */
         console.log(await korisniciModel.obrisiKorisnika(id));
 
@@ -293,4 +318,114 @@ module.exports.postBrisanjeProfila = async (req,res) =>
         res.redirect('/svi_korisnici');
     }
     
+}
+
+
+
+// Izmena slike 
+
+/** get /svi_korisnici/profil/:id/slika */
+module.exports.getSlika = async (req,res) =>
+{
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+    // Ako korisnik nije ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+    // Uzimanje id korisnika
+    var id = req.params.id;
+
+
+    // Ako ulogovani korisnik i korisnik cija se slika menja nisu isti
+    if(ulogovaniKorisnik.id != id)
+    {
+        res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`);
+    }
+
+    /** Upit za vraćanje korisnika */
+        var korisnik = await korisniciModel.vratiKorisnika(id);
+
+
+
+    res.render('korisnici/dodavanjeSlike',{
+        title : 'Slika profila',
+        korisnik : korisnik
+        });
+}
+
+
+
+/** POST /svi_korisnici/profil/:id/slika */
+module.exports.postSlika = async (req,res) =>
+{
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+
+    // Ako koroisnik nije ulogovan
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
+
+    // Uzimanje id korisnika
+    var id = req.params.id;
+
+
+    // Ako ulogovani korisnik i korisnik ko menja/dodaje sliku nisu isti
+    if(ulogovaniKorisnik.id != id)
+    {
+        res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`);
+    }
+
+    // Vracanje korisnika
+    var korisnik = await korisniciModel.vratiKorisnika(id);
+
+
+
+    // Stara slika
+    var staraSlika = korisnik[0].slika;
+    // Nova slika
+    var slika = '';
+
+
+
+    // Parsiranje fomrme, gde je poslata slika
+    var form = new formidable.IncomingForm();
+    form.parse(req);
+
+    // Handlovanje događaja koji prestavlja da je slika pristigla
+    form.on('fileBegin', async function (name, file)
+    {
+
+        // U slučaju da je slika ispravna
+        if( file.name && file.name.match(/\.(jpg|jpeg|png)$/i) )
+        {
+            // Cuvanje imena slike
+            slika = Date.now() + file.name;
+
+            // Upload slike
+            file.path = path.join(__dirname,'..','public','images','uploads','korisnici',slika);
+
+            /** Upit za cuvanje slike u bazu */
+                console.log( await korisniciModel.dodajSliku(id,slika));
+
+            // Brisanje stare slike ako ona postoji
+            if(staraSlika.length != 0)
+            {
+                fs.unlinkSync(path.join(__dirname,'..','public','images','uploads','korisnici',staraSlika));
+                console.log('Stara slika obrisana.');
+            }
+            console.log('Promena slike uspesna!');
+        }
+    });
+
+
+
+    // Redirektovanje korisnika na početnoj strani
+    res.redirect('/');
 }

@@ -5,6 +5,39 @@
 
 <body style="margin-top: 70px;">
 
+     <!-- Uspesno prijavljivanje -->
+     <% if (obavestenje == true) {%>
+        <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+            $('#myModal').modal('show');
+        }, 1); // milliseconds
+            });
+
+         </script>
+    <%}%>
+
+           <!-- /Modal za uspesno prijavljivanje-->
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    </div>
+                    <div class="modal-body">
+                        <span class="text-success">Čestitamo Vaša registracija je uspešna! Dobro došli na sajt Web oglasi za posao.</span> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- /Modal za uspesno prijavljivanje-->
+
+
 
 
     <!--Navigacija-->

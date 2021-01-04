@@ -88,3 +88,37 @@ module.exports.obrisiKorisnika = (id) =>
         })
     })
 }
+
+/** Vraćanje slike korisnika selektovanog pomoću Id-a */
+module.exports.vratiSlikuKorisnika = (korisnikId) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `SELECT slika FROM korisnici WHERE id = ? `;
+
+        conn.query(query,[korisnikId],(err,result) =>
+        {
+            if (err)    rej(err);
+            else        res(result);  
+        });
+    });
+}
+
+
+/** Dodavanej nove slike korisniku */
+module.exports.dodajSliku = (korisnikId, nazivSlike) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `   UPDATE korisnici
+                        SET slika = ?
+                        WHERE id = ?
+                    `;
+
+        conn.query( query ,[nazivSlike,korisnikId], (err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        })
+    })
+}

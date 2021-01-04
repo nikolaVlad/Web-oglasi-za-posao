@@ -7,7 +7,7 @@ module.exports = async (req, res)=>
 {
  
     /** Role */
-     const ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+    const ulogovaniKorisnik = req.session.ulogovaniKorisnik;
     
 
     // Iscitavanje 3 kategorija 
@@ -18,12 +18,21 @@ module.exports = async (req, res)=>
     var poslovi = await posloviModel.vratiPoslove(6);
    
 
+    /** Obavestenje */
+    var obavestenje = false;
+    if(req.session.prviPut == true)
+    {
+        req.session.prviPut = false;
+        obavestenje = true;
+    }
+
+
 
     res.render('index', {
         title : 'Web oglasi za posao', 
         kategorije : kategorije, 
         poslovi : poslovi,
-        ulogovaniKorisnik : ulogovaniKorisnik    
-    
+        ulogovaniKorisnik : ulogovaniKorisnik,    
+        obavestenje : obavestenje
     });
 };
