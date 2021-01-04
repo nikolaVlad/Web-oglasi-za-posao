@@ -114,7 +114,7 @@ module.exports.getKorisnik = async (req,res) =>
                 strana : trenutnaStrana,
                 sledecaStrana : sledecaStrana,
                 prethodnaStrana : prethodnaStrana,
-                ukupno : ukupno.length
+                ukupno : ukupno.length,
             });
 }
 
@@ -155,7 +155,8 @@ module.exports.getIzmenaProfila = async(req,res) =>
 
     res.render('korisnici/izmena_korisnika',{
         title : 'Izmena profila',
-        korisnik : korisnik
+        korisnik : korisnik,
+        ulogovaniKorisnik : ulogovaniKorisnik
         });
 }
 
@@ -353,7 +354,8 @@ module.exports.getSlika = async (req,res) =>
 
     res.render('korisnici/dodavanjeSlike',{
         title : 'Slika profila',
-        korisnik : korisnik
+        korisnik : korisnik,
+        ulogovaniKorisnik : ulogovaniKorisnik
         });
 }
 

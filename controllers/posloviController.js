@@ -10,7 +10,8 @@ var prijaveModel = require('../models/prijaveModel');
 /**Get /svi_poslovi */
 module.exports.getSviPoslovi = async(req, res) =>
 {
-   
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
 
 
      /** Paginacija  */
@@ -101,6 +102,7 @@ module.exports.getSviPoslovi = async(req, res) =>
         prethodnaStrana : prethodnaStrana,
         ukupnoPoslova : ukupnoPoslova.length,
         prikazaniPoslovi : poslovi.length * trenutnaStrana, 
+        ulogovaniKorisnik : ulogovaniKorisnik
     })
     
     
@@ -253,7 +255,8 @@ module.exports.getNoviPosao = async(req, res) =>
         greska : '',
         title : 'Novi oglas', 
         sveKategorije : sveKategorije,
-        kategorijaId : kategorijaId
+        kategorijaId : kategorijaId,
+        ulogovaniKorisnik : ulogovaniKorisnik
     });
 }
 
@@ -363,7 +366,8 @@ module.exports.getIzmenaPosla = async (req,res) =>
         posao : posao,
         greska : '',
         sveKategorije: sveKategorije,
-        kategorijaId : kategorijaId
+        kategorijaId : kategorijaId,
+        ulogovaniKorisnik : ulogovaniKorisnik
     });
 }
 
