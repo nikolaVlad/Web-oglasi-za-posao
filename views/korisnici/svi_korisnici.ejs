@@ -75,7 +75,9 @@
     <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
 
 
-
+    <div class="container text-center"> <b class="h2"> Svi korisnici </b> </div>
+    <hr class="container" style="background-color: beige;">
+    <div class="container mb-3 mt-2">Prikazani korisnici : <b><%-(ucitani * strana)%></b> / <%-ukupno%></div>
 
 
     <!-- Izlistavanje svih korisnika -->
@@ -83,71 +85,7 @@
 
             <!-- Tabela-->
             <table class="table table-striped text-white table-dark table-responsive-sm " >
-                <!-- Akcije -->
-                <form>
-                    <!-- Pretrazivanje -->
-                    <thead style="background-color: #142a4d;;">
-                        <tr>
-                        <!-- Ime i prezime -->   
-                            <th scope="col">
-                                <i class="fas fa-search"></i>
-                            </th>
-                            <th scope="col">
-                                <input class="form-control form-control-sm mr-3 text-white" type="search" placeholder="Pronađi korisnika" 
-                                style="background-color : #142a4d;"
-                                aria-label="Search">
-                            </th>
-                            <!-- Ime i prezime -->
-
-                            <!-- Prijavljeni poslovi -->
-                            <th scope="col">
-                                <div class="row ml-1">
-                                    <input type="text" placeholder="Od" style="background-color : #142a4d;" class="form-control form-control-sm  col-4 mr-3">
-                                    <input type="text" placeholder="Do" style="background-color : #142a4d;" class="form-control form-control-sm  col-4">
-                                </div>
-                            </th>
-                             <!-- /Prijavljeni poslovi -->
-
-
-                            <!-- Postavljeni poslovi -->
-                            <th scope="col">
-                                <div class="row ml-1">
-                                    <input type="text" placeholder="Od" style="background-color : #142a4d;" class="form-control form-control-sm  col-4 mr-3">
-                                    <input type="text" placeholder="Do" style="background-color : #142a4d;" class="form-control form-control-sm  col-4">
-                                </div>
-                            </th>
-                             <!-- /Postavljeni poslovi -->
-
-
-                            <!-- Akcije -->
-                            <th scope="col">
-                               <div class="row ">
-                                   <input class = 'btn-sm btn-primary'type="button" value="Pretraži" class="col-sm-6">
-                                   <a  href = ''class="btn-sm btn-secondary col-sm-6">Odustani</a>
-                                </div>
-                            </th>
-                            <!-- /Akcije -->
-
-
-
-                          </tr>
-                    </thead>
-                    <!-- /Pretrazivanje -->
-
-
-                </form>
-
-                <!-- /Akcije -->
-
-
-
-
-
-
-
-
-
-
+               
 
 
                 <!-- Naslov -->
@@ -159,10 +97,9 @@
                     <th scope="col">Ime i prezime</th>
                     <th scope="col">Broj oglasa na koje se prijavio</th>
                     <th scope="col">Broj oglasa koje je postavio</th>
-                    <th scope="col" class="">Akcije</th>
                   </tr>
                 <!-- /Podaci za prikaz -->
-
+              
                 <!-- Prazan prostor -->
                   <tr style="background-color: #142a4d;">
                     <td colspan="6"></td>
@@ -170,19 +107,15 @@
                 <!-- /Prazan prostor -->
                 </thead>
                 <!-- /Naslov -->
-                
+                <% for(korisnik of korisnici ) {%>
                 <!-- Telo -->
                 <tbody>
                 <!-- Podaci o korisniku-->
                   <tr>
-                    <th scope="row">1 </th>
-                    <td>Mark Zakenberg</td>
-                    <td>5</td>
-                    <td>20</td>
-                    <td>
-                        <a href='' class="text-primary ml-3"><i class="fas fa-user-edit"></i></a> 
-                        <a href='' class='text-danger ml-3'> <i class="fas fa-user-times"></i></a>
-                    </td>
+                    <th scope="row">#</th>
+                    <td><a href = '/svi_korisnici/profil/<%-korisnik.id%>'><%-korisnik.ime%> <%-korisnik.prezime%></a></td>
+                    <td><%-korisnik.br_prijavljenih%></td>
+                    <td><%-korisnik.br_postavljenih%></td>
                   </tr>
                 <!-- /Podaci o korisniku-->
 
@@ -193,14 +126,65 @@
                 <!-- /Prazan prostor-->
                 </tbody>
                 <!-- Telo -->
-
+                <% } %>
               </table>
               <!-- /Tabela -->
 
         </div>
     <!-- /Izlistavanje svih korisnika -->
 
-    
+
+
+
+
+
+
+  <!-- Paginacija -->
+    <nav>
+      <!-- Telo paginacije-->
+      <ul class="pagination justify-content-center mt-5    ">
+
+          <!-- Prethodna -->
+          <%if (strana != 1) {%>
+          <form action="/svi_korisnici" method="GET" >
+              
+              <button class="btn text-white bg-dark" name = 'strana' value= <%-prethodnaStrana%> >Prethodna</button> 
+             
+
+
+             
+              
+          </form>
+          <%}%>
+          <!-- Prethodna -->
+
+          <% if(ukupno>10){ %>
+          <!-- Trenutna -->
+          <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#"><%-strana%></a></li>
+          <!-- Trenutna -->
+
+         
+          <!-- Sledeća -->
+          <form action="/svi_korisnici" method="GET" >
+              <button class="btn text-white bg-dark" name = 'strana' value= <%-sledecaStrana%> >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 
+                 
+          </form>
+          <!-- /Sledeća -->
+          <% } %>
+      </ul>
+      <!-- /Telo paginacije-->
+    </nav>
+  <!-- /Paginacija -->
+
+
+
+
+
+
+
+
+
+
 
     <!-- Footer -->
     <div class="container-fluid fixed-bottom footer">

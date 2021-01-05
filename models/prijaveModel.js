@@ -7,15 +7,29 @@ module.exports.vratiKorisnikeZaPosao = (posaoId, offset) =>
 {
     return new Promise((res,rej) =>
     {
-        var query = `
-                    SELECT korisnici.ime,korisnici.prezime, korisnici.id, prijave.status as status FROM prijave 
-                    INNER JOIN korisnici
-                    ON prijave.korisnik_id = korisnici.id
-                    WHERE prijave.posao_id = ?
-                    ORDER BY datum DESC
-                    LIMIT ?, 5
-                    `
-        offset = (offset * 5) - 5;
+
+        if(typeof offset != 'undefined')
+        {
+            var query = `
+                        SELECT korisnici.ime,korisnici.prezime, korisnici.id, prijave.status as status FROM prijave 
+                        INNER JOIN korisnici
+                        ON prijave.korisnik_id = korisnici.id
+                        WHERE prijave.posao_id = ?
+                        ORDER BY datum DESC
+                        LIMIT ?, 5
+                        `
+            offset = (offset * 5) - 5;
+        }
+
+        else
+        {
+            var query = `   SELECT korisnici.* 
+                            FROM prijave 
+                            INNER JOIN korisnici
+                            ON prijave.korisnik_id = korisnici.id
+                            WHERE prijave.posao_id = ?`
+        }
+
         conn.query(query,[posaoId,offset], (err,result)=>
         {
             if(err)     rej(err);

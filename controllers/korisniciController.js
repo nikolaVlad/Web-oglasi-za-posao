@@ -17,9 +17,52 @@ var fs = require('fs');
 
 
 /** Get /svi_korisnici */
-module.exports.getSviKorisnici = (req, res)=>
+module.exports.getSviKorisnici = async (req, res)=>
 {
-    res.render('./korisnici/svi_korisnici', {title : 'Svi korisnici'});
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+
+  
+    /** Paginacija  */
+        // Racunanje trenutne strane (Koji će sluziti kao limit u bazi)
+        var trenutnaStrana = parseInt(req.query.strana);
+        if (isNaN(trenutnaStrana) || trenutnaStrana === 0)
+        {
+            trenutnaStrana = 1;
+        }
+
+        // Racunanje pretgodne i sledece strane 
+        var prethodnaStrana = new Number(trenutnaStrana - 1);
+        var sledecaStrana =   new Number(trenutnaStrana + 1);
+
+
+
+
+
+
+    // Ako korisnik nije ulogovan
+
+
+
+    /** Upit za izlistavanje svih korisnika sa limitom i offsetom sortirani po ABC */
+        var korisnici = await korisniciModel.vratiSveKorisnike(trenutnaStrana);
+
+    /** Upit za prebrojavanje svih korisnika */
+        var ukupno = await korisniciModel.vratiUkupnoKorisnika();
+        ukupno = ukupno[0].ukupno;
+      
+
+
+    res.render('./korisnici/svi_korisnici', {
+        title : 'Svi korisnici',
+        korisnici : korisnici,
+        strana : trenutnaStrana,
+        prethodnaStrana : prethodnaStrana,
+        sledecaStrana : sledecaStrana,
+        ukupno : ukupno,
+        ucitani : korisnici.length
+        });
 }
 
 /** Get /svi_korisnici/profil/<id> */
@@ -281,6 +324,8 @@ module.exports.postBrisanjeProfila = async (req,res) =>
 
     /**  Upit za brisanje svih postavljenih poslova(oglasa) korisnika */
         console.log(await posloviModel.obrisiPosloveKorisnika(id));
+
+
 
     /** Algoritam za brisanje slike korisnika, sa servera */
         // Vraćanje imena slike 

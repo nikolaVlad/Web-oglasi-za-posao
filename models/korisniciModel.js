@@ -122,3 +122,78 @@ module.exports.dodajSliku = (korisnikId, nazivSlike) =>
         })
     })
 }
+
+
+
+/** Vraćanje svih korisnika limitirani i sortirani */
+module.exports.vratiSveKorisnike = (offset) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `   SELECT * FROM korisnici 
+                        ORDER BY ime ASC
+                        LIMIT ?,10
+                    `
+        offset = (offset * 10) - 10;
+        conn.query(query,[offset], (err,result) =>
+        {
+            if (err)        rej(err);
+            else            res(result);
+        });
+
+    })
+}
+
+/** Vraćanje broja korisnika */
+module.exports.vratiUkupnoKorisnika = () =>
+{
+    return new Promise(( res,rej) =>
+    {
+        var query = `SELECT COUNT(*) as ukupno FROM korisnici`;
+
+        conn.query(query,(err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        })
+    });
+    
+}
+
+
+
+/** Azuriranje br_prijavljenih poslova(oglasa) */
+module.exports.azurirajBrPrijavljenihZaKorisnika = (korisnikId) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `   UPDATE korisnici 
+                        SET br_prijavljenih = (SELECT COUNT(*) FROM prijave WHERE korisnik_id = ?)
+                        WHERE id = ?
+                        `;
+        conn.query(query,[korisnikId,korisnikId], (err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        });
+    });
+}
+
+
+
+/** Azuriranje br_postavljenih poslova(oglasa) */
+module.exports.azurirajBrPostavljenihZaKorisnika = (korisnikId) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `   UPDATE korisnici 
+                        SET br_postavljenih = (SELECT COUNT(*) FROM poslovi WHERE korisnik_id = ?)
+                        WHERE id = ?
+                        `;
+        conn.query(query,[korisnikId,korisnikId], (err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        });
+    });
+}

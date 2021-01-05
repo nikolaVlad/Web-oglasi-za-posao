@@ -264,6 +264,8 @@ module.exports.getNoviPosao = async(req, res) =>
 /** POST /svi_poslovi/novi_posao */
 module.exports.postNoviPosao = async(req,res) =>
 {
+  
+
     /** Uzimanje podataka iz forme */
         var naziv = req.body.naziv;
         var kratakOpis = req.body.kratakOpis;
@@ -276,6 +278,18 @@ module.exports.postNoviPosao = async(req,res) =>
         var korisnikId = req.session.ulogovaniKorisnik.id;
 
         var brPrijava = 0;
+
+
+    // Ako korisnik nije ulogovan
+    if(!korisnikId)
+    {
+        return res.redirect('/logIn');
+    }
+
+
+
+
+
 
     /** Iscitavamo sve kategorije iz baze radi upisa u padajći meni */
         var sveKategorije = await kategorijeModel.vratiNaziviIdKategorije();
@@ -489,17 +503,24 @@ module.exports.postBrisanjePosla = async (req,res) =>
     // Proveravanje posla da li pripada ulogovanom korisniku
     var posaoP = await posloviModel.vratiPosao(id);
         //** Redirektovanje korisnika ako je pokušao da menja posao koji nije on postavio */
-        if(posaoP[0].korisnik_id != ulogovaniKorisnik.id && ulogovaniKorisnik.rola != 'admin')
-        {
-            return res.redirect(`/svi_poslovi/posao/${id}`);
-        }
+            if(posaoP[0].korisnik_id != ulogovaniKorisnik.id && ulogovaniKorisnik.rola != 'admin')
+            {
+                return res.redirect(`/svi_poslovi/posao/${id}`);
+            }
 
 
+    // Vracanje svih korisnika koji su se prijavili za dati posao, koji će se obrisati
+        var prijavljeniKorisnici = await prijaveModel.vratiKorisnikeZaPosao(id);
 
     /** Upit za brisanjea svih prijava koje se odnose na posao koji se briše */
         await prijaveModel.obrisiPrijaveZaPosao(id);
     /** Upit za brisanje jednog posla */
         console.log(await posloviModel.obrisiPosao(id));
+    /** Upit za azuriranje br_prijavljenih poslova za svakog korisnika koji se je bio prijavio za posao */
+            for(korisnik of prijavljeniKorisnici)
+            {
+                await korisniciModel.azurirajBrPrijavljenihZaKorisnika(korisnik.id);
+            }
 
     res.redirect('/svi_poslovi');
 }
@@ -540,6 +561,8 @@ module.exports.postPrijavljivanjePosla = async (req,res) =>
     /** Azuriranje kolone br_prijava u tabeli poslovi za odredjenog posla - tabela poslovi*/
         console.log(await posloviModel.azurirajBrPoslova(posaoId));
 
+    /** Azuriranje kolone br_prijavljenih poslova u tabeli korisnici za korisnika - koji je prijavio posao */
+        console.log(await korisniciModel.azurirajBrPrijavljenihZaKorisnika(korisnikId));
 
     // Redirektovanje 
     res.redirect('back');
@@ -560,7 +583,10 @@ module.exports.postOdjavljivanjePosla = async (req, res) =>
         console.log(await prijaveModel.obrisiPrijavu(ulogovaniKorisnik.id,id));
 
      /** Azuriranje kolone br_prijava u tabeli poslovi za odredjenog posla - tabela poslovi*/
-     console.log(await posloviModel.azurirajBrPoslova(id));
+        console.log(await posloviModel.azurirajBrPoslova(id));
+
+     /** Azuriranje kolone br_prijavljenih poslova u tabeli korisnici za korisnika - koji je prijavio posao */
+        console.log(await korisniciModel.azurirajBrPrijavljenihZaKorisnika(ulogovaniKorisnik.id));
 
 
     return res.redirect('back');
