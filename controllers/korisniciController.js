@@ -303,8 +303,6 @@ module.exports.postBrisanjeProfila = async (req,res) =>
     {
         return res.redirect(`/svi_korisnici/profil/${id}`);
     }
-
-   
   
     /** Čuvanje svih poslova na koje se prijavio korisnik, radi ažuriranja */
         var posloviP = await prijaveModel.vratiPrijavljenePosloveKorisnika(id);
@@ -312,24 +310,48 @@ module.exports.postBrisanjeProfila = async (req,res) =>
     /** Upit za brisanje svih prijava za posao, na koje se prijavio korisnik */
         console.log(await prijaveModel.obrisiPrijave(id));
     
-    /** Algoritam za ažuriranje br_prijava svih poslova na koje se prijavio korisnik */
+    /** Algoritam za ažuriranje kolone br_prijava svih poslova na koje se prijavio korisnik */
         for (posao of posloviP)
         {
             await posloviModel.azurirajBrPoslova(posao.id);
         }
 
+    //ALGORITAN za cuvanje korisnika koju su se bili prijavili na neke od poslova  korisnika za koga je pristigao zahtev za brisanje
+        // Korisnici koji su se prijavili na neki od posao korisnik koji ce biti obrisan
+        var osteceniKorisnici = [];
+        // Vraćeni poslovi koje je postavio korisnik koji će biti obrisan 
+        var sviPoslovi = await posloviModel.vratiSvePosloveZaKorisnika(id); 
+        // Prolaz kroz te poslove da bi se našli korisnici koji su se prijavili za te poslove
+        for(posao of sviPoslovi)
+        {
+
+             // Vraća korisnike koji su se prijavili za jedan od poslova korisnika koji će bit iobrisan
+            var korisnici = await prijaveModel.vratiKorisnikeZaPosao(posao.id);
+            // Prolaz kroz sve vraćene korisnik, da bi se sačuvali za kasnije
+            for(korisnik of korisnici)
+            {
+                // Čuvanje oštećenih korisnika u nizu u kome će kasnije kolona br_prijavljenih svakog korisnika,
+                // biti ažurirana.
+                osteceniKorisnici.push(korisnik);
+            }
+        }
+        
+    // Kraj algoritma : korisnici sacuvani i kasnije ce se upotrebiti
 
     /** SLOZENI Upit za brisanje svih prijava za poslove koje je postavio korisnik */
         console.log(await prijaveModel.obrisiPrijaveZaPosloveKorisnika(id));
 
 
-   
-
-
-
 
     /**  Upit za brisanje svih postavljenih poslova(oglasa) korisnika */
         console.log(await posloviModel.obrisiPosloveKorisnika(id));
+
+
+    /** Upit za azuriranje kolone br_prijavljenih poslova, korisnika(Sačuvani preko algoritma) koju su bili prijavljeni na neki od poslova obrisanog korisnika  */
+        for(korisnik of osteceniKorisnici)
+        {
+            await korisniciModel.azurirajBrPrijavljenihZaKorisnika(korisnik.id);
+        }
 
 
 
