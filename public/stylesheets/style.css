@@ -29,6 +29,13 @@ body
 }
 
 
+.img404
+{
+    width: 90%;
+    height: 800px;
+
+}
+
 
 
 
@@ -46,7 +53,7 @@ body
     {
        
         background-position: center;
-        background-image: url('../images/site/404.png');
+      
         position: relative;
         margin: 0px;
         

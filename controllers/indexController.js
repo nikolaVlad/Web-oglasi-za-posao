@@ -5,7 +5,6 @@ const posloviModel = require('../models/posloviModel');
 /**Get index */
 module.exports = async (req, res)=>
 {
- 
     /** Role */
     const ulogovaniKorisnik = req.session.ulogovaniKorisnik;
     

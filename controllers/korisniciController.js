@@ -70,6 +70,7 @@ module.exports.getKorisnik = async (req,res) =>
 {
     /** Role */
     var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+    console.log(req.session.ulogovaniKorisnik.slika);
 
     // Ako korisnik nije ulogovan
     if(!ulogovaniKorisnik)
@@ -102,9 +103,6 @@ module.exports.getKorisnik = async (req,res) =>
     // Uzimanje parametra za prikaz oglasi-menija
         var oglasiMeni = ( typeof req.query.oglasiMeni == 'undefined' || req.query.oglasiMeni != 'prijavljeni') 
         ? 'aktivni' : req.query.oglasiMeni;
-
-
-        console.log(oglasiMeni);
     
     // Mogućnost da samo ulogovani korisnik (i admin ) može da vidi prijavljene oglase
     if(oglasiMeni != 'aktivni' && (ulogovaniKorisnik.id != id && ulogovaniKorisnik.rola != 'admin'))
@@ -483,7 +481,6 @@ module.exports.postSlika = async (req,res) =>
             // Cuvanje imena slike
             slika = Date.now() + file.name;
 
-            // Upload slike
             file.path = path.join(__dirname,'..','public','images','uploads','korisnici',slika);
 
             /** Upit za cuvanje slike u bazu */
@@ -494,16 +491,22 @@ module.exports.postSlika = async (req,res) =>
             {
                 fs.unlinkSync(path.join(__dirname,'..','public','images','uploads','korisnici',staraSlika));
                 console.log('Stara slika obrisana.');
+                
             }
-            console.log('Promena slike uspesna!');
+            console.log('Promena slike uspesna!');  
         }
     });
 
-     // Redirektovanje korisnika na početnoj strani ako je tu 1. put
+    
+   
+
+    // Redirektovanje korisnika na početnoj strani ako je tu 1. put
     if(req.session.prviPut == true)
         res.redirect('/');
    
     // U suprotnom redirektovanje korisnika na starnici svog profila
-    else res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`);
-
+    else 
+    {
+        res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`); 
+    }
 }

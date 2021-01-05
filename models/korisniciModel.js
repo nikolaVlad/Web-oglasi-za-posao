@@ -2,7 +2,7 @@
 const conn = require('../config/db');
 
 
-/** Vraća id i ime korisnika , selektovan pomoću Id-a */
+/** Vraća korisnika , selektovan pomoću Id-a */
 module.exports.vratiKorisnika = (id) =>
 {
     return new Promise((res,rej) =>
@@ -31,6 +31,7 @@ module.exports.vratiKorisnikaSaEmailom = (email) =>
         })
     })
 }
+
 
 
 /** Dodavanje novog korisnika */

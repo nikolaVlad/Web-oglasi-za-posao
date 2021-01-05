@@ -87,7 +87,7 @@ app.use(express.static(path.join(__dirname, 'node_modules/jquery')));
 // Sesije
 app.use(session({
   secret : 'secret-key',
-  resave : false,
+  resave : true,
   saveUninitialized : false,
 }))
 
