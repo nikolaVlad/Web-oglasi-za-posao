@@ -309,7 +309,7 @@ module.exports.postBrisanjeProfila = async (req,res) =>
     /** Čuvanje svih poslova na koje se prijavio korisnik, radi ažuriranja */
         var posloviP = await prijaveModel.vratiPrijavljenePosloveKorisnika(id);
 
-    /** Upit za brisanje svih prijava za posao, na koje se prijavio korisnika */
+    /** Upit za brisanje svih prijava za posao, na koje se prijavio korisnik */
         console.log(await prijaveModel.obrisiPrijave(id));
     
     /** Algoritam za ažuriranje br_prijava svih poslova na koje se prijavio korisnik */
@@ -321,6 +321,12 @@ module.exports.postBrisanjeProfila = async (req,res) =>
 
     /** SLOZENI Upit za brisanje svih prijava za poslove koje je postavio korisnik */
         console.log(await prijaveModel.obrisiPrijaveZaPosloveKorisnika(id));
+
+
+   
+
+
+
 
     /**  Upit za brisanje svih postavljenih poslova(oglasa) korisnika */
         console.log(await posloviModel.obrisiPosloveKorisnika(id));
