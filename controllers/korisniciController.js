@@ -507,6 +507,14 @@ module.exports.postSlika = async (req,res) =>
     // U suprotnom redirektovanje korisnika na starnici svog profila
     else 
     {
-        res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`); 
+        req.session.save( function(err) 
+        {
+            req.session.reload( function (err) 
+            {
+                req.session.ulogovaniKorisnik.slika = slika;
+                res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`); 
+            });
+        });
+       
     }
 }
