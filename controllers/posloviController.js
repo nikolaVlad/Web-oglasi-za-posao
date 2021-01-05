@@ -330,6 +330,9 @@ module.exports.postNoviPosao = async(req,res) =>
     /** Upit ka bazi za upis posla */
       var noviPosao = await posloviModel.dodajPosao(naziv,kratakOpis,punOpis,potrebneVestine,pozeljneVestine,datum,kategorijaId,korisnikId,brPrijava);
 
+    /** Upit ka bazi za azuriranje kolone br_postavljeih poslova, onog korisnika koji je postavio posao */
+        await korisniciModel.azurirajBrPostavljenihZaKorisnika(korisnikId);
+
     // Vracanje stranice sa dodatim poslom :
     res.redirect(`/svi_poslovi/posao/${noviPosao.insertId}`);
 }
@@ -502,7 +505,7 @@ module.exports.postBrisanjePosla = async (req,res) =>
 
     // Proveravanje posla da li pripada ulogovanom korisniku
     var posaoP = await posloviModel.vratiPosao(id);
-        //** Redirektovanje korisnika ako je pokušao da menja posao koji nije on postavio */
+        //** Redirektovanje korisnika ako je pokušao da brise posao koji nije on postavio */
             if(posaoP[0].korisnik_id != ulogovaniKorisnik.id && ulogovaniKorisnik.rola != 'admin')
             {
                 return res.redirect(`/svi_poslovi/posao/${id}`);
@@ -514,13 +517,15 @@ module.exports.postBrisanjePosla = async (req,res) =>
 
     /** Upit za brisanjea svih prijava koje se odnose na posao koji se briše */
         await prijaveModel.obrisiPrijaveZaPosao(id);
-    /** Upit za brisanje jednog posla */
+    /** Upit za brisanje posla */
         console.log(await posloviModel.obrisiPosao(id));
-    /** Upit za azuriranje br_prijavljenih poslova za svakog korisnika koji se je bio prijavio za posao */
+    /** Upit za azuriranje br_prijavljenih poslova za svakog korisnika koji se bio prijavio za posao */
             for(korisnik of prijavljeniKorisnici)
             {
                 await korisniciModel.azurirajBrPrijavljenihZaKorisnika(korisnik.id);
             }
+    /** Upit za azuriranje br_postavljenih korisnika koji je obrisao posao */
+            console.log(await korisniciModel.azurirajBrPostavljenihZaKorisnika(ulogovaniKorisnik.id));
 
     res.redirect('/svi_poslovi');
 }
