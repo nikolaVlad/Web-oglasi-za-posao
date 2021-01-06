@@ -190,7 +190,7 @@
     </div>
 
     <!-- Broj prikazanih i ukupno oglasa -->
-    <div class="container"><p class="ml-4">Prikazani oglasi : <b><%-prikazaniPoslovi%></b> / <%-ukupnoPoslova%>  </p></div>
+    <div class="container"><p class="ml-4">Ukupno oglasa : <b><%-ukupnoPoslova%></b></p></div>
 
     <!-- /Broj prikazanih i ukupno oglasa-->
 
@@ -297,7 +297,7 @@
             <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#"><%-strana%></a></li>
             <!-- Trenutna -->
 
-            <% if (prikazaniPoslovi > 10) {%>
+            <% if (prikazaniPoslovi >= 10) {%>
             <!-- Sledeća -->
             <form action="/svi_poslovi" method="GET" >
                 <button class="btn text-white bg-dark" name = 'strana' value= <%-sledecaStrana%> >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 

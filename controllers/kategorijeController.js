@@ -41,9 +41,12 @@ module.exports.getSveKategorije = async (req, res) =>
     // Vraćamo određeniroj kategorija iz baze
     var kategorije = await kategorijeModel.vratiSveKategorije(pretrazi,sortiraj,trenutnaStrana);
     
+
     // Broj vracenih i broj ukupnih kategorija
      var ukupnoKategorija = await kategorijeModel.vratiBrojKategorija();
      ukupnoKategorija = ukupnoKategorija[0].ukupnoKategorija;
+    
+    // Trenutno prikazanih kategorija
     
 
 
@@ -57,7 +60,7 @@ module.exports.getSveKategorije = async (req, res) =>
                 sledecaStrana : sledecaStrana,
                 prethodnaStrana : prethodnaStrana,
                 ukupnoKategorija : ukupnoKategorija,
-                prikazaneKategorije : kategorije.length * trenutnaStrana,
+                prikazaneKategorije : kategorije.length,
                 ulogovaniKorisnik : ulogovaniKorisnik
             });
 }
@@ -134,8 +137,8 @@ module.exports.getKategorija = async (req, res) =>
      }
     
      // Proracunavanje broja ukupnih i prikazanih poslova
-     var ukupnoPoslova = await posloviModel.vratiPosloveIzKategorije(id,[''],1);
-     var prikazaniPoslovi = poslovi.length * trenutnaStrana;
+     var ukupnoPoslova = await posloviModel.vratibrojPoslovaIzKategorije(id);
+     ukupnoPoslova = ukupnoPoslova[0].ukupno;
 
      
   
@@ -149,8 +152,8 @@ module.exports.getKategorija = async (req, res) =>
         kljucneReci : kljucneReci.join(','),
         sortiranje : sortiranje,
         poslovi : poslovi,
-        ukupnoPoslova : ukupnoPoslova.length,
-        prikazaniPoslovi : prikazaniPoslovi,
+        prikazaniPoslovi : poslovi.length,
+        ukupnoPoslova : ukupnoPoslova,
         ulogovaniKorisnik : ulogovaniKorisnik,
     });
 }

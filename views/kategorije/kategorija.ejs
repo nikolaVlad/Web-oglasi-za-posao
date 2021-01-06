@@ -245,7 +245,7 @@
     <!-- Prikaz broja oglasa-->
     <div class="container">
         <span class ='ml-4 mb-3'> 
-            Prikazani oglasi :  <b> <%-prikazaniPoslovi%> </b> / <%-ukupnoPoslova%>
+            Ukupno oglasa :  <b> <%-ukupnoPoslova%></b> 
         </span> 
     </div>
     <!-- /Prikaz broja oglasa -->
@@ -351,7 +351,7 @@
             <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#"><%-strana%></a></li>
             <!-- Trenutna -->
 
-            <%if(prikazaniPoslovi > 10){%>
+            <%if(prikazaniPoslovi >= 10){%>
             <!-- Sledeća -->
             <form action="/sve_kategorije/kategorija/<%-kategorija[0].id%>" method="GET" >
                 <button class="btn text-white bg-dark" name = 'strana' value= <%-sledecaStrana%> >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 

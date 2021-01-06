@@ -56,6 +56,22 @@ module.exports.vratiPoslove = (limit,offset) =>
     });
 }
 
+/** Vraća ukupan broj poslova */
+module.exports.vratiBrojPoslova = () =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `SELECT COUNT(*) as ukupno FROM poslovi`;
+
+        conn.query(query,(err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        });
+    });
+}
+
+
 /** Vraća sve poslove iz date kategorije sortirane po datumu ASC/DESC sa Limitom 10 i kljucnom rejcu za pretrazivanje  */
 module.exports.vratiPosloveIzKategorijeSort = (idKategorije, kljucneReci,strana, sortiranje) => //idKategorije, kljucnaRec, sortiranje
 {
@@ -119,6 +135,22 @@ module.exports.vratiPosloveIzKategorije = (idKategorije, kljucneReci, strana) =>
         });
     });
 }
+
+/** Vraća broj poslova iz kategorije */
+module.exports.vratibrojPoslovaIzKategorije = (kategorijaId) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `SELECT COUNT(*) as ukupno FROM poslovi WHERE kategorija_id = ?`;
+
+        conn.query(query,(kategorijaId),(err,result) =>
+        {
+            if (err)    rej(err);
+            else        res(result);
+        });
+    })
+}
+
 
 /** Vraća korisnike koji su postavili poslove u datu kategoriju */
 module.exports.vratiKorisnikeUKategoriji = (kategorijaId) =>

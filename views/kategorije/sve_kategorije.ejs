@@ -181,7 +181,7 @@
 
 
     <div class="container text-center"><h2>Sve kategorije</h2></div>
-    <div class="container">Prikazane kategorije : <b><%- prikazaneKategorije %></b> / <%-ukupnoKategorija%></div>
+    <div class="container">Ukupno kategorija : <b> <%-ukupnoKategorija%></b></div>
     <!-- Izlistavanje kategorije -->
     <div class="container mt-4 ">
 
@@ -287,7 +287,7 @@
         <ul class="pagination justify-content-center mt-5    ">
 
             <!-- Prethodna -->
-            <%if (strana != 1) {%>
+            <%if (strana > 1) {%>
             <form action="/sve_kategorije" method="GET" >
                
                 <button class="btn text-white bg-dark" name = 'strana' value= <%-prethodnaStrana%> >Prethodna</button> 
@@ -307,7 +307,7 @@
             <li class="page-item active "><a class="btn page-link text-warning bg-dark" href="#"><%-strana%></a></li>
             <!-- Trenutna -->
 
-            <% if (prikazaneKategorije > 9) {%>
+            <% if (prikazaneKategorije >= 9 ) {%>
             <!-- Sledeća -->
             <form action="/sve_kategorije" method="GET" >
                 <button class="btn text-white bg-dark" name = 'strana' value= <%-sledecaStrana%> >Sledeća&nbsp;&nbsp;&nbsp;&nbsp;</button> 

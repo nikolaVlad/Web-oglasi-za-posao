@@ -83,8 +83,8 @@ module.exports.getSviPoslovi = async(req, res) =>
             }
 
         // Računanje isčitanih i ukupan broj podataka
-            var ukupnoPoslova = await posloviModel.vratiPosloveIzKategorije("%%",[''],1);
-            
+            var ukupnoPoslova = await posloviModel.vratiBrojPoslova();
+            ukupnoPoslova = ukupnoPoslova[0].ukupno;
 
 
 
@@ -100,8 +100,8 @@ module.exports.getSviPoslovi = async(req, res) =>
         strana : trenutnaStrana,
         sledecaStrana : sledecaStrana,
         prethodnaStrana : prethodnaStrana,
-        ukupnoPoslova : ukupnoPoslova.length,
-        prikazaniPoslovi : poslovi.length * trenutnaStrana, 
+        ukupnoPoslova : ukupnoPoslova,
+        prikazaniPoslovi : poslovi.length, 
         ulogovaniKorisnik : ulogovaniKorisnik
     })
     
@@ -186,9 +186,8 @@ module.exports.getPosao = async (req,res) =>
         var prijaveKorisnici = await prijaveModel.vratiKorisnikeZaPosao(posao[0].id,trenutnaStrana);
 
      
-        // Ukupno korisnika prijavljenih za posao
-        var ukupno = await prijaveModel.vratiBrojPrijavljenihKorisnika(id);
-        var ukupno = ukupno.length;
+        // Vraćanje broja prijava za posao 
+        var ukupno = posao[0].br_prijava;
         
         
         // Vraćanje statusa prijave za korisnika koji se je pirjvaio za posao na koji je pristigao

@@ -74,7 +74,6 @@ module.exports.getKorisnik = async (req,res) =>
 {
     /** Role */
     var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
-    console.log(req.session.ulogovaniKorisnik.slika);
 
     // Ako korisnik nije ulogovan
     if(!ulogovaniKorisnik)
@@ -114,29 +113,6 @@ module.exports.getKorisnik = async (req,res) =>
         oglasiMeni = 'aktivni';
     }
 
- 
-    // Iscitavanje postavljenih i prijavljenih oglasa
-    var oglasi = ''
-    var ukupno = ''
-
-    /** Postavljeni (Aktivni) oglasi (poslovi):  */
-    if(oglasiMeni == 'aktivni')
-    {
-        // Prikaz oglasa koje je postavio određeni korisnik
-        oglasi = await posloviModel.vratiSvePosloveZaKorisnika(id,trenutnaStrana);
-        ukupno = await posloviModel.vratiSvePosloveZaKorisnika(id);
-    }
-
-    /** Prijavljeni oglasi(oglasi): */
-    else
-    {
-        // Prikaz oglasa na koje se prijavio određeni korisnilk
-        oglasi = await prijaveModel.vratiPrijavljenePosloveKorisnika(id,trenutnaStrana);
-        ukupno = await prijaveModel.vratiPrijavljenePosloveKorisnika(id);
-    }
-
-
-    
 
     /** Upit ka bazi za vraćanje korisnika */
     var korisnik = await korisniciModel.vratiKorisnika(id);
@@ -150,6 +126,36 @@ module.exports.getKorisnik = async (req,res) =>
 
     
 
+
+
+ 
+    // Iscitavanje postavljenih i prijavljenih oglasa
+    var oglasi = ''
+    var ukupno = ''
+
+    /** Postavljeni (Aktivni) oglasi (poslovi):  */
+    if(oglasiMeni == 'aktivni')
+    {
+        // Prikaz oglasa koje je postavio određeni korisnik
+        oglasi = await posloviModel.vratiSvePosloveZaKorisnika(id,trenutnaStrana);
+        ukupno = korisnik[0].br_postavljenih;
+    }
+
+    /** Prijavljeni oglasi(oglasi): */
+    else
+    {
+        // Prikaz oglasa na koje se prijavio određeni korisnilk
+        oglasi = await prijaveModel.vratiPrijavljenePosloveKorisnika(id,trenutnaStrana);
+        ukupno = korisnik[0].br_prijavljenih;
+    }
+
+
+    
+
+    
+
+    
+
     res.render('./korisnici/korisnik', {
                 title : 'Profil', 
                 korisnik : korisnik,
@@ -159,7 +165,7 @@ module.exports.getKorisnik = async (req,res) =>
                 strana : trenutnaStrana,
                 sledecaStrana : sledecaStrana,
                 prethodnaStrana : prethodnaStrana,
-                ukupno : ukupno.length,
+                ukupno : ukupno
             });
 }
 

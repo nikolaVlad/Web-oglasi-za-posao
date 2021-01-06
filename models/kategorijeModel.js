@@ -79,10 +79,10 @@ module.exports.vratiSveKategorije = (pretrazi, sortiraj, offset, limit) =>
                         * FROM kategorije
                         WHERE naziv LIKE'%${pretrazi}%'
                         ORDER BY naziv ${sortiraj}
-                        LIMIT ? , ? `
+                        LIMIT ? , 9 `
 
-        offset = (offset  * 10)-10; 
-        conn.query(query,[offset,limit], (err,result)=>
+        offset = (offset  * 9) - 9; 
+        conn.query(query,[offset], (err,result)=>
         {
             console.log(query);
             if (err)    rej(err);

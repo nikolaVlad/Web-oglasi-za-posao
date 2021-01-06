@@ -45,7 +45,12 @@ module.exports.postLogIn = async(req,res) =>
             lozinka : lozinka
         }
         
-        res.render('./log_reg/login',{title:'Uloguj se' , obavestenje : '', greska : greska})
+        res.render('./log_reg/login',{
+                    title:'Uloguj se' , 
+                    obavestenje : '', 
+                    greska : greska,
+                    ulogovaniKorisnik : req.session.ulogovaniKorisnik    
+                })
     }
 
 
@@ -64,7 +69,7 @@ module.exports.postLogIn = async(req,res) =>
                 lozinka : lozinka
             }
             
-            res.render('./log_reg/login',{title:'Uloguj se' , obavestenje : '', greska : greska})
+            res.render('./log_reg/login',{title:'Uloguj se' , obavestenje : '', greska : greska, ulogovaniKorisnik : req.session.ulogovaniKorisnik    })
         }
 
         // Isptavno - Loguje se korisnik u sesiji
