@@ -215,14 +215,25 @@
 
                     <!-- @Izlistavanje poslova -->
                         <% for(posao of poslovi){ %>
-                        <div class="col-lg-4 sm-1 mb-3 mt-3" >
-                            <div class="posao-card">
-                                <i class="far fa-file-code" style="font-size: 30px; color: rgb(255, 230, 0);"></i>
-                                <!-- Naziv posla -->
-                                <a href='/svi_poslovi/posao/<%-posao.id%>'><h5><%- posao.naziv %></h5></a>
-                                <!-- Kratak opis posla -->
-                                <p class="small "> <%- posao.kratak_opis %></p>
-                            </div>
+                        <div class="col-lg-4 col-sm-12 mb-3 mt-3 justify-content-center d-flex" 
+                        style="cursor: pointer;" 
+                        onclick="window.location.href = '/svi_poslovi/posao/<%-posao.id%>'"
+                        >
+                            <div class="card bg-dark posao-card " style="width: 18rem; min-height: 15rem;">
+                                <div class="card-body">
+                                    <h6 class="card-title" style="color: rgb(0, 152, 169);">
+                                        <i class="far fa-file-code" style="font-size: 20px; color: rgb(255, 230, 0);"></i>
+                                        <%-posao.naziv%>
+                                    </h6>
+                                    <hr style="background-color: rgb(0, 0, 0);">
+                                  <h6 class="card-subtitle mb-2 text-muted small">Datum</h6>
+                                  <p class="card-text">Kratak opis:  
+                                      <%-posao.kratak_opis%>...   </p>
+                                  
+                                 
+                                
+                                </div>
+                              </div>
                         </div>
                         <%}%>
                     <!-- /@Izlistavanje poslova-->    
@@ -247,6 +258,16 @@
     <%}%>
 
     
+   
+
+
+
+
+
+
+
+
+
     <!-- Footer -->
     <div class="container-fluid fixed-bottom footer small">
         <!-- Linija -->

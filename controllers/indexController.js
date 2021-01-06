@@ -25,6 +25,12 @@ module.exports = async (req, res)=>
         obavestenje = true;
     }
 
+    // Modifikacija kratkog opis za svakog posla : 67
+    for(posao of poslovi)
+    {
+        posao.kratak_opis = posao.kratak_opis.slice(0,67);
+    }
+
 
 
     res.render('index', {

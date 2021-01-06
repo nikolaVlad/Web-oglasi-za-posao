@@ -200,20 +200,15 @@ body
 /* ? Poslovi */
 .posao-card
 {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.39);
-    font-size: 18px;
-    background-color: rgba(139, 139, 139, 0.39);
-    border-radius: 20px;
-    padding: 1rem;
+    border-radius: 30px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.123);
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.63);
+    
     color: rgb(255, 255, 255);
-    transition: all 0.5s;
 }
 
-.posao-card:hover
-{
-    transform: scale(1.1);
-    transition: all 0.5s;
-}
+
 
 
 .posao-card a
