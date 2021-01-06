@@ -186,8 +186,8 @@
                     <!-- Buttons -->
                     <div class="col-12">
                         <section>
-                            <a href = '/svi_poslovi/novi_posao' class="btn btn-success">Postavi oglas</a>
-                            <a href = '/svi_poslovi' class="btn btn-primary">Pronađi posao</a>
+                            <a href = '/svi_poslovi/novi_posao' class="btn btn-lg btn-success">Postavi oglas</a>
+                            <a href = '/svi_poslovi' class="btn btn-lg btn-primary">Pronađi posao</a>
                         </section>
                     </div>
                     <!-- /Buttons-->
@@ -219,15 +219,19 @@
                         style="cursor: pointer;" 
                         onclick="window.location.href = '/svi_poslovi/posao/<%-posao.id%>'"
                         >
-                            <div class="card bg-dark posao-card " style="width: 18rem; min-height: 15rem;">
+                            <div class="card bg-dark posao-card " style="width: 23rem; min-height: 13rem;">
                                 <div class="card-body">
                                     <h6 class="card-title" style="color: rgb(0, 152, 169);">
                                         <i class="far fa-file-code" style="font-size: 20px; color: rgb(255, 230, 0);"></i>
                                         <%-posao.naziv%>
                                     </h6>
                                     <hr style="background-color: rgb(0, 0, 0);">
-                                  <h6 class="card-subtitle mb-2 text-muted small">Datum</h6>
-                                  <p class="card-text">Kratak opis:  
+                                  <h6 class="card-subtitle mb-2 text-muted small">
+                                      <%-posao.datum%><br>
+                                      Br prijava : <span class="text-warning"><%-posao.br_prijava%></span>
+                                
+                                  </h6>
+                                  <p class="card-text">
                                       <%-posao.kratak_opis%>...   </p>
                                   
                                  
@@ -269,14 +273,14 @@
 
 
     <!-- Footer -->
-    <div class="container-fluid fixed-bottom footer small">
+    <div class="container-fluid fixed-bottom small " style="background-color:  #142a4d;; margin: 1px; padding: 10px; border-top: rgb(117, 117, 117) 2px solid;">
         <!-- Linija -->
-        <hr class='bg-white'>
+      
         <div class="row text-center">
-            <div class="col-lg-4 col-sm-4 text-secondary">
+            <div class="col-lg-4 col-sm-4 text-">
                 nikolavlad63@gmail.com
             </div>
-            <div class="col-lg-4 col-sm-4 text-secondary">
+            <div class="col-lg-4 col-sm-4 text">
                 Web oglasi za posao - 2020 <sup>&copy</sup> 
             </div>
             

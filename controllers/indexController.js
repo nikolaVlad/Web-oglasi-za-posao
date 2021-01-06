@@ -25,10 +25,12 @@ module.exports = async (req, res)=>
         obavestenje = true;
     }
 
-    // Modifikacija kratkog opis za svakog posla : 67
+    // Modifikacija kratkog opis za svakog posla : 67, datuma, naziv
     for(posao of poslovi)
     {
         posao.kratak_opis = posao.kratak_opis.slice(0,67);
+        posao.datum = (posao.datum + '').slice(0,25);
+        posao.naziv = posao.naziv.slice(0,60);
     }
 
 
