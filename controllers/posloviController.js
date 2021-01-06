@@ -158,7 +158,7 @@ module.exports.getPosao = async (req,res) =>
         // U slucaju da posao ne postoji
         if(posao.length == 0)
         {
-            res.render('error_404',{title : 'Page not foint - wop'});
+            res.render('error_404',{title : 'Page not foint - wop',ulogovaniKorisnik : ulogovaniKorisnik});
         }
     
 
@@ -320,7 +320,8 @@ module.exports.postNoviPosao = async(req,res) =>
             greska : greska,
             title : 'Novi oglas',
             sveKategorije : sveKategorije,
-            kategorijaId : kategorijaId
+            kategorijaId : kategorijaId,
+            ulogovaniKorisnik : ulogovaniKorisnik
        })
     }
 
@@ -464,7 +465,8 @@ module.exports.postIzmenaPosla = async (req,res) =>
                 posao : posao,
                 greska : greska,
                 sveKategorije : sveKategorije,
-                kategorijaId : kategorijaId
+                kategorijaId : kategorijaId,
+                ulogovaniKorisnik : ulogovaniKorisnik
             })
         }
     }

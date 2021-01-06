@@ -291,3 +291,23 @@ module.exports.obrisiPrijaveZaPosao = (posaoId) =>
         });
     })
 }
+
+
+
+/** Vraća sve prijavljene korisnike na poslove iz kategorije selektovane pomoću Id */
+module.exports.vratiPrijavljeneKorisnikeUKategoriji = (kategorijaId) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `   SELECT prijave.korisnik_id
+                        FROM prijave INNER JOIN poslovi
+                        ON prijave.posao_id = poslovi.id
+                        WHERE poslovi.kategorija_id = ?
+                    `
+        conn.query(query,[kategorijaId],(err,result) =>
+        {
+            if (err)    rej(err);
+            else        res(result);
+        });
+    });
+}

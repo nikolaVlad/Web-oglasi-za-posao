@@ -104,7 +104,7 @@
     <div class = 'container bg'>
         <div class=" row text-right" >
             <div class="col-xl-12">
-                <a href="/svi_poslovi/novi_posao?kategorijaId=<%=kategorija[0].id%>" style=" color : white" class=""><i class="fas fa-plus text-success" ></i> Dodaj oglas</a>
+                <a href="/svi_poslovi/novi_posao?kategorijaId=<%=kategorija[0].id%>" style=" color : white" ><i class="fas fa-plus text-success" ></i> Dodaj oglas</a>
                 <a href ="/sve_kategorije" class="m-3" style="color: white;"><i class="fas fa-border-all text-warning"></i></i> Vidi sve kategorije</a>
             </div>
             <hr>
@@ -113,10 +113,10 @@
             <% if(ulogovaniKorisnik) {%>
                 <% if (ulogovaniKorisnik.rola == 'admin'){%>
                 <div class="d-flex">
-                    <a href ="/sve_kategorije/kategorija/<%-kategorija[0].id%>/izmena_kategorije" class="btn btn-outline-dark" style="color: white;"><i class="fas fa-edit " style="color : rgb(0, 204, 255)"></i> Izmeni kategoriju</a>
+                    <a href ="/sve_kategorije/kategorija/<%-kategorija[0].id%>/izmena_kategorije" class="btn" style="color: white;"><i class="fas fa-edit " style="color : rgb(0, 204, 255)"></i> Izmeni kategoriju</a>
                     
                     <form class="form form-inline" action="/sve_kategorije/kategorija/<%-kategorija[0].id%>/brisanje_kategorije" method="POST">
-                        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modalObrisiKategoriju" style="color: white; "><i class="fas fa-trash" style="color : rgb(255, 64, 64)"></i> Obriši kategoriju</button>
+                        <button type="button" class="btn " data-toggle="modal" data-target="#modalObrisiKategoriju" style="color: white; "><i class="fas fa-trash" style="color : rgb(255, 64, 64)"></i> Obriši kategoriju</button>
                     
                     
                         <!-- Modal za brisanje -->

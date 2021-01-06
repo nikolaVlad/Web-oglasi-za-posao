@@ -42,7 +42,10 @@ module.exports.getSviKorisnici = async (req, res)=>
 
 
     // Ako korisnik nije ulogovan
-
+    if(!ulogovaniKorisnik)
+    {
+        res.redirect('/logIn');
+    }
 
 
     /** Upit za izlistavanje svih korisnika sa limitom i offsetom sortirani po ABC */
@@ -61,7 +64,8 @@ module.exports.getSviKorisnici = async (req, res)=>
         prethodnaStrana : prethodnaStrana,
         sledecaStrana : sledecaStrana,
         ukupno : ukupno,
-        ucitani : korisnici.length
+        ucitani : korisnici.length,
+        ulogovaniKorisnik : ulogovaniKorisnik
         });
 }
 
@@ -141,7 +145,7 @@ module.exports.getKorisnik = async (req,res) =>
     // Ako korisnik ne postoji 
     if(korisnik.length == 0)
     {
-       return res.render('error_404',{title : 'Page not found - wop'});
+       return res.render('error_404',{title : 'Page not found - wop', ulogovaniKorisnik : ulogovaniKorisnik});
     }
 
     
@@ -255,7 +259,8 @@ module.exports.postIzmenaProfila = async (req, res) =>
         res.render(`korisnici/izmena_korisnika`, {
             title : 'Izmena profila',
             greska : greska,
-            korisnik : korisnik
+            korisnik : korisnik,
+            ulogovaniKorisnik : ulogovaniKorisnik
         });
 
     }
@@ -502,7 +507,18 @@ module.exports.postSlika = async (req,res) =>
 
     // Redirektovanje korisnika na početnoj strani ako je tu 1. put
     if(req.session.prviPut == true)
-        res.redirect('/');
+    {
+        req.session.save( function(err) 
+        {
+            req.session.reload( function (err) 
+            {
+                req.session.ulogovaniKorisnik.slika = slika;
+                res.redirect('/');
+            });
+        });
+
+    }
+       
    
     // U suprotnom redirektovanje korisnika na starnici svog profila
     else 

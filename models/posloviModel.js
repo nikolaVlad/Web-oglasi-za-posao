@@ -120,6 +120,24 @@ module.exports.vratiPosloveIzKategorije = (idKategorije, kljucneReci, strana) =>
     });
 }
 
+/** Vraća korisnike koji su postavili poslove u datu kategoriju */
+module.exports.vratiKorisnikeUKategoriji = (kategorijaId) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `SELECT korisnik_id FROM poslovi WHERE kategorija_id = ?`;
+
+        conn.query(query,[kategorijaId],(err,result) =>
+        {
+            if (err)    rej(err);
+            else        res(result);
+        });
+
+    });
+}
+
+
+
 
 /** Vraća 1 posao selektovan pomoću id-a */
 module.exports.vratiPosao = (id) =>

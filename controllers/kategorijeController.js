@@ -2,7 +2,7 @@
 var kategorijeModel = require('../models/kategorijeModel');
 var posloviModel = require('../models/posloviModel')
 var prijaveModel = require('../models/prijaveModel');
-
+var korisniciModel = require('../models/korisniciModel');
 
 
 
@@ -108,7 +108,7 @@ module.exports.getKategorija = async (req, res) =>
 
     if(kategorija.length == 0)
     {
-        res.end('Izabrana kategorija ne postoji !');
+        res.render('error_404.ejs',{title:'Page not found - wop', ulogovaniKorisnik : ulogovaniKorisnik});
     }
 
     // Vracanje poslova iz baze za kategoriju na kojoj je prostoigao korisnik
@@ -189,10 +189,15 @@ module.exports.getIzmenaKategorije = async(req,res) =>
     // Proveravanje rezultata
     if(kategorija.length == 0)
     {
-        res.end('Izabrana kategorija ne postoji ili je obrisana.');
+        res.render('error_404.ejs',{title:'Page not found - wop',ulogovaniKorisnik : ulogovaniKorisnik});
     }
 
-    res.render('./kategorije/izmena_kategorije', {title : 'Izmena kategorije', kategorija : kategorija, greska : ''});
+    res.render('./kategorije/izmena_kategorije', {
+        title : 'Izmena kategorije', 
+        kategorija : kategorija, 
+        greska : '',
+        ulogovaniKorisnik : ulogovaniKorisnik
+    });
 }
 
 
@@ -217,8 +222,6 @@ module.exports.postIzmenaKategorije = async(req,res) =>
     // Provera da li je ulogovani korisnik kao admin
     if(ulogovaniKorisnik.rola != 'admin')
     {
-        console.log(ulogovaniKorisnik.rola);
-        console.log('desio se');
         res.redirect(`/sve_kategorije/kategorija/${id}`);
     }
 
@@ -238,7 +241,8 @@ module.exports.postIzmenaKategorije = async(req,res) =>
         return res.render('./kategorije/izmena_kategorije', {
             title : 'Izmena kategorije', 
             greska : 'Kategorija sa ovim nazivom već postoji!',
-            kategorija : kategorija
+            kategorija : kategorija,
+            ulogovaniKorisnik : ulogovaniKorisnik
             });
     }
 
@@ -281,7 +285,11 @@ module.exports.getNovaKategorija = async(req,res) =>
     }
 
 
-    res.render('./kategorije/nova_kategorija', {title : 'Nova kategorija', greska: ''});
+    res.render('./kategorije/nova_kategorija', {
+        title : 'Nova kategorija', 
+        greska: '',
+        ulogovaniKorisnik : ulogovaniKorisnik
+    });
 }
 
 
@@ -289,6 +297,10 @@ module.exports.getNovaKategorija = async(req,res) =>
 /** POST /sve_kategorije/nova_kategorija */ 
 module.exports.postNovaKategorija = async (req,res) =>
 {
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+
+
     // Dobijanje podataka iz forme 
     var naziv =       req.body.naziv
     var kratakOpis =  req.body.kratakOpis;
@@ -309,7 +321,8 @@ module.exports.postNovaKategorija = async (req,res) =>
         return res.render('./kategorije/nova_kategorija',{
             title : 'Nova kategorija', 
             greska : 'Kategorija sa ovim nazivom već postoji!',
-            kategorija : kategorija
+            kategorija : kategorija,
+            ulogovaniKorisnik : ulogovaniKorisnik
         });
     }
 
@@ -332,7 +345,7 @@ module.exports.obrisiKategoriju = async (req, res) =>
     var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
     
 
-    // Uzimanja id kategorije za brisanje iz forme
+    // Uzimanja id kategorije za brisanje iz URL putanje
     var id = req.params.id;
 
 
@@ -350,6 +363,11 @@ module.exports.obrisiKategoriju = async (req, res) =>
     }
 
 
+    /** Uzimanje korisnika koji su postavili poslove u kategorije za brisanje */
+        var korisniciPostavili = await posloviModel.vratiKorisnikeUKategoriji(id);
+    
+    /** Uzimanje korisnika koji su se prijavili na poslove u kategoriji za brisanje*/
+        var korisniciPrijavili = await prijaveModel.vratiPrijavljeneKorisnikeUKategoriji(id);
 
     /** Brisanje prijava za poslove iz te kategorije */
         console.log(await prijaveModel.obrisiPrijaveZaPosloveIzKategorije(id));
@@ -360,6 +378,18 @@ module.exports.obrisiKategoriju = async (req, res) =>
     /** Brisanje kategorije */
         console.log(await kategorijeModel.obrisiKategoriju(id));
 
+    /** Ažuriranje poslja br_prijavljenih poslova za svakog korisnika */
+        for(korisnik of korisniciPrijavili)
+        {
+            await korisniciModel.azurirajBrPrijavljenihZaKorisnika(korisnik.korisnik_id);
+        }
+
+    /** Ažuriranje poslja br_postavljenih poslova za svakog korisnika */
+        for(korisnik of korisniciPostavili)
+        {
+            await korisniciModel.azurirajBrPostavljenihZaKorisnika(korisnik.korisnik_id);
+        }
+    
     res.redirect('/sve_kategorije');
 }
 

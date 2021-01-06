@@ -4,75 +4,101 @@
 
 
 <body class = 'eror-page'>
-  
+
     <!--Navigacija-->
-    <div class="navigation fixed-top">
-       <div class="container-fluid" >
-           <!--Navbar-->
-           <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <div class="navigation fixed-top">
+        <div class="container-fluid" >
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+               
+                <!--Logo-->
+                <div>
+                    <a href = '/'>
+                       <img class="navbar-brand logoSlika" src = '/images/site/WOPlogo.svg'></img>
+                    </a>
+                </div>
+                
+                         
+  
+  
               
-               <!--Logo-->
-               <a class="navbar-brand" href="#">
-                   <b >Web oglasi za posao</b>
-               </a>
-               
-                        
-
-
-             
-
-               <!--Ostali deo menia-->
-               <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-                   <!--Pretrazivac-->
-                   <form class="form-inline" action ='' method=''>
-                   <input class="form-control mr-sm-2" style="background-color: rgba(28, 26, 61, 0.123); color: aliceblue;" type="search" placeholder="Pratraži poslove" aria-label="Search">
-                   </form>    
-                   <!-- /Pretrazivac--> 
-
-                 <div class="navbar-nav ml-auto">
-                     
-                   <a class="nav-item nav-link active" href="#">Početna <span class="sr-only">(current)</span></a>
-                   <a class="nav-item nav-link " href="#">O nama</a>
-                   <!--  Deo koji gost vidi  -->
-                   <a class="nav-item nav-link" href="#">Prijavi se</a>
-                   <a class="nav-item nav-link" href="#" style="color : rgb(0, 153, 255)">Registruj se</a>
-                   <!--/End-->
-                 </div>
-               </div> 
-               <!--/Ostali deo menija-->
-
-               <!--Deo koji gost ne vidi-->
-                   <!--Dropdown avatara-->
-                   <div class="dropdown show">
-                       <img class="avatar" src = '../static/img/avatar.jpg' href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   </img>
-                       <div class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
-                           <a class="dropdown-item text-black" href="#">Moj profil</a>
-                           <a class="dropdown-item text-danger" href="#">Odjavi se</a>
-                         </div>
-                   </div>
-                   <!-- /Dropdown avatar-->
-               <!-- /Deo koji gost ne vidi-->    
-
-               <!-- Button response -->
-
-               <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
-                   <span class="navbar-toggler-icon"></span>
-               </button>
-
-                <!-- /Button response -->
-                  
-               
-               
-             </nav>
-           <!--/Navbar--> 
-           
-       </div>
-       <!--/Container-->
-       <!-- Razdvajanje menija od sadrzaja-->
-   </div>
-   <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
-
+  
+                <!--Ostali deo menia-->
+                <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+                    <!--Pretrazivac-->
+                    <form class="form-inline" action ='/svi_poslovi' method='GET'>
+                        <input class="form-control  mr-sm-5" style="background-color: rgba(28, 26, 61, 0.123); color: aliceblue; width: 20rem;" type="search" placeholder="Pratraži poslove" aria-label="Search" name='kljucneReci'>
+                    </form>    
+                    <!-- /Pretrazivac--> 
+  
+                  <div class="navbar-nav ml-auto">
+                      
+                    <a class="nav-item nav-link" href="/">Početna</a>
+                    <a class="nav-item nav-link " href="/o_nama">O nama</a>
+                    <!--  Deo koji gost vidi  -->
+                    <% if(!ulogovaniKorisnik) { %>
+                    <a class="nav-item nav-link" href="/logIn">Prijavi se</a>
+                    <a class="nav-item nav-link" href="/registracija" style="color : rgb(0, 153, 255)">Registruj se</a>
+                    <!-- /Deo koji gost vidi -->
+                    <%}%>
+                  </div>
+                </div> 
+                <!--/Ostali deo menija-->
+  
+                <% if (ulogovaniKorisnik) {%>
+                <!--Deo koji gost ne vidi-->
+                    <!--Dropdown avatara-->
+                    <div class="dropdown show">
+                    
+                        <img class="avatar" 
+  
+                            <% if (ulogovaniKorisnik.slika != '') { %>
+                                src = '/images/uploads/korisnici/<%-ulogovaniKorisnik.slika%>' 
+                            <% } else { %>
+                                src = '/images/site/noPhoto.jpg' 
+                            <% } %>
+  
+                            href="#" role="button" id="dropdownMenuLink" 
+                            data-toggle="dropdown" aria-haspopup="true" 
+                            aria-expanded="false">
+                        </img>
+  
+  
+  
+                        <div class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item text-black" href="/svi_korisnici/profil/<%-ulogovaniKorisnik.id%>">Moj profil</a>
+                            
+                            <% if (ulogovaniKorisnik.rola == 'admin') {%>
+                                <a class="dropdown-item text-black" href="/svi_korisnici">Vidi sve profile</a>
+                            <% } %>
+                            <a class="dropdown-item text-danger" href="/logOut">Odjavi se</a>
+                            
+                          </div>
+                    </div>
+                    <!-- /Dropdown avatar-->
+                <!-- /Deo koji gost ne vidi-->    
+                <% } %>
+                
+                <!-- Button response -->
+  
+                <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+  
+                 <!-- /Button response -->
+                   
+                
+                
+              </nav>
+            <!--/Navbar--> 
+            
+        </div>
+        <!--/Container-->
+        <!-- Razdvajanje menija od sadrzaja-->
+         </div>
+    <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
+  
+  
 
    <!-- Sadržaj stranice -->
    <div class="container">
@@ -86,26 +112,26 @@
 
 
 
-   <!-- Footer -->
-   <div class="container-fluid fixed-bottom footer">
-       <!-- Linija -->
-       <hr class='bg-white'>
-       <div class="row text-center">
-           <div class="col-lg-4 col-sm-4 text-secondary">
-               nikolavlad63@gmail.com
-           </div>
-           <div class="col-lg-4 col-sm-4 text-secondary">
-               Web oglasi za posao - 2020 <sup>&copy</sup> 
-           </div>
-           
-           <div class="col-lg-4 col-sm-4">
-               <a href=""><i class="fab fa-instagram ml-3" style="color:blueviolet"></i></a>
-               <a href=""><i class="fab fa-facebook ml-3"></i></a>
-               <span class = 'text-secondary'><i class="fas fa-phone-alt ml-3"></i> 0123-456</span> 
-           </div>
-       </div>
-   </div>
-   <!-- Footer -->
+    
+    <!-- Footer -->
+    <div class="container-fluid fixed-bottom footer small">
+        <!-- Linija -->
+        <hr class='bg-white'>
+        <div class="row text-center">
+            <div class="col-lg-4 col-sm-4 text-secondary">
+                nikolavlad63@gmail.com
+            </div>
+            <div class="col-lg-4 col-sm-4 text-secondary">
+                Web oglasi za posao - 2020 <sup>&copy</sup> 
+            </div>
+            
+            <div class="col-lg-4 col-sm-4">
+                <a href="https://instagram.com/__nik0lv?igshid=1lzhwdmj6zw2o&amp;fbclid=IwAR3qzJemENnY9hk63ATgLgRVBJM-xfb940iFVN8ZRxBRqSKJ6kYHrtHd25A"><i class="fab fa-instagram ml-3" style="color:blueviolet"></i></a>
+                <a href="https://www.facebook.com/nikola.vladimirov.589/"><i class="fab fa-facebook ml-3"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
 
 
 
