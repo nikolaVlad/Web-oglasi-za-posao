@@ -109,11 +109,22 @@
 
             <!-- Lozinka -->
                 <label>Lozinka</label>
-                <input type="password" class="form-control center-style" name = 'lozinka'
+                <input type="password" class="form-control center-style" name = 'lozinka' id ='logInLozinka'
                 <% if(greska.textLozinka != ''){%>
                     value = '<%-greska.lozinka%>' 
                 <%}%>
                 >
+            
+            <!-- Prikazi/sakrij lozinku-->
+                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password text-warning" onclick="prikaziSakrij()">
+
+                </span>
+                
+
+            <!-- /Prikazi/sakrij lozinku-->
+
+
+
             <!-- /Lozinka -->
             <!-- Greska neispravan email-->
                 <%if (greska.textLozinka != '') {%> 

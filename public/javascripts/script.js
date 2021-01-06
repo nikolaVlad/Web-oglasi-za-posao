@@ -11,3 +11,22 @@
     });
 
 
+/** Prikazi/Sakrij lozinku */
+  var i = 0;
+  var prikaziSakrij = () =>
+  {
+    
+
+    if(i == 0)
+    {  
+        $("#logInLozinka").attr('type','text');
+        i = 1;
+    }
+    else
+    {
+        $("#logInLozinka").attr('type','password');
+        i = 0;
+    }
+
+
+  }

@@ -130,7 +130,7 @@ app.use(session({
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.render('error_404', {title : 'Page not found - wop'});
+  res.render('error_404', {title : 'Page not found - wop',ulogovaniKorisnik : req.session.ulogovaniKorisnik});
 });
 
 
