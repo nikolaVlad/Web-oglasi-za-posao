@@ -541,3 +541,35 @@ module.exports.postSlika = async (req,res) =>
        
     }
 }
+
+/** POST /svi_korisnici/profil/<id>/rola */
+module.exports.postRola = async (req,res) =>
+{
+    /** Role */
+    var ulogovaniKorisnik = req.session.ulogovaniKorisnik;
+    
+    // Ako se desi da ulogovani korisnik nije admin (ili nije ulogovan)
+    if(!ulogovaniKorisnik || ulogovaniKorisnik.rola != 'admin')
+    {
+        res.redirect('/');
+    }
+
+    // Uzimanje role korisnika
+    var id = req.params.id;
+
+    // Vraćanje korisnika
+    var korisnik = await korisniciModel.vratiKorisnika(id);
+
+    // Uzimanje role korisnika
+    var rola = korisnik[0].rola;
+
+    // Promena role
+    rola = (rola == 'admin') ? 'korisnik' : 'admin';
+
+    console.log('Nova rola : ' + rola);
+
+    /** Upit bazi za promenu role korisnika  */
+        await korisniciModel.promeniRoluKorisnika(id,rola);
+    
+    res.redirect('/svi_korisnici');
+}

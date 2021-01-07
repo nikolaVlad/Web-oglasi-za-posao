@@ -198,3 +198,21 @@ module.exports.azurirajBrPostavljenihZaKorisnika = (korisnikId) =>
         });
     });
 }
+
+/** Promena role korisnika */
+module.exports.promeniRoluKorisnika = (korisnikId, novaRola) =>
+{
+    return new Promise((res,rej) =>
+    {
+        var query = `   UPDATE korisnici 
+                        SET rola = ?
+                        WHERE id = ? 
+                    `
+
+        conn.query(query,[novaRola,korisnikId],(err,result) =>
+        {
+            if(err)     rej(err);
+            else        res(result);
+        });
+    });
+}

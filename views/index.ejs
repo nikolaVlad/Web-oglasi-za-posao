@@ -136,13 +136,13 @@
 
 
     <!-- Kategorije -->
-    <div class='kategorije  ' style="border-top: 1px solid rgb(255, 208, 0); ">
+    <div class='kategorije ' style="border-top: 1px solid rgb(255, 208, 0); ">
         <div class= 'container ' >
             <div class = 'row'>
 
                 <!-- @Izlistavanej kategorija-->
                 <% for (kategorija of kategorije){ %>
-                    <div class="col-3">
+                    <div class="col-3 ">
                         <a href = '/sve_kategorije/kategorija/<%- kategorija.id %>'>
                            <!-- Naziv kategorije -->
                            <%- kategorija.naziv%>

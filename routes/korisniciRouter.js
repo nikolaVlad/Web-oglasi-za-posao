@@ -25,13 +25,14 @@ router.post('/profil/:id/brisanje_profila', korisniciController.postBrisanjeProf
 
 // Dodavanje slike
 
-/** Get /svi_korisnici/profil/:id/ */
+/** Get /svi_korisnici/profil/<id>/slika */
 router.get('/profil/:id/slika', korisniciController.getSlika);
 
-/**  POST /svi_korisnici/profil/:id/ */ 
+/**  POST /svi_korisnici/profil/<id>/slika */ 
 router.post('/profil/:id/slika', korisniciController.postSlika);
 
-
+/** POST /svi_korisnici/profil/<id>/rola */
+router.post('/profil/:id/rola', korisniciController.postRola);
 
 
 module.exports = router;

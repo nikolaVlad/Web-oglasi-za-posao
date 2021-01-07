@@ -64,7 +64,7 @@ module.exports.postLogIn = async(req,res) =>
             var greska = 
             {
                 textEmail : '',
-                textLozinka : 'Neistavna lozinka!',
+                textLozinka : 'Neispravna lozinka!',
                 email : email,
                 lozinka : lozinka
             }

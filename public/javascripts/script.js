@@ -1,5 +1,7 @@
 
 
+
+
 /** Dodavanje slike na kod registracije  */
     $("#slika").on("change", function (e) {
     var reader = new FileReader();
@@ -10,6 +12,7 @@
     reader.readAsDataURL(file);
     });
 
+    
 
 /** Prikazi/Sakrij lozinku */
   var i = 0;
@@ -32,7 +35,7 @@
 
 
 
-  /** Posalji mejl */
+  /** Posalji mejl na kontakt stranici */
   var posaljiMejl = () =>
   {
 
@@ -41,3 +44,27 @@
     var ime = $("#ime").val() + '/n';
     window.open(`mailto:nikolavlad63@gmail.com?subject=${subject}&ime=${ime}&body=${body}`);
   }
+
+
+ 
+  /** Detektovanje caps-lock-a */
+  var lozinka =  document.getElementById('logInLozinka');
+  var capsObavestenje = document.getElementById('capsObavestenje');
+
+
+  lozinka.addEventListener('keyup',(event) =>
+  {
+      
+      // Ako je ukljucen caps-lock
+      if(event.getModifierState("CapsLock"))
+      {
+          capsObavestenje.style.visibility = "";
+      }
+
+      else
+      {
+          capsObavestenje.style.visibility = "hidden"
+         
+      }
+
+  });
