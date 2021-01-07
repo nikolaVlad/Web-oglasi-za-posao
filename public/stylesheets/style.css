@@ -6,14 +6,17 @@ body
     color: white;
     margin-top: 90px;
     margin-bottom: 130px;
+    background-image : url('../images/site/bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;     
     
 }
 
 
 .footer
 {
-    background-color: #142a4d;;
-    padding-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.822);
 }
 
 
@@ -90,7 +93,7 @@ body
 /* ? Navigacija */
 .navigation
 {
-    box-shadow: 0px 0px 20px rgba(255, 125, 4, 0.527);
+    box-shadow: 0px 0px 20px rgba(255, 125, 4, 0.295);
     background-color: #343a40!important;
     
 }
@@ -136,12 +139,13 @@ body
   .kategorije
   {
       height: 30px;
-      box-shadow: 0px 0px 10px rgba(51, 0, 0, 0.342);
+      box-shadow: 0px 0px 10px rgb(51, 0, 0);
+      background-color: rgb(41, 41, 41);
   }
 
   .kategorije a
   {
-      color: orange;
+      color: rgb(255, 255, 255);
   }
 
 .kategorije a:hover
@@ -155,9 +159,9 @@ body
 
 .header-img
 {
-    background-image : url('../images/site/headPic.jpg');
+   
     
-    height: 20rem;
+    height: 24rem;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -168,7 +172,7 @@ body
 .senka
 {
   border-radius: 30px ;
-  background-color: rgba(0, 0, 0, 0.158);
+  background-color: rgba(0, 48, 59, 0.171);
 }
 
 

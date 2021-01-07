@@ -46,7 +46,7 @@ module.exports.getSviPoslovi = async(req, res) =>
 
     /** Izlistavanje poslova */
         // U slucaju da nije izabrana kategorija
-        if(typeof kategorijaId == 'undefined' || kategorijaId == 'sve')
+        if(typeof kategorijaId == 'undefined' || kategorijaId == 'sve' || kategorijaId =='')
         {
             // Izlistaj poslove iz svih kategorija, odnosno sve poslove
             if(sortiranje == 'desc' || sortiranje == 'desc')
