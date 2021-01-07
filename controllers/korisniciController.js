@@ -165,7 +165,8 @@ module.exports.getKorisnik = async (req,res) =>
                 strana : trenutnaStrana,
                 sledecaStrana : sledecaStrana,
                 prethodnaStrana : prethodnaStrana,
-                ukupno : ukupno
+                ukupno : ukupno,
+                prikazaniOglasi : oglasi.length
             });
 }
 

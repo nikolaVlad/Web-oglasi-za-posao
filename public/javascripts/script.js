@@ -27,6 +27,17 @@
         $("#logInLozinka").attr('type','password');
         i = 0;
     }
+  }
 
 
+
+
+  /** Posalji mejl */
+  var posaljiMejl = () =>
+  {
+
+    var body =  $("#poruka").val();
+    var subject = $("#naslov").val();
+    var ime = $("#ime").val() + '/n';
+    window.open(`mailto:nikolavlad63@gmail.com?subject=${subject}&ime=${ime}&body=${body}`);
   }

@@ -43,6 +43,9 @@ const session = require('express-session');
     /** LogOut */
     var logOutRouter = require('./routes/logOutRouter');
 
+    /** Kontakt */
+    var kontaktRouter = require('./routes/kontaktRouter');
+
 // end Ruteri----------------------------------------------
 
 
@@ -121,6 +124,9 @@ app.use(session({
 
     // logOut
     app.use('/logOut', logOutRouter);
+
+    // kontakt
+    app.use('/kontakt',kontaktRouter);
 
 // end Rute
 

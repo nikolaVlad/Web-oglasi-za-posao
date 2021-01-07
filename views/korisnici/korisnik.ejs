@@ -35,6 +35,7 @@
                       
                     <a class="nav-item nav-link" href="/">Početna</a>
                     <a class="nav-item nav-link " href="/o_nama">O nama</a>
+                    <a class="nav-item nav-link " href="/kontakt">Kontakt</a>
                     <!--  Deo koji gost vidi  -->
                     <% if(!ulogovaniKorisnik) { %>
                     <a class="nav-item nav-link" href="/logIn">Prijavi se</a>
@@ -240,7 +241,7 @@
                                 <!-- Prethodna -->
                                 <form action="/svi_korisnici/profil/<%-korisnik[0].id%>" method="GET" >
                                     
-                                    <button class="btn text-white bg-dark btn-lg" name = 'strana' value= <%-prethodnaStrana%> ><i class="fas fa-arrow-circle-left"></i></button> 
+                                    <button class="btn text-white" name = 'strana' value= <%-prethodnaStrana%> ><i class="fas fa-arrow-circle-left"></i></button> 
                                     
                                     <input hidden name = 'oglasiMeni' value = '<%-oglasiMeni%>'>
 
@@ -249,16 +250,16 @@
                                
                                 <!-- Prethodna -->
                     
-                                <% if (ukupno > 8) { %>
+                            
                                 <!-- Trenutna -->
                                 <li class="page-item  active"><a class="btn-sm page-link text-warning bg-dark" href="#"><%-strana%></a></li>
                                 <!-- Trenutna -->
                     
-                               
+                                <% if (prikazaniOglasi >= 8) { %>
                                 <!-- Sledeća -->
                                 <form action="/svi_korisnici/profil/<%-korisnik[0].id%>" method="GET" >
 
-                                    <button class="btn text-white bg-dark btn-lg " name = 'strana' value= <%-sledecaStrana%> ><i class="fas fa-arrow-circle-right"></i></button> 
+                                    <button class="btn text-white  " name = 'strana' value= <%-sledecaStrana%> ><i class="fas fa-arrow-circle-right"></i></button> 
                                     <input hidden name = 'oglasiMeni' value = '<%-oglasiMeni%>'>
                                 </form>
                                 <!-- /Sledeća -->
@@ -392,7 +393,7 @@
                         <!-- Prethodna -->
                         <form action="/svi_korisnici/profil/<%-korisnik[0].id%>" method="GET" >
                             
-                            <button class="btn text-white bg-dark btn-lg" name = 'strana' value= <%-prethodnaStrana%> ><i class="fas fa-arrow-circle-left"></i></button> 
+                            <button class="btn text-white " name = 'strana' value= <%-prethodnaStrana%> ><i class="fas fa-arrow-circle-left"></i></button> 
                             
                             <input hidden name = 'oglasiMeni' value = '<%-oglasiMeni%>'>
 
@@ -401,16 +402,16 @@
                         <% } %>
 
 
-                        <% if (ukupno > 8) {%>
+                     
                         <!-- Trenutna -->
                         <li class="page-item  active"><a class="btn-sm page-link text-warning bg-dark" href="#"><%-strana%></a></li>
                         <!-- Trenutna -->
             
-                        
+                        <% if (prikazaniOglasi >= 8) {%>
                         <!-- Sledeća -->
                         <form action="/svi_korisnici/profil/<%-korisnik[0].id%>" method="GET" >
 
-                            <button class="btn text-white bg-dark btn-lg " name = 'strana' value= <%-sledecaStrana%> ><i class="fas fa-arrow-circle-right"></i></button> 
+                            <button class="btn text-white " name = 'strana' value= <%-sledecaStrana%> ><i class="fas fa-arrow-circle-right"></i></button> 
                             <input hidden name = 'oglasiMeni' value = '<%-oglasiMeni%>'>
                         </form>
                         <!-- /Sledeća -->

@@ -1,13 +1,11 @@
-
 <!--Title-->
 <title> <%- title %></title>
 
 
 <body>
-  
-   
+
     <!--Navigacija-->
-    <div class="navigation fixed-top">
+        <div class="navigation fixed-top">
         <div class="container-fluid" >
             <!--Navbar-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
@@ -20,10 +18,10 @@
                 </div>
                 
                          
-
-
+  
+  
               
-
+  
                 <!--Ostali deo menia-->
                 <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
                     <!--Pretrazivac-->
@@ -31,12 +29,12 @@
                         <input class="form-control  mr-sm-5" style="background-color: rgba(28, 26, 61, 0.123); color: aliceblue; width: 20rem;" type="search" placeholder="Pratraži poslove" aria-label="Search" name='kljucneReci'>
                     </form>    
                     <!-- /Pretrazivac--> 
-
+  
                   <div class="navbar-nav ml-auto">
                       
-                    <a class="nav-item nav-link active" href="/">Početna</a>
+                    <a class="nav-item nav-link" href="/">Početna</a>
                     <a class="nav-item nav-link " href="/o_nama">O nama</a>
-                    <a class="nav-item nav-link " href="/kontakt">Kontakt</a>
+                    <a class="nav-item nav-link active " href="/kontakt">Kontakt</a>
                     <!--  Deo koji gost vidi  -->
                     <% if(!ulogovaniKorisnik) { %>
                     <a class="nav-item nav-link" href="/logIn">Prijavi se</a>
@@ -46,27 +44,27 @@
                   </div>
                 </div> 
                 <!--/Ostali deo menija-->
-
+  
                 <% if (ulogovaniKorisnik) {%>
                 <!--Deo koji gost ne vidi-->
                     <!--Dropdown avatara-->
                     <div class="dropdown show">
                     
                         <img class="avatar" 
-
+  
                             <% if (ulogovaniKorisnik.slika != '') { %>
                                 src = '/images/uploads/korisnici/<%-ulogovaniKorisnik.slika%>' 
                             <% } else { %>
                                 src = '/images/site/noPhoto.jpg' 
                             <% } %>
-
+  
                             href="#" role="button" id="dropdownMenuLink" 
                             data-toggle="dropdown" aria-haspopup="true" 
                             aria-expanded="false">
                         </img>
-
-
-
+  
+  
+  
                         <div class="dropdown-menu bg-info" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item text-black" href="/svi_korisnici/profil/<%-ulogovaniKorisnik.id%>">Moj profil</a>
                             
@@ -82,11 +80,11 @@
                 <% } %>
                 
                 <!-- Button response -->
-
+  
                 <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" >
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+  
                  <!-- /Button response -->
                    
                 
@@ -97,62 +95,73 @@
         </div>
         <!--/Container-->
         <!-- Razdvajanje menija od sadrzaja-->
-    </div>
+         </div>
     <!--/Navigacija------------------------------------------------------------------------------------------------------------------>
+     
+    
+    <!-- Telo forme-->
+    <div class="container ">
+        <form action="mailto:nikolavlad63@gmail.com?subject=radi&body=idegascuga" method="post" enctype="text/plain" style="display: flex; justify-content: center; ;" >
+            <div class="form-group col-sm-6 ">
+            <!-- Naslov-->
+                <div class = 'text-center mb-4 text-warning'>Kontaktirajte nas</div>
+            <!-- /Naslov-->
 
 
+            <!-- Ime -->
+              <label class>Ime</label>
+              <input type="text" class="form-control center-style" id = 'ime' required
+              <% if (ulogovaniKorisnik) {%>
+                value = '<%-ulogovaniKorisnik.ime%> <%-ulogovaniKorisnik.prezime%>'
+            <%}%>
+              > 
+            <!-- /Ime -->
+              
+
+
+            <!-- Email -->
+                <label class>Email</label>
+                <input type="email" class="form-control center-style" id = 'emailK' required
+                <% if (ulogovaniKorisnik) {%>
+                    value = '<%-ulogovaniKorisnik.email%>'
+                  <%}%>
+
+                > 
+            <!-- /Email -->
+            
+
+             <!-- Naslov mejla -->
+                <label class>Naslov</label>
+                <input type="text" class="form-control center-style" id = 'naslov' required> 
+             <!-- /Naslov mejla -->
+
+
+            <!-- Poruka -->
+                <label class>Poruka</label>
+                <textarea class="form-control center-style" style="height: 10rem;" id='poruka'></textarea>
+            <!-- Poruka -->
+                
+            <hr>
+
+            
+            <!-- Poslati na -->
+                <label>Poslati na : </label><input type="text" value ='nikolavlad63@gmail.com' style="background-color: transparent; border: none; color: tomato; margin-left: 10px;">
+            <!-- /Poslati na -->
+
+            <!-- Pošalji -->
+                <button type="button" class = 'btn btn-warning mt-1' style="width: 100%;" onclick="posaljiMejl()" >Pošalji</button>
+            <!-- /Pošalji -->  
+
+            </div>
+        </form>
+    </div>
+    <!-- /Telo forme-->
 
     
-    <!-- Forma za izmenu  kategorije-->
-    <!-- Naslov -->
-    <h1 style="text-align: center;">Izmena kategorije</h1>
-     <!-- /Naslov -->
     
-        <!-- Unos podataka -->
-        <div class ='container center'>
-            <!-- Forma -->
-            <form action='/sve_kategorije/kategorija/<%-kategorija[0].id%>/izmena_kategorije' method= 'POST'>
-                <!-- Telo forme-->
-                <div class="form-group ">
-                  
-
-                    <!-- Ostali deo forme-->
-                    <label>Naziv kategorije :</label>
-                    <input type="text" name = 'naziv' class='form-control center-style' value = '<%-kategorija[0].naziv%>' >
-                    <!-- GRESKA : Naziv kategorije vec postoji-->
-                    <% if(greska != '') {%>
-                        <p class="small text-danger"><%-greska%></p>
-                    <%}%>
-                    
-
-
-                    <lavel>Kratak opis :</lavel><br>
-                    <textarea name = 'kratakOpis' class="form-control center-style" ><%-kategorija[0].kratak_opis%></textarea>
-                    <!-- /Ostali deo forme-->
-                    <br>
-                    <!-- Submit dugme -->
-                    <button type="submit" class="btn btn-success" >
-                        Izmeni kategoriju
-                    </button>
-                    
-
-                    <!-- Odustani -->
-                    <a type="button" href = '/sve_kategorije/kategorija/<%-kategorija[0].id%>' class="btn btn-danger">Odustani</a>
-                    
-
-
-                </div>
-                <!-- /Telo forme-->
-            </form>
-            <!-- /Forma-->
-        </div>
-        <!-- /Unos podataka -->
-
-        
     
-
-      
-      <!-- Footer -->
+    
+    <!-- Footer -->
       <div class="container-fluid fixed-bottom small footer " style=" margin: 1px; padding: 10px; border-top: rgb(117, 117, 117) 2px solid;">
         <!-- Linija -->
       
