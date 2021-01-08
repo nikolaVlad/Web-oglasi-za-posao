@@ -220,35 +220,36 @@
 
                     <!-- @Izlistavanje 3 najaktuelnija posla poslova -->
                       
-
-                    <!-- Posao mesto 2-->
-                    <div class="col-lg-4 col-sm-12 mb-3 mt-5 justify-content-center d-flex" 
-                    style="cursor: pointer;" 
-                    onclick="window.location.href = '/svi_poslovi/posao/<%-poslovi[1].id%>'"
-                    >
-                        <div class="card bg-dark  " style="width: 23rem; min-height: 13rem; box-shadow: 10px 20px 10px rgba(0, 0, 0, 0.418)">
-                            <div class="card-body">
-                                <h6 class="card-title" style="color: rgb(0, 152, 169);">
-                                    <i class="far fa-file-code" style="font-size: 20px; color: rgb(255, 230, 0);"></i>
-                                    <%-poslovi[1].naziv%>
+                    <% if (poslovi[1]) {%>
+                        <!-- Posao mesto 2-->
+                        <div class="col-lg-4 col-sm-12 mb-3 mt-5 justify-content-center d-flex" 
+                        style="cursor: pointer;" 
+                        onclick="window.location.href = '/svi_poslovi/posao/<%-poslovi[1].id%>'"
+                        >
+                            <div class="card bg-dark  " style="width: 23rem; min-height: 13rem; box-shadow: 10px 20px 10px rgba(0, 0, 0, 0.418)">
+                                <div class="card-body">
+                                    <h6 class="card-title" style="color: rgb(0, 152, 169);">
+                                        <i class="far fa-file-code" style="font-size: 20px; color: rgb(255, 230, 0);"></i>
+                                        <%-poslovi[1].naziv%>
+                                    </h6>
+                                    <hr style="background-color: rgb(0, 0, 0);">
+                                <h6 class="card-subtitle mb-2 text-muted small">
+                                    
+                                    Br prijava : <span class="text-warning"><%-poslovi[1].br_prijava%></span>
+                                
                                 </h6>
-                                <hr style="background-color: rgb(0, 0, 0);">
-                              <h6 class="card-subtitle mb-2 text-muted small">
-                                 
-                                  Br prijava : <span class="text-warning"><%-poslovi[1].br_prijava%></span>
-                            
-                              </h6>
-                              <p class="card-text">
-                                  <%-poslovi[1].kratak_opis%>...   </p>
-                              
-                             
-                            
+                                <p class="card-text">
+                                    <%-poslovi[1].kratak_opis%>...   </p>
+                                
+                                
+                                
+                                </div>
                             </div>
-                          </div>
-                    </div>
-                    <!-- Posao mesto 2-->
+                        </div>
+                        <!-- Posao mesto 2-->
+                    <% } %>
 
-
+                    <% if (poslovi[0]) {%>
                          <!-- Posao mesto 1-->
                          <div class="col-lg-4 col-sm-12 mb-3 mt-3 justify-content-center d-flex" 
                          style="cursor: pointer;" 
@@ -275,8 +276,9 @@
                                </div>
                          </div>
                          <!-- Posao mesto 1-->
+                    <% } %>
 
-
+                    <% if (poslovi[2]) {%>
                            <!-- Posao mesto 3-->
                            <div class="col-lg-4 col-sm-12 mb-3 mt-5 justify-content-center d-flex" 
                            style="cursor: pointer;" 
@@ -303,18 +305,10 @@
                                  </div>
                            </div>
                            <!-- Posao mesto 3-->
-
-
-
-
-
-
-
-
-
-
-                    <!-- /@Izlistavanje poslova-->    
+                    <% } %>
                     
+                    <!-- /@Izlistavanje poslova-->    
+                 
                     
                  
                     
