@@ -192,13 +192,13 @@
             <!-- Kolona -->
             <div class="col-lg-4 col-sm-6 mt-1 mb-3 ">
                 <!-- Kartica za kategoriju-->
-                <div class="card" style="width: 20rem; background-color: rgba(61, 61, 61, 0.678); box-shadow: none; border: 1px solid rgba(98, 0, 255, 0);">
+                <div class="card" style="width: 20rem; background-color: rgba(51, 51, 51, 0.562); box-shadow: none; border: 1px solid rgba(233, 0, 0, 0.068);">
                     <!-- Slika kategorije -->
                     <img class="card-img-top " src="/images/site/category.jpg" alt="Card image cap">
                     <!-- Sadrzaj kartice-->
                     <div class="card-body">
                         <!-- Naziv kategorije-->
-                            <a href = '/sve_kategorije/kategorija/<%-kategorija.id%>'class="text-center"><p class="text-success"><b><%-kategorija.naziv%></b></p></a>
+                            <a href = '/sve_kategorije/kategorija/<%-kategorija.id%>'class="text-center"><p class="text-warning"><%-kategorija.naziv%></p></a>
 
                         <%if(ulogovaniKorisnik && ulogovaniKorisnik.rola == 'admin'){%>
                         <!-- Akcije nad kategorijom-->
@@ -209,7 +209,7 @@
                             <!-- Obrisi #Admin-->
                             <form class="form form-inline" method="POST" action="/sve_kategorije/kategorija/<%-kategorija.id%>/brisanje_kategorije">
 
-                                <button type = 'button' class="btn btn-outline-danger br" data-toggle="modal" data-target="#modalBrisanjeKategorije<%-kategorija.id%>"><i class="fas fa-trash " style='color:tomato';></i></button>
+                                <button type = 'button' class="btn btn-outline-danger " data-toggle="modal" data-target="#modalBrisanjeKategorije<%-kategorija.id%>"><i class="fas fa-trash " style='color:tomato';></i></button>
 
                                     <!-- Modal za brisanje -->
                                         <div class="modal fade text-center" id="modalBrisanjeKategorije<%-kategorija.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

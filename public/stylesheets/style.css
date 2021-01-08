@@ -205,7 +205,7 @@ body
 /* ? Poslovi */
 .posao-card
 {
-    border-radius: 30px;
+    border-radius: 10px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.123);
     font-size: 16px;
     background-color: rgba(0, 0, 0, 0.63);
