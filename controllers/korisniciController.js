@@ -519,7 +519,7 @@ module.exports.postSlika = async (req,res) =>
         {
             req.session.reload( function (err) 
             {
-                req.session.ulogovaniKorisnik.slika = slika;
+                req.session.ulogovaniKorisnik.slika = (slika != '') ? slika : staraSlika;
                 res.redirect('/');
             });
         });
@@ -534,7 +534,7 @@ module.exports.postSlika = async (req,res) =>
         {
             req.session.reload( function (err) 
             {
-                req.session.ulogovaniKorisnik.slika = slika;
+                req.session.ulogovaniKorisnik.slika = (slika != '') ? slika : staraSlika;
                 res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`); 
             });
         });
