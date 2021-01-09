@@ -34,12 +34,13 @@ module.exports = async (req, res)=>
     }
 
 
-
+   
     res.render('index', {
         title : 'Web oglasi za posao', 
         kategorije : kategorije, 
         poslovi : poslovi,
         ulogovaniKorisnik : ulogovaniKorisnik,    
         obavestenje : obavestenje
+        
     });
 };
