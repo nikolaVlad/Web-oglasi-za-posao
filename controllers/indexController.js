@@ -28,7 +28,7 @@ module.exports = async (req, res)=>
     // Modifikacija kratkog opis za svakog posla : 67, datuma, naziv
     for(posao of poslovi)
     {
-        posao.kratak_opis = posao.kratak_opis.slice(0,67);
+        posao.kratak_opis = posao.kratak_opis.slice(0,150);
         posao.datum = (posao.datum + '').slice(0,25);
         posao.naziv = posao.naziv.slice(0,60);
     }

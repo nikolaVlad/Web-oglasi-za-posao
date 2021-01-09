@@ -528,7 +528,7 @@ module.exports.postBrisanjePosla = async (req,res) =>
     /** Upit za azuriranje br_postavljenih korisnika koji je obrisao posao */
             console.log(await korisniciModel.azurirajBrPostavljenihZaKorisnika(ulogovaniKorisnik.id));
 
-    res.redirect('/svi_poslovi');
+    res.redirect(`/svi_korisnici/profil/${ulogovaniKorisnik.id}`);
 }
 
 

@@ -239,7 +239,6 @@ module.exports.postIzmenaProfila = async (req, res) =>
 
 
     // Uzimanej podataka poslati putem forme
-    var slika = '';
     var ime = req.body.ime;
     var prezime = req.body.prezime;
     // Email nema pravo da se menja
@@ -280,7 +279,7 @@ module.exports.postIzmenaProfila = async (req, res) =>
 
 
     /** Izmena korisnika u tabeli korisnici */
-    console.log(await korisniciModel.izmeniKorisnika(ime,prezime,novaLozinka,slika,id));
+    console.log(await korisniciModel.izmeniKorisnika(ime,prezime,novaLozinka,id));
 
     // Uspesna izmena korisnika, redirektujemo ga na svoj profil
     res.redirect(`/svi_korisnici/profil/${id}`);

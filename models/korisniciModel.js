@@ -53,7 +53,7 @@ module.exports.dodajKorisnika = (ime,prezime,email,lozinka,slika) =>
 
 
 /** Izmena postojećeg korisnika */
-module.exports.izmeniKorisnika = (ime,prezime,lozinka,slika,id) =>
+module.exports.izmeniKorisnika = (ime,prezime,lozinka,id) =>
 {
     return new Promise((res,rej) =>
     {
@@ -61,12 +61,11 @@ module.exports.izmeniKorisnika = (ime,prezime,lozinka,slika,id) =>
                     SET 
                     ime = ?,
                     prezime = ?,
-                    lozinka = ?,
-                    slika = ?
+                    lozinka = ?
                     WHERE id = ?
         `
 
-        conn.query(query,[ime,prezime,lozinka,slika,id], (err,result) =>
+        conn.query(query,[ime,prezime,lozinka,id], (err,result) =>
         {
             if(err)         rej(err);
             else            res(result);
