@@ -5,6 +5,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+
+
 // My imports modules:
 
 // Layouts za kreiranje templejta
@@ -60,8 +63,6 @@ var app = express();
 // Layouts setup
 app.use(expressLayouts);
 app.set('layout','./template/base');
-
-
 
 
 // view engine setup 
