@@ -263,7 +263,7 @@ module.exports.getNoviPosao = async(req, res) =>
 /** POST /svi_poslovi/novi_posao */
 module.exports.postNoviPosao = async(req,res) =>
 {
-  
+    
 
     /** Uzimanje podataka iz forme */
         var naziv = req.body.naziv;
@@ -294,38 +294,8 @@ module.exports.postNoviPosao = async(req,res) =>
         var sveKategorije = await kategorijeModel.vratiNaziviIdKategorije();
 
 
-    /** Provera posla da li već postoji u toj kategorije */
-        var posao = await posloviModel.vratiPosaoIzKategorijeSaNazivom(naziv,kategorijaId);
-       
 
-    // Promenljiva koja sliži za čuvanje greske
-        var greska;
-
-
-    // U slučaju da ovakav posao već postoji u datoj kategoriji
-    if(posao.length != 0)
-    {
-       greska = {
-           ime : 'Posao sa ovim nazivom već postoji u ovoj kategoriji!',
-           naziv : naziv,
-           kratakOpis : kratakOpis,
-           punOpis : punOpis,
-           potrebneVestine : potrebneVestine,
-           pozeljneVestine : pozeljneVestine,
-           kategorijaId : kategorijaId,
-       }
-
-       return res.render('./poslovi/novi_posao',{
-            greska : greska,
-            title : 'Novi oglas',
-            sveKategorije : sveKategorije,
-            kategorijaId : kategorijaId,
-            ulogovaniKorisnik : ulogovaniKorisnik
-       })
-    }
-
-
-    // U slusaju da posao ne postoji upisujemo posao u bazi
+    
 
     /** Upit ka bazi za upis posla */
       var noviPosao = await posloviModel.dodajPosao(naziv,kratakOpis,punOpis,potrebneVestine,pozeljneVestine,datum,kategorijaId,korisnikId,brPrijava);
