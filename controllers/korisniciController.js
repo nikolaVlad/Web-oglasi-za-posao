@@ -476,9 +476,7 @@ module.exports.postSlika = async (req,res) =>
     // Nova slika
     var slika = '';
 
-
-
-    // Parsiranje fomrme, gde je poslata slika
+    // Parsiranje request-a, gde je poslata slika
     var form = new formidable.IncomingForm();
     form.parse(req);
 
@@ -489,20 +487,19 @@ module.exports.postSlika = async (req,res) =>
         // U slučaju da je slika ispravna
         if( file.name && file.name.match(/\.(jpg|jpeg|png)$/i) )
         {
-            // Cuvanje imena slike
+            // Čuvanje jedinstvenog imena slike
             slika = Date.now() + file.name;
 
             file.path = path.join(__dirname,'..','public','images','uploads','korisnici',slika);
 
-            /** Upit za cuvanje slike u bazu */
-                console.log( await korisniciModel.dodajSliku(id,slika));
+            /** Upit za čuvanje slike u bazu */
+                 await korisniciModel.dodajSliku(id,slika);
 
             // Brisanje stare slike ako ona postoji
             if(staraSlika.length != 0)
             {
                 fs.unlinkSync(path.join(__dirname,'..','public','images','uploads','korisnici',staraSlika));
                 console.log('Stara slika obrisana.');
-                
             }
             console.log('Promena slike uspesna!');  
         }

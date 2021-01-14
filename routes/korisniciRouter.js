@@ -31,6 +31,8 @@ router.get('/profil/:id/slika', korisniciController.getSlika);
 /**  POST /svi_korisnici/profil/<id>/slika */ 
 router.post('/profil/:id/slika', korisniciController.postSlika);
 
+
+
 /** POST /svi_korisnici/profil/<id>/rola */
 router.post('/profil/:id/rola', korisniciController.postRola);
 

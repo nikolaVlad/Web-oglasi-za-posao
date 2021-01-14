@@ -15,7 +15,7 @@ module.exports.getSviPoslovi = async(req, res) =>
 
 
      /** Paginacija  */
-        // Racunanje trenutne strane (Koji će sluziti kao limit u bazi)
+        // Računanje trenutne strane (Koja će sluziti kao limit u bazi)
         var trenutnaStrana = parseInt(req.query.strana);
         if (isNaN(trenutnaStrana) || trenutnaStrana === 0)
         {
