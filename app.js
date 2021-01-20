@@ -16,7 +16,8 @@ const expressLayouts = require('express-ejs-layouts');
 // Sesije za login sistem i role
 const session = require('express-session');
 
-
+// Favicon
+var favicon = require('serve-favicon');
 
 
 
@@ -95,6 +96,9 @@ app.use(session({
   saveUninitialized : false,
 }))
 
+
+// Favicon
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 }
 // end Podesavanja
