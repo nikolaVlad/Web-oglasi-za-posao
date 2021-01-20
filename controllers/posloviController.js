@@ -554,6 +554,8 @@ module.exports.postOdjavljivanjePosla = async (req, res) =>
 
     // Dobijanje id posla za odjavljivanje
     var id = req.params.id;
+    console.log("ISPISIIIIIII SE BREEEEEEEEEEEEEEE : "+id);
+
 
     /** Brisanje prijave za posao */
         console.log(await prijaveModel.obrisiPrijavu(ulogovaniKorisnik.id,id));

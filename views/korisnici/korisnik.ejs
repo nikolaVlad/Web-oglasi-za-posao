@@ -106,7 +106,7 @@
     <div class="container-fluid   mt-5  " style="padding-left: 20px; padding-top: 10px; border-radius: 30px; background-color: rgba(0, 0, 36, 0.226);">
         
         <!-- Red -->
-        <div class="row">
+        <div class="row" style="padding: 10px;">
            
             <!-- Kolona sa podacima korisnika-->
             <div class="col-lg-6 col-sm-12 mb-5 text-wrap">
@@ -312,9 +312,9 @@
                     <!-- /Naziv oglasa -->
 
                     <!-- Akcije nad oglasima-->
-                    <div class="col-5">
+                    <div class="col-5 d-flex">
                       
-                        <form action = '/svi_poslovi/posao/<%-oglas.id%>/odjavljivanje_posla' method='POST' class="form-inline">
+                       
 
                           <!-- Status -->
                             <i 
@@ -331,10 +331,10 @@
                         
                         <!-- Forma za odustajanje ako status nije prihvacen -->
                         <% if (oglas.status != 'prihvaćen') {%>
-                          
+                            <form action = '/svi_poslovi/posao/<%-oglas.id%>/odjavljivanje_posla' method='POST' class="form-inline">  
 
                                 <button type="button" class="btn btn-outline btn-sm ml-1 text-warning" data-toggle="modal" data-target="#modalOdjaviSeZaPosao<%-oglas.id %>">
-                                    <b>Odustani</b>
+                                    <b class="ml-3">Odustani</b>
                                 </button>
 
                                 <!-- Modal za odustajanje od posla-->
