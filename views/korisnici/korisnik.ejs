@@ -129,7 +129,7 @@
                 </div>
                 <% if(ulogovaniKorisnik.id == korisnik[0].id || ulogovaniKorisnik.rola == 'admin') {%>
                 <div class="text-center">
-                    <a href = '/svi_korisnici/profil/<%-korisnik[0].id%>/slika' class="text-info">Izmenite sliku</a>
+                    <a href = '/svi_korisnici/profil/<%-korisnik[0].id%>/slika' class="text-info">Izmenite sliku <i class="fas fa-edit"></i>    </a>
                 </div>
                 <% } %>
                 
@@ -315,8 +315,8 @@
                     <div class="col-5 d-flex">
                       
                        
-
-                          <!-- Status -->
+                        <div class="col-5">
+                        <!-- Status -->
                             <i 
                             <% if (oglas.status == 'prihvaćen'){%> class='text-success '
                             <%} else if(oglas.status == 'odbijen') {%> class = 'text-danger '    
@@ -328,13 +328,15 @@
                         
                             </i>   
                         <!-- /Status -->
-                        
+                        </div>
+
+                        <div class="col-6">
                         <!-- Forma za odustajanje ako status nije prihvacen -->
                         <% if (oglas.status != 'prihvaćen') {%>
                             <form action = '/svi_poslovi/posao/<%-oglas.id%>/odjavljivanje_posla' method='POST' class="form-inline">  
 
                                 <button type="button" class="btn btn-outline btn-sm ml-1 text-warning" data-toggle="modal" data-target="#modalOdjaviSeZaPosao<%-oglas.id %>">
-                                    <b class="ml-3">Odustani</b>
+                                    <b class="">Odustani</b>
                                 </button>
 
                                 <!-- Modal za odustajanje od posla-->
@@ -374,6 +376,7 @@
                         </form>
                            
                         <% } %>
+                        </div>
                        <!-- Forma za odustajanje od posla ako nije prihvacen  -->
 
                     </div>
