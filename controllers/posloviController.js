@@ -178,6 +178,7 @@ module.exports.getPosao = async (req,res) =>
         // Modifikovanje podataka iz tabele posao - kolona potrebne_vestine i datum
             posao[0].potrebne_vestine = posao[0].potrebne_vestine.split(',');
             posao[0].datum  = (posao[0].datum + '').slice(0,25);
+            posao[0].potrebne_vestine[0] = " " + posao[0].potrebne_vestine[0];
 
         // Kategorija kojoj pripada određeni posao
         var kategorija = await kategorijeModel.vratiKategoriju(posao[0].kategorija_id);
