@@ -48,23 +48,28 @@
 
  
   /** Detektovanje caps-lock-a */
-  var lozinka =  document.getElementById('logInLozinka');
-  var capsObavestenje = document.getElementById('capsObavestenje');
+  
+    var lozinka =  document.getElementById('logInLozinka');
+    var capsObavestenje = document.getElementById('capsObavestenje');
+  
 
+    if(lozinka)
+    {
+        lozinka.addEventListener('keyup',(event) =>
+        {
+            
+            // Ako je ukljucen caps-lock
+            if(event.getModifierState("CapsLock"))
+            {
+                capsObavestenje.style.visibility = "";
+            }
 
-  lozinka.addEventListener('keyup',(event) =>
-  {
-      
-      // Ako je ukljucen caps-lock
-      if(event.getModifierState("CapsLock"))
-      {
-          capsObavestenje.style.visibility = "";
-      }
+            else
+            {
+                capsObavestenje.style.visibility = "hidden"
+                
+            }
 
-      else
-      {
-          capsObavestenje.style.visibility = "hidden"
-         
-      }
-
-  });
+        });
+    }
+  
