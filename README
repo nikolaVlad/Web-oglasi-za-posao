@@ -1,0 +1,18 @@
+1) O projektu :
+ 
+  - Projekat "Web Oglasi Za Posao" predstavlja web aplikaciju namenjenu za pronalaženje posla i postavljanje oglasa za posao. Aplikacija je kompleksnije arhitekture, zato je ceo kod razložen na manje celine, a sam način organizovanja koda je po uzorku MVC. 
+  MVC(Model-View-Controller) vrsta projektnog uzorka (patern-a) je veoma značajna kod složenijih aplikacija radi lakšeg održavanja, kao i kasnijeg nadograđivanja. 
+  -Tehnologije koje su korišćenje za razvoj projekta na klijentskoj strani su : html odnosno ugrađeni JS templejtski jezik ejs, koji dozvoljava prikazivanje dinamičkih podataka na klijentskoj strani. Za dizajn templejta i responzivnosti istih, korišćen je css sa Bootstrap4 razvojnim okvirom, a ikonice su uzete iz fontAwesome biblioteke. Radi boljeg korisničkog iskustva ubačene su i dodatne funkcije pomoću JavaScripta i jQuery razvojnog okvira.
+  Serverska strana aplikacije napisana je u nodeJs, a za konekcuju sa bazom korišćen je mySql server. Dodatni alati koju su potrebni su : XAMPP i Git čija će primena biti objašnjena kasnije.
+
+2) Instaliranje :
+  2.1) Pre samog pokretanja potrebno je skinuti i instalirani sledeće programe : git, nodejs i xampp. Kad su instalirani potrebno je otići na github link repozitorijuma gde se nalazi aplikacija : https://github.com/nikolaVlad/Web-oglasi-za-posao. Potom je potrebno kopirati link github repozitorijuma, pozicionirati se na željenoj lokaciji i pomoću git alata naredbom git clone klonorati repozitorijum aplikacije na svom lokalnom računaru. 
+  2.2) Sada kad imamo aplikaciju na lokalnom računaru, potrebno je instaliranje svih node modula koji su potrebne za pokretanje iste, čiji se nazivi nalaze u fajlu package.json.   To radimo na sledeći način : pomoću cmd-a (ili powershell-a) se pozicioniramo u root folder aplikacije i pozivom komande npm install instaliramo sve potrebne module.
+  2.3) Zatim je potrebno da  startujemo MySql I Apache servere, pomoću XAMPP alata.
+  2.4) U root folderu aplikacije nalazi se fajl, koji predstavlja bazu podataka sa nazivom wop.sql. Potrebno je kreirati bazu sa nazivom wop u mySql serveru, a zatim pomenuti fajl import-ovati na mysql server u novokreiranoj bazi (preporučeni online alat za ove akcije je phpMyAdmin : http://localhost/phpmyadmin/index.php).
+  2.5) Potom je potrebno otvoriti fajl na putanji relativna u odnosu na root folder : /config/db.js – koji predstavlja konekciju sa bazom I ako je potrebno izmeniti parametre, kako bi konektovanje bilo uspešno. 
+  2.6) Po izvršenju prethodno opisanih koraka, aplikacija se može pokrenuti pozicioniranjen u root foldera i izvršenje komande : npm start .
+
+
+
+- Aplikacija sluša na portu : 3000
